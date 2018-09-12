@@ -62,7 +62,7 @@ export class MyMap extends Component {
           width: "100vw"
         }}
         center={[-97.000000, 38.000000]}
-        zoom={[3.7]}
+        zoom={[4]}
         onMouseMove={this.handleMouseMove}
         onClick={this.handleMapClick}
       >
