@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import CurrentLegislators from '../data/legislators-current.json';
+import '../App.less';
 
 class CongressInfo extends Component {
 
@@ -21,40 +22,45 @@ class CongressInfo extends Component {
   getLegislatorData = () => {
     const { district } = this.props;
 
-    let legislator = {};
-    let currentTerm = {};
+    console.log(district);
+
+    let representative = {};
+    let repCurrentTerm = {};
     if (district.properties) {
-      [legislator] = CurrentLegislators.filter(thisLegislator => {
-        return thisLegislator.id.bioguide === district.properties.rep_id;
+      [representative] = CurrentLegislators.filter(legislator => {
+        return legislator.id.bioguide === district.properties.rep_id;
       });
-      const terms = legislator.terms;
-      currentTerm = terms[terms.length - 1];
+      const repTerms = representative.terms;
+      repCurrentTerm = repTerms[repTerms.length - 1];
     }
 
     return {
-      name: (legislator.name) ? legislator.name.official_full : '',
-      party: (currentTerm.party) ? '(' + currentTerm.party + ')' : '',
+      representative: {
+        img: this.getLegislatorImg(),
+        name: (representative.name) ? representative.name.official_full : '',
+        party: (repCurrentTerm.party) ? '(' + repCurrentTerm.party + ')' : '',
+      },
       districtTitle: (district.properties) ? district.properties.title_long : '',
-      img: this.getLegislatorImg()
     };
   };
 
   render() {
 
-    const legislator = this.getLegislatorData();
+    const data = this.getLegislatorData();
+    const rep = data.representative;
 
     return (
       <div className="congress-info">
+        <div className="district-name">
+          {data.districtTitle}
+        </div>
         <div className="rep-info">
           <div className="rep-photo">
-            { legislator.img }
+            { rep.img }
           </div>
-          <div class="legislator-name">
-            { legislator.name }
-            <span>{ legislator.party }</span>
-          </div>
-          <div class="district-name">
-            { legislator.districtTitle }
+          <div className="rep-name">
+            { rep.name }
+            <span>{ rep.party }</span>
           </div>
         </div>
       </div>
