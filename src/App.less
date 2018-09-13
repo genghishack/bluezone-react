@@ -16,24 +16,53 @@
 #main-container {
   display: flex;
 
+  .no-info {
+    padding: 15px;
+    margin: auto;
+    font-size: 22px;
+    color: #555;
+    width: 400px;
+  }
+
   .congress-info {
     width: 400px;
+    padding: 0 15px;
 
     .district-name {
+      font-size: 22px;
+      height: 50px;
+    }
+
+    #rep-section, #sen-section {
+      margin: 25px 15px;
+
+      .title {
+        padding: 0 0 25px;
+        font-size: 17px;
+        font-style: italic;
+      }
+
+      .info {
+        display: flex;
+
+        .photo {
+          img {
+            width: 100px;
+            margin: 0 15px 15px 0;
+          }
+        }
+
+        .name {
+
+        }
+
+        .party {
+          margin: 0 5px;
+        }
+      }
 
     }
 
-    .rep-info {
-      display: flex;
-
-      .rep-photo {
-        width: 55px;
-      }
-
-      .rep-name {
-
-      }
-    }
   }
 
 }

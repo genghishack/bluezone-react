@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 
 import CurrentLegislators from '../data/legislators-current.json';
-import '../App.less';
 
 class CongressInfo extends Component {
 
-  getLegislatorImg = () => {
-    const { district } = this.props;
-
-    let src = '';
-    if (district.properties) {
-      src = 'https://theunitedstates.io/images/congress/225x275/' + district.properties.rep_id + '.jpg';
-    }
+  getLegislatorImg = (id) => {
+    const src = 'https://theunitedstates.io/images/congress/225x275/' + id + '.jpg';
     return (
       <img
         src={src}
@@ -19,52 +13,90 @@ class CongressInfo extends Component {
     );
   };
 
-  getLegislatorData = () => {
+  getLegislatorData = (id) => {
+
+    let legislator;
+    [legislator] = CurrentLegislators.filter(leg => {
+      return leg.id.bioguide === id;
+    });
+    legislator = legislator || {};
+
+    legislator.fullName = '';
+    if (legislator.name) {
+      legislator.fullName = legislator.name.official_full;
+    }
+    legislator.partyAbbrev = '';
+    if (legislator.terms) {
+      const currentTerm = legislator.terms[legislator.terms.length - 1];
+      legislator.partyAbbrev = '(' + currentTerm.party[0] + ')';
+    }
+    legislator.img = '';
+    if (legislator.id) {
+      legislator.img = this.getLegislatorImg(legislator.id.bioguide);
+    }
+    // console.log(legislator);
+
+    return legislator;
+  };
+
+  getLegislatorDisplay = legislator => {
+    return (
+      <div className="info">
+        <div className="photo">
+          { legislator.img }
+        </div>
+        <div className="name">
+          { legislator.fullName }
+        </div>
+        <div className="party">
+          { legislator.partyAbbrev }
+        </div>
+      </div>
+    );
+  };
+
+  getInfoDisplay = () => {
     const { district } = this.props;
 
-    console.log(district);
+    const districtTitle = (district.properties) ? district.properties.title_long : ''
 
-    let representative = {};
-    let repCurrentTerm = {};
     if (district.properties) {
-      [representative] = CurrentLegislators.filter(legislator => {
-        return legislator.id.bioguide === district.properties.rep_id;
-      });
-      const repTerms = representative.terms;
-      repCurrentTerm = repTerms[repTerms.length - 1];
-    }
+      const rep = this.getLegislatorData(district.properties.rep_id);
 
-    return {
-      representative: {
-        img: this.getLegislatorImg(),
-        name: (representative.name) ? representative.name.official_full : '',
-        party: (repCurrentTerm.party) ? '(' + repCurrentTerm.party + ')' : '',
-      },
-      districtTitle: (district.properties) ? district.properties.title_long : '',
-    };
+      let sens = [];
+      const sSenIds = district.properties.sen_ids.replace(/(\[|\]|\")/g, '');
+      const rSenIds = sSenIds.split(',');
+      rSenIds.forEach(sen_id => {
+        sens.push(this.getLegislatorData(sen_id));
+      });
+      console.log(sens);
+
+      return (
+        <div className="congress-info">
+          <div className="district-name">
+            {districtTitle}
+          </div>
+          <section id="rep-section">
+            <div className="title">Representative</div>
+            {this.getLegislatorDisplay(rep)}
+          </section>
+          <section id="sen-section">
+            <div className="title">Senators</div>
+            {sens.map(sen => this.getLegislatorDisplay(sen))}
+          </section>
+        </div>
+      )
+    } else {
+      return (
+        <div className="no-info">
+          Please click on a congressional district to display information.
+        </div>
+      )
+    }
   };
 
   render() {
-
-    const data = this.getLegislatorData();
-    const rep = data.representative;
-
-    return (
-      <div className="congress-info">
-        <div className="district-name">
-          {data.districtTitle}
-        </div>
-        <div className="rep-info">
-          <div className="rep-photo">
-            { rep.img }
-          </div>
-          <div className="rep-name">
-            { rep.name }
-            <span>{ rep.party }</span>
-          </div>
-        </div>
-      </div>
-    )
+    return this.getInfoDisplay();
   }
 }
 
