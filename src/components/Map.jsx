@@ -17,7 +17,11 @@ export class CongressMap extends Component {
   };
 
   render() {
-    const { handleMapClick } = this.props;
+    const {
+      zoom,
+      center,
+      handleMapClick,
+    } = this.props;
 
     return (
       <Map
@@ -26,8 +30,8 @@ export class CongressMap extends Component {
           height: "100vh",
           width: "100vw"
         }}
-        center={[-96.000000, 38.000000]}
-        zoom={[3.7]}
+        center={center}
+        zoom={zoom}
         onMouseMove={this.handleMouseMove}
         onClick={handleMapClick}
       >

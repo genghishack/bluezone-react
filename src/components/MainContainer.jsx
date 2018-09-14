@@ -5,11 +5,14 @@ import CongressMap from './Map';
 
 class MainContainer extends Component {
   state = {
-    feature: {}
+    feature: {},
+    zoom: [3.7],
+    center: [-96.000000, 38.000000],
   };
 
   handleMapClick = (map, evt) => {
     const features = map.queryRenderedFeatures(evt.point);
+    console.log(features);
     if (!features.length) {
       this.setState({ feature: {} });
       return;
@@ -21,13 +24,23 @@ class MainContainer extends Component {
       return;
     }
 
-    this.setState({ feature });
+    // map.setPaintProperty(
+    //   feature.layer.id,
+    //   'fill-color',
+    //   '#f00',
+    // );
+
+    this.setState({
+      feature: feature,
+    });
   };
 
   render() {
     return (
       <div id="main-container">
         <CongressMap
+          zoom={this.state.zoom}
+          center={this.state.center}
           handleMapClick={this.handleMapClick}
         />
         <CongressInfo
