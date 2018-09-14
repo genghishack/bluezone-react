@@ -1,18 +1,31 @@
 import React, {Component} from 'react';
 import MapboxGl from "mapbox-gl";
+import geoViewport from '@mapbox/geo-viewport';
+
 import CongressInfo from './Info';
 import CongressMap from './Map';
+
+import states from '../data/states.json';
+import bboxes from '../data/bboxes.json';
+
+// Use GeoViewport and the window size to determine and appropriate center and zoom for the continental US
+const continentalView = (w,h) => {
+  return geoViewport.viewport([-128.8, 23.6, -65.4, 50.2], [w, h]);
+};
+const continental = continentalView(window.innerWidth/2, window.innerHeight/2);
 
 class MainContainer extends Component {
   state = {
     feature: {},
-    zoom: [3.7],
-    center: [-96.000000, 38.000000],
+    zoom: [continental.zoom],
+    center: continental.center,
   };
 
   handleMapClick = (map, evt) => {
     const features = map.queryRenderedFeatures(evt.point);
-    console.log(features);
+
+    // console.log(features);
+
     if (!features.length) {
       this.setState({ feature: {} });
       return;
@@ -24,11 +37,10 @@ class MainContainer extends Component {
       return;
     }
 
-    // map.setPaintProperty(
-    //   feature.layer.id,
-    //   'fill-color',
-    //   '#f00',
-    // );
+    // console.log(feature);
+
+    const view = geoViewport.viewport(bboxes[feature.properties.state + feature.properties.number], [window.innerWidth/3, window.innerHeight/3])
+    map.easeTo(view);
 
     this.setState({
       feature: feature,
@@ -36,6 +48,7 @@ class MainContainer extends Component {
   };
 
   render() {
+
     return (
       <div id="main-container">
         <CongressMap

@@ -41,7 +41,10 @@ class CongressInfo extends Component {
 
   getLegislatorDisplay = legislator => {
     return (
-      <div key={ legislator.id.bioguide } className="info">
+      <div
+        // key={ legislator.id.bioguide }
+        className="info"
+      >
         <div className="photo">
           { legislator.img }
         </div>
@@ -58,7 +61,7 @@ class CongressInfo extends Component {
   getInfoDisplay = () => {
     const { district } = this.props;
 
-    console.log(district);
+    // console.log(district);
 
     const districtTitle = (district.properties) ? district.properties.title_long : ''
 
