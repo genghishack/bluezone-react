@@ -38,8 +38,8 @@ export class CongressMap extends Component {
       <Map
         style="mapbox://styles/genghishack/cjga1amoc2xx02ro7nzpv1e7s"
         containerStyle={{
-          height: "100vh",
-          width: "100vw"
+          height: "100%",
+          width: "100%"
         }}
         center={center}
         zoom={zoom}

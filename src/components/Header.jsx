@@ -6,7 +6,10 @@ export class Header extends Component {
     return (
       <header className="App-header">
         <a href="/" className="home-link">
-          <span className="App-title">Congressional Map</span>
+          <div class="App-title">
+            <span className="light">Hackathon </span>
+            <span className="normal">Congressional Map</span>
+          </div>
         </a>
       </header>
     )
