@@ -5,7 +5,6 @@ import geoViewport from '@mapbox/geo-viewport';
 import CongressInfo from './Info';
 import CongressMap from './Map';
 
-import states from '../data/states.json';
 import bboxes from '../data/bboxes.json';
 
 // Use GeoViewport and the window size to determine and appropriate center and zoom for the continental US
@@ -68,7 +67,7 @@ class MainContainer extends Component {
 
   focusMap = (map, stateAbbr, districtCode) => {
     const view = geoViewport.viewport(
-      bboxes[stateAbbr + districtCode],
+      this.props.bboxes[stateAbbr + districtCode],
       [window.innerWidth/2.75, window.innerHeight/2.75]
     );
     map.easeTo(view);
@@ -76,7 +75,7 @@ class MainContainer extends Component {
 
   render() {
 
-    console.log(window.location.hash);
+    // console.log(window.location.hash);
 
     if (window.location.hash) {
       const hash = window.location.hash;
@@ -89,7 +88,7 @@ class MainContainer extends Component {
       });
 
       if (state || (state && district)) {
-        console.log(state, district);
+        // console.log(state, district);
       }
 
     }
