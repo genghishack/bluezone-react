@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 import CurrentLegislators from '../data/legislators-current.json';
 
@@ -21,18 +22,27 @@ class CongressInfo extends Component {
     });
     legislator = legislator || {};
 
-    legislator.fullName = '';
+    legislator.attributes = {
+      fullName: '',
+      DOB: '',
+      partyAbbrev: '',
+      imgTag: ''
+    };
+
     if (legislator.name) {
-      legislator.fullName = legislator.name.official_full;
+      legislator.attributes.fullName = legislator.name.official_full;
     }
-    legislator.partyAbbrev = '';
+    if (legislator.bio) {
+      legislator.attributes.DOB = 'DOB: ' + moment(legislator.bio.birthday).format('MMMM Do, YYYY');
+    }
     if (legislator.terms) {
       const currentTerm = legislator.terms[legislator.terms.length - 1];
-      legislator.partyAbbrev = '(' + currentTerm.party[0] + ')';
+      legislator.attributes.partyAbbrev = '(' + currentTerm.party[0] + ')';
     }
-    legislator.img = '';
     if (legislator.id) {
-      legislator.img = this.getLegislatorImg(legislator.id.bioguide);
+      legislator.attributes.imgTag = this.getLegislatorImg(legislator.id.bioguide);
+      const wikipediaUrl = 'http://www.wikipedia.org/wiki/' + legislator.id.wikipedia;
+      legislator.attributes.wikipediaLink = (<a href={ wikipediaUrl } target="legislator">Wikipedia</a>)
     }
     // console.log(legislator);
 
@@ -40,19 +50,36 @@ class CongressInfo extends Component {
   };
 
   getLegislatorDisplay = legislator => {
+
+    const l = legislator.attributes;
+
     return (
       <div
         // key={ legislator.id.bioguide }
         className="info"
       >
         <div className="photo">
-          { legislator.img }
+          { l.imgTag }
         </div>
-        <div className="name">
-          { legislator.fullName }
-        </div>
-        <div className="party">
-          { legislator.partyAbbrev }
+        <div className="column">
+          <div className="line">
+            <div className="name">
+              { l.fullName }
+            </div>
+            <div className="party">
+              { l.partyAbbrev }
+            </div>
+          </div>
+          <div className="line">
+            <div className="dob">
+              { l.DOB }
+            </div>
+          </div>
+          <div className="line">
+            <div className="wikipedia">
+              { l.wikipediaLink }
+            </div>
+          </div>
         </div>
       </div>
     );

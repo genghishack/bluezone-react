@@ -11,9 +11,20 @@ const Map = ReactMapboxGl({
 
 export class CongressMap extends Component {
 
-  handleMouseMove(map, evt) {
+  handleMouseMove = (map, evt) => {
+    const {rDistrictIds} = this.props;
     const features = map.queryRenderedFeatures(evt.point);
-    map.getCanvas().style.cursor = (features.length && features[0].sourceLayer === 'districts') ? 'pointer' : '';
+
+    let cursorStyle = '';
+
+    const rFilteredDistricts = features.filter(feature => {
+      return rDistrictIds.indexOf(feature.layer.id) !== -1;
+    });
+    if (rFilteredDistricts.length) {
+      cursorStyle = 'pointer';
+    }
+
+    map.getCanvas().style.cursor = cursorStyle;
   };
 
   render() {

@@ -13,10 +13,11 @@ const continentalView = (w,h) => {
   return geoViewport.viewport([-128.8, 23.6, -65.4, 50.2], [w, h]);
 };
 const continental = continentalView(window.innerWidth/2, window.innerHeight/2);
+const rDistrictIds = ['districts_1', 'districts_2', 'districts_3', 'districts_4', 'districts_5'];
 
 class MainContainer extends Component {
   state = {
-    feature: {},
+    district: {},
     zoom: [continental.zoom],
     center: continental.center,
   };
@@ -24,28 +25,28 @@ class MainContainer extends Component {
   handleMapClick = (map, evt) => {
     const features = map.queryRenderedFeatures(evt.point);
 
-    // console.log(features);
+    // console.log('features: ', features);
 
-    if (!features.length) {
-      this.setState({ feature: {} });
+    let district;
+    const rFilteredDistricts = features.filter(feature => {
+      return rDistrictIds.indexOf(feature.layer.id) !== -1;
+    });
+    if (rFilteredDistricts.length) {
+      district = rFilteredDistricts[0];
+    }
+
+    if (!district) {
+      this.setState({ district: {} });
       return;
     }
 
-    const feature = features[0];
-    if (feature.sourceLayer !== 'districts') {
-      this.setState({ feature: {} });
-      return;
-    }
-
-    // console.log(feature);
+    // console.log('district: ', district);
     // console.log(map.getStyle());
     // console.log(map.getFilter('districts_1'));
 
-    this.focusMap(map, feature.properties.state, feature.properties.number);
+    this.focusMap(map, district.properties.state, district.properties.number);
 
-    this.setState({
-      feature: feature,
-    });
+    this.setState({ district });
   };
 
   filterMap = (map, stateAbbr, districtCode) => {
@@ -99,9 +100,10 @@ class MainContainer extends Component {
           zoom={this.state.zoom}
           center={this.state.center}
           handleMapClick={this.handleMapClick}
+          rDistrictIds={rDistrictIds}
         />
         <CongressInfo
-          district={this.state.feature}
+          district={this.state.district}
         />
       </div>
     )
