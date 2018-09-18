@@ -55,7 +55,7 @@ class CongressInfo extends Component {
 
     return (
       <div
-        // key={ legislator.id.bioguide }
+        key={ l.fullName }
         className="info"
       >
         <div className="photo">
