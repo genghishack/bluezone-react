@@ -7,15 +7,23 @@ export class Header extends Component {
     possibleDistricts: []
   };
 
-  handleStateSelection = (evt) => {
+  handleStateSelection = evt => {
     const { districts } = this.props;
     this.setState({
       selectedState: evt.target.value,
       selectedDistrict: '',
-      possibleDistricts: districts[evt.target.value].sort()
+      possibleDistricts: (districts[evt.target.value]) ? districts[evt.target.value].sort() : []
     }, () => {
       // console.log(this.state);
+      this.props.handleSelection(this.state.selectedState);
     });
+  };
+
+  handleDistrictSelection = evt => {
+    this.setState({ selectedDistrict: evt.target.value }, () => {
+      // console.log(this.state);
+      this.props.handleSelection(this.state.selectedState, this.state.selectedDistrict);
+    })
   };
 
   render() {
@@ -48,8 +56,11 @@ export class Header extends Component {
           </div>
           <div className="selector light">
             <span className="label">District</span>
-            <select className="district">
-              <option value="" selected></option>
+            <select
+              className="district"
+              onChange={this.handleDistrictSelection}
+            >
+              <option value=""></option>
               {this.state.possibleDistricts.map(districtNum => {
                 return (
                   <option

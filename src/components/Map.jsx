@@ -36,11 +36,14 @@ export class CongressMap extends Component {
 
     return (
       <Map
+        ref={e => { this.props.getMaphandle(e); }}
         style="mapbox://styles/genghishack/cjga1amoc2xx02ro7nzpv1e7s"
         containerStyle={{
           height: "100%",
           width: "100%"
         }}
+        attributionControl={false}
+        renderWorldCopies={false}
         center={center}
         zoom={zoom}
         onMouseMove={this.handleMouseMove}
@@ -49,6 +52,7 @@ export class CongressMap extends Component {
         <ZoomControl />
         <ScaleControl
           measurement="mi"
+          position={'top-left'}
         />
       </Map>
     );
