@@ -34,13 +34,13 @@ class App extends Component {
     center: continental.center,
   };
 
+  getMapHandle = e => {
+    this.map = e;
+  };
+
   handleSelection = (state, district='') => {
     this.filterMap(state, district);
     this.focusMap(state, district);
-  };
-
-  getMapHandle = e => {
-    this.map = e;
   };
 
   filterMap = (stateAbbr, districtCode) => {

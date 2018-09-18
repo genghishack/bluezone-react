@@ -85,7 +85,7 @@ class CongressInfo extends Component {
     );
   };
 
-  getInfoDisplay = () => {
+  render() {
     const { district } = this.props;
 
     // console.log(district);
@@ -101,7 +101,6 @@ class CongressInfo extends Component {
       rSenIds.forEach(sen_id => {
         sens.push(this.getLegislatorData(sen_id));
       });
-      // console.log(sens);
 
       return (
         <div className="congress-info">
@@ -127,9 +126,6 @@ class CongressInfo extends Component {
     }
   };
 
-  render() {
-    return this.getInfoDisplay();
-  }
 }
 
 export default CongressInfo;
