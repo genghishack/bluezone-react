@@ -32,6 +32,7 @@ class CongressInfo extends Component {
             <div className="title">Senators</div>
             {rSenIds.map(sen_id => (
               <Legislator
+                key={sen_id}
                 id={sen_id}
               />
             ))}
