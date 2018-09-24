@@ -35,8 +35,8 @@ export class Header extends Component {
             <i className="fas fa-globe"></i>
           </div>
           <div className="App-title">
-            <span className="light">Project </span>
-            <span className="normal">BlueZone</span>
+            <span className="light">Hackathon </span>
+            <span className="normal">Congressional Map</span>
           </div>
         </a>
         <div className="App-menu">
