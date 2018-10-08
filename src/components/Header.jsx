@@ -31,6 +31,9 @@ export class Header extends Component {
     return (
       <header id="App-header">
         <a href="/" className="home-link">
+          <div className="App-logo">
+            <i className="fas fa-globe"></i>
+          </div>
           <div className="App-title">
             <span className="light">Hackathon </span>
             <span className="normal">Congressional Map</span>

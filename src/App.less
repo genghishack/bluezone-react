@@ -22,7 +22,19 @@
   padding: 15px 20px 10px;
 
   .home-link {
+    display: flex;
     text-decoration: none;
+
+    .App-logo {
+      margin-right: 5px;
+      font-size: 22px;
+      color: #6495ed;
+    }
+    .App-title {
+      font-family: 'Open sans', sans-serif;
+      font-size: 22px;
+    }
+
   }
 
   .App-menu {
@@ -44,11 +56,6 @@
       }
     }
   }
-}
-
-.App-title {
-  font-family: 'Open sans', sans-serif;
-  font-size: 22px;
 }
 
 #main-container {
@@ -85,10 +92,6 @@
       .info {
         display: flex;
 
-        .line {
-          display: flex;
-        }
-
         .photo {
           img {
             width: 100px;
@@ -96,20 +99,36 @@
           }
         }
 
-        .name {
-          padding-bottom: 10px;
+        .line {
+          display: flex;
+        }
+
+        .heading {
+          padding-bottom: 5px;
+
+          .party {
+            margin: 0 5px;
+          }
+        }
+
+        .links {
+          font-size: 12px;
+          padding: 5px 0;
+
+          a {
+            text-decoration: none;
+          }
+
+          i {
+            margin-left: 5px;
+            font-size: 10px;
+            position: relative;
+            top: -1px;
+          }
         }
 
         .dob {
           font-size: 12px;
-        }
-
-        .wikipedia {
-          font-size: 12px;
-        }
-
-        .party {
-          margin: 0 5px;
         }
       }
 
