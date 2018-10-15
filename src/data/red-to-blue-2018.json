@@ -1,0 +1,1432 @@
+[
+  {
+    "name": {
+      "first": "Clarke",
+      "last": "Tucker",
+      "official_full": "Clarke Tucker"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": "Clarke is a seventh-generation Arkansan and a State Representative respected on both sides of the aisle. As young cancer survivor, Clarke's bipartisan work to protect access to health care is personal. His decision to run for Congress was spurred by his opponent's vote to drive up the cost of coverage and strip away protections for people who, like Clarke, live with pre-existing conditions. Clarke's deep roots in this community, ability to build consensus across party lines, and proven fundraising ability make him the right candidate to win back this seat with Democratic roots."
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "AR",
+      "district": 2,
+      "party": "Democrat",
+      "url": "https://www.clarketucker.com/"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Ann Kirkpatrick"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "AZ",
+      "district": 2,
+      "party": "Democrat",
+      "url": ""
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Jessica Morse"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "CA",
+      "district": 4,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Josh Harder"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "CA",
+      "district": 10,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "TJ Cox"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "CA",
+      "district": 21,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Katie Hill"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "CA",
+      "district": 25,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Gil Cisneros"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "CA",
+      "district": 39,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Katie Porter"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "CA",
+      "district": 45,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Harley Rouda"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "CA",
+      "district": 48,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Mike Levin"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "CA",
+      "district": 49,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Jason Crow"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "CO",
+      "district": 6,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Jahana Hayes"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "CT",
+      "district": 5,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Nancy Soderberg"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "FL",
+      "district": 6,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Kristen Carlson"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "FL",
+      "district": 15,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "David Shapiro"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "FL",
+      "district": 16,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Lauren Baer"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "FL",
+      "district": 18,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Mary Barzee Flores"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "FL",
+      "district": 25,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Debbie Mucarsel-Powell"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "FL",
+      "district": 26,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Lucy McBath"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "GA",
+      "district": 6,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Carolyn Bourdeaux"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "GA",
+      "district": 7,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Abby Finkenauer"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "IA",
+      "district": 1,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Cindy Axne"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "IA",
+      "district": 3,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Sean Casten"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "IL",
+      "district": 6,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Brendan Kelly"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "IL",
+      "district": 12,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Betsy Dirksen Londrigan"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "IL",
+      "district": 13,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Lauren Underwood"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "IL",
+      "district": 14,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Liz Watson"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "IN",
+      "district": 9,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Paul Davis"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "KS",
+      "district": 2,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Sharice Davids"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "KS",
+      "district": 3,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Amy McGrath"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "KY",
+      "district": 6,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Jared Golden"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "ME",
+      "district": 2,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Matt Longjohn"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "MI",
+      "district": 6,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Gretchen Driskell"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "MI",
+      "district": 7,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Elissa Slotkin"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "MI",
+      "district": 8,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Haley Stevens"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "MI",
+      "district": 11,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Dan Feehan"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "MN",
+      "district": 1,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Angie Craig"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "MN",
+      "district": 2,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Dean Phillips"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "MN",
+      "district": 3,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Joe Radinovich"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "MN",
+      "district": 8,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Cort VanOstran"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "MO",
+      "district": 2,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Kathleen Williams"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "MT",
+      "district": 0,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Linda Coleman"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NC",
+      "district": 2,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Dan McCready"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NC",
+      "district": 9,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Kathy Manning"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NC",
+      "district": 13,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Kara Eastman"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NE",
+      "district": 2,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Chris Pappas"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NH",
+      "district": 1,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Jeff Van Drew"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NJ",
+      "district": 2,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Andy Kim"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NJ",
+      "district": 3,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Tom Malinowski"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NJ",
+      "district": 7,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Mikie Sherrill"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NJ",
+      "district": 11,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Xochitl Torres Small"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NM",
+      "district": 2,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Susie Lee"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NV",
+      "district": 3,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Steven Horsford"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NV",
+      "district": 4,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Perry Gershon"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NY",
+      "district": 1,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Max Rose"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NY",
+      "district": 11,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Antonio Delgado"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NY",
+      "district": 19,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Anthony Brindisi"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NY",
+      "district": 22,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Dana Balter"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "NY",
+      "district": 24,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Aftab Pureval"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "OH",
+      "district": 1,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Ken Harbaugh"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "OH",
+      "district": 7,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Danny O’Connor"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "OH",
+      "district": 12,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Betsy Rader"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "OH",
+      "district": 14,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Scott Wallace"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "PA",
+      "district": 1,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Chrissy Houlahan"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "PA",
+      "district": 6,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Susan Wild"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "PA",
+      "district": 7,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "George Scott"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "PA",
+      "district": 10,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Ron DiNicola"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "PA",
+      "district": 16,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Joe Cunningham"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "SC",
+      "district": 1,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Todd Litton"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "TX",
+      "district": 2,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Lizzie Fletcher"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "TX",
+      "district": 7,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Joseph Kopser"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "TX",
+      "district": 21,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Gina Ortiz Jones"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "TX",
+      "district": 23,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "MJ Hegar"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "TX",
+      "district": 31,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Colin Allred"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "TX",
+      "district": 32,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Ben McAdams"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "UT",
+      "district": 4,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Elaine Luria"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "VA",
+      "district": 2,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Abigail Spanberger"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "VA",
+      "district": 7,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Jennifer Wexton"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "VA",
+      "district": 10,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Carolyn Long"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "WA",
+      "district": 3,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Lisa Brown"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "WA",
+      "district": 5,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Kim Schrier"
+    },
+    "bio": {
+      "gender": "F",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "WA",
+      "district": 8,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Randy Bryce"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "WI",
+      "district": 1,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Dan Kohl"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "WI",
+      "district": 6,
+      "party": "Democrat"
+    }
+  },
+  {
+    "name": {
+      "first": "",
+      "last": "",
+      "official_full": "Richard Ojeda"
+    },
+    "bio": {
+      "gender": "M",
+      "summary": ""
+    },
+    "campaign": {
+      "type": "rep",
+      "state": "WV",
+      "district": 3,
+      "party": "Democrat"
+    }
+  }
+]
