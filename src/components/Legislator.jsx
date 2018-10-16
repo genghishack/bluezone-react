@@ -23,13 +23,7 @@ class Legislator extends Component {
     )
   };
 
-  getData = (id) => {
-
-    let legislator;
-    [legislator] = CurrentLegislatorData.filter(leg => {
-      return leg.id.bioguide === id;
-    });
-    legislator = legislator || {};
+  getModel = legislator => {
 
     legislator.attributes = {
       fullName: '',
@@ -75,8 +69,9 @@ class Legislator extends Component {
   };
 
   render() {
-    const { id } = this.props;
-    const legislator = this.getData(id);
+    const { data } = this.props;
+    // console.log(data);
+    const legislator = this.getModel(data);
 
     const l = legislator.attributes;
 

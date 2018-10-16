@@ -3,6 +3,10 @@ import React, {Component} from 'react';
 import CongressInfo from './Info';
 import CongressMap from './Map';
 
+import { indexedLegislators } from '../utils/legislator-index';
+
+const legislatorIndex = indexedLegislators();
+
 const rDistrictIds = ['districts_1', 'districts_2', 'districts_3', 'districts_4', 'districts_5'];
 
 class MainContainer extends Component {
@@ -50,6 +54,7 @@ class MainContainer extends Component {
         />
         <CongressInfo
           district={this.state.district}
+          legislatorIndex={legislatorIndex}
         />
       </div>
     )
