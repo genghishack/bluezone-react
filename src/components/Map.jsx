@@ -11,6 +11,10 @@ const Map = ReactMapboxGl({
 
 export class CongressMap extends Component {
 
+  handleMapLoad = (map, evt) => {
+    console.log('map loaded');
+  };
+  
   handleMouseMove = (map, evt) => {
     const {rDistrictIds} = this.props;
     const features = map.queryRenderedFeatures(evt.point);
@@ -23,7 +27,6 @@ export class CongressMap extends Component {
     if (rFilteredDistricts.length) {
       cursorStyle = 'pointer';
     }
-
     map.getCanvas().style.cursor = cursorStyle;
   };
 
@@ -48,6 +51,7 @@ export class CongressMap extends Component {
         zoom={zoom}
         onMouseMove={this.handleMouseMove}
         onClick={handleMapClick}
+        onStyleLoad={this.handleMapLoad}
       >
         <ZoomControl />
         <ScaleControl

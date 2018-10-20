@@ -3,9 +3,12 @@ import React, {Component} from 'react';
 import CongressInfo from './Info';
 import CongressMap from './Map';
 
-import { indexedLegislators } from '../utils/legislator-index';
+import { indexedLegislators, indexedCandidates } from '../utils/data-index';
 
 const legislatorIndex = indexedLegislators();
+const candidateIndex = indexedCandidates();
+
+console.log(candidateIndex);
 
 const rDistrictIds = ['districts_1', 'districts_2', 'districts_3', 'districts_4', 'districts_5'];
 
@@ -15,6 +18,9 @@ class MainContainer extends Component {
   };
 
   handleMapClick = (map, evt) => {
+    // set color on a layer
+    // map.setPaintProperty('districts_1', 'fill-color', '#0000ff');
+
     const features = map.queryRenderedFeatures(evt.point);
 
     // console.log('features: ', features);
@@ -33,8 +39,8 @@ class MainContainer extends Component {
     }
 
     // console.log('district: ', district);
-    // console.log(map.getStyle());
-    // console.log(map.getFilter('districts_1'));
+    // console.log('source: ', map.getSource('composite'));
+    // console.log('layer: ', map.getLayer('districts_1'));
 
     this.props.focusMap(district.properties.state, district.properties.number);
 

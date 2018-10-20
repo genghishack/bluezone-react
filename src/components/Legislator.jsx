@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
-import CurrentLegislatorData from '../data/legislators-current.json';
-
 class Legislator extends Component {
 
   getImg = (id) => {
