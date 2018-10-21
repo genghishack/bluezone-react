@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 
 class Candidate extends Component {
 
+  getImg = (filename) => {
+    const src = '/img/red-to-blue-2018/' + filename;
+    return (
+      <img
+        src={src}
+      />
+    );
+  };
+
   getLink = (url, text) => {
     return (
       <a href={ url } target="candidate">
@@ -16,6 +25,7 @@ class Candidate extends Component {
     candidate.attributes = {
       fullName: '',
       partyAbbrev: '',
+      imgTag: '',
       links: {
         website: ''
       }
@@ -23,6 +33,10 @@ class Candidate extends Component {
 
     if (candidate.name) {
       candidate.attributes.fullName = candidate.name.official_full;
+    }
+
+    if (candidate.bio) {
+      candidate.attributes.imgTag = this.getImg(candidate.bio.photo);
     }
 
     if (candidate.campaign) {
@@ -50,6 +64,9 @@ class Candidate extends Component {
         key={ c.fullName }
         className="info"
       >
+        <div className="photo">
+          { c.imgTag }
+        </div>
         <div className="column">
           <div className="line heading">
             <div className="name">

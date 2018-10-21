@@ -1,5 +1,5 @@
 import CurrentLegislatorData from '../data/legislators-current.json';
-import CurrentCandidateData from '../data/red-to-blue-2018.json';
+import CurrentCandidateData from '../data/red-to-blue-2018/candidates.json';
 
 export const indexedLegislators = () => {
 

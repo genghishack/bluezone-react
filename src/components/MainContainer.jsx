@@ -8,8 +8,6 @@ import { indexedLegislators, indexedCandidates } from '../utils/data-index';
 const legislatorIndex = indexedLegislators();
 const candidateIndex = indexedCandidates();
 
-console.log(candidateIndex);
-
 const rDistrictIds = ['districts_1', 'districts_2', 'districts_3', 'districts_4', 'districts_5'];
 
 class MainContainer extends Component {
@@ -56,11 +54,12 @@ class MainContainer extends Component {
           center={this.props.center}
           handleMapClick={this.handleMapClick}
           rDistrictIds={rDistrictIds}
-          getMaphandle={this.props.getMapHandle}
+          getMapHandle={this.props.getMapHandle}
         />
         <CongressInfo
           district={this.state.district}
           legislatorIndex={legislatorIndex}
+          candidateIndex={candidateIndex}
         />
       </div>
     )

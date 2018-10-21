@@ -39,7 +39,7 @@ export class CongressMap extends Component {
 
     return (
       <Map
-        ref={e => { this.props.getMaphandle(e); }}
+        ref={e => { this.props.getMapHandle(e); }}
         style="mapbox://styles/genghishack/cjga1amoc2xx02ro7nzpv1e7s"
         containerStyle={{
           height: "100%",

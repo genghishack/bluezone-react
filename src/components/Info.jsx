@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 
 import Legislator from './Legislator';
+import Candidate from './Candidate';
 
 class CongressInfo extends Component {
 
   render() {
-    const { district, legislatorIndex } = this.props;
+    const { district, legislatorIndex, candidateIndex } = this.props;
+
+    console.log('candidateIndex: ', candidateIndex);
 
     const districtTitle = (district.properties) ? district.properties.title_long : '';
 
@@ -14,6 +17,10 @@ class CongressInfo extends Component {
       const state = district.properties.state;
       const district_num = parseInt(district.properties.number);
       const rep = legislatorIndex[state].rep[district_num];
+      const repCandidate = candidateIndex[state].rep[district_num];
+
+      console.log('repCandidate: ', repCandidate);
+
       const sens = legislatorIndex[state].sen ? Object.values(legislatorIndex[state].sen) : [];
 
       // console.log(rep, sens);
@@ -29,6 +36,14 @@ class CongressInfo extends Component {
               data={rep}
             />
           </section>
+          {repCandidate ? (
+            <section id="rep-candidate-section">
+              <div className="title">Challenger</div>
+              <Candidate
+              data={repCandidate}
+              />
+            </section>
+          ) : ''}
           <section id="sen-section">
             <div className="title">Senators</div>
             {sens.length ?

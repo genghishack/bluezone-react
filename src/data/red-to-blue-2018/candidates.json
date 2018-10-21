@@ -6,7 +6,8 @@
       "official_full": "Clarke Tucker"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_tucker.png"
     },
     "campaign": {
       "type": "rep",
@@ -23,7 +24,8 @@
       "official_full": "Ann Kirkpatrick"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_kirkpatrick.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -40,7 +42,8 @@
       "official_full": "Jessica Morse"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_morse.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -57,7 +60,8 @@
       "official_full": "Josh Harder"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_harder.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -74,7 +78,8 @@
       "official_full": "TJ Cox"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_cox.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -91,7 +96,8 @@
       "official_full": "Katie Hill"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_hill.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -108,7 +114,8 @@
       "official_full": "Gil Cisneros"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_cisneros.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -125,7 +132,8 @@
       "official_full": "Katie Porter"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_porter.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -142,7 +150,8 @@
       "official_full": "Harley Rouda"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_rouda.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -159,7 +168,8 @@
       "official_full": "Mike Levin"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_levin.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -176,7 +186,8 @@
       "official_full": "Jason Crow"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_crow.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -193,7 +204,8 @@
       "official_full": "Jahana Hayes"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_hayes.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -210,7 +222,8 @@
       "official_full": "Nancy Soderberg"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_soderberg.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -227,7 +240,8 @@
       "official_full": "Kristen Carlson"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_carlson.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -244,7 +258,8 @@
       "official_full": "David Shapiro"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_shapiro.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -261,7 +276,8 @@
       "official_full": "Lauren Baer"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_baer.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -278,7 +294,8 @@
       "official_full": "Mary Barzee Flores"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_barzeeflores.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -295,7 +312,8 @@
       "official_full": "Debbie Mucarsel-Powell"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_mucarsel-powell.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -312,7 +330,8 @@
       "official_full": "Lucy McBath"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_mcbath.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -329,7 +348,8 @@
       "official_full": "Carolyn Bourdeaux"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_bourdeaux.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -346,7 +366,8 @@
       "official_full": "Abby Finkenauer"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_finkenauer2.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -363,7 +384,8 @@
       "official_full": "Cindy Axne"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_axne.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -380,7 +402,8 @@
       "official_full": "Sean Casten"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_casten.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -397,7 +420,8 @@
       "official_full": "Brendan Kelly"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_kelly_2.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -414,7 +438,8 @@
       "official_full": "Betsy Dirksen Londrigan"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_londrigan.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -431,7 +456,8 @@
       "official_full": "Lauren Underwood"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_underwood.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -448,7 +474,8 @@
       "official_full": "Liz Watson"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_watson.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -465,7 +492,8 @@
       "official_full": "Paul Davis"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_davis.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -482,7 +510,8 @@
       "official_full": "Sharice Davids"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_davids.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -499,7 +528,8 @@
       "official_full": "Amy McGrath"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_mcgrath.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -516,7 +546,8 @@
       "official_full": "Jared Golden"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_golden.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -533,7 +564,8 @@
       "official_full": "Matt Longjohn"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_londrigan.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -550,7 +582,8 @@
       "official_full": "Gretchen Driskell"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_driskell.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -567,7 +600,8 @@
       "official_full": "Elissa Slotkin"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_slotkin.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -584,7 +618,8 @@
       "official_full": "Haley Stevens"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_stevens.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -601,7 +636,8 @@
       "official_full": "Dan Feehan"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_feehan.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -618,7 +654,8 @@
       "official_full": "Angie Craig"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_craig_v4.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -635,7 +672,8 @@
       "official_full": "Dean Phillips"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_phillips.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -652,7 +690,8 @@
       "official_full": "Joe Radinovich"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_radinovich.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -669,7 +708,8 @@
       "official_full": "Cort VanOstran"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_vanostran.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -686,7 +726,8 @@
       "official_full": "Kathleen Williams"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_williams.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -703,7 +744,8 @@
       "official_full": "Linda Coleman"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_coleman.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -720,7 +762,8 @@
       "official_full": "Dan McCready"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_mccready.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -737,7 +780,8 @@
       "official_full": "Kathy Manning"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_manning.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -754,7 +798,8 @@
       "official_full": "Kara Eastman"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_eastman.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -771,7 +816,8 @@
       "official_full": "Chris Pappas"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_pappas.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -788,7 +834,8 @@
       "official_full": "Jeff Van Drew"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_van_drew.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -805,7 +852,8 @@
       "official_full": "Andy Kim"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_kim.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -822,7 +870,8 @@
       "official_full": "Tom Malinowski"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_malinowski.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -839,7 +888,8 @@
       "official_full": "Mikie Sherrill"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_sherrill.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -856,7 +906,8 @@
       "official_full": "Xochitl Torres Small"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_torres_small.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -873,7 +924,8 @@
       "official_full": "Susie Lee"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_lee.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -890,7 +942,8 @@
       "official_full": "Steven Horsford"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_horsford.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -907,7 +960,8 @@
       "official_full": "Perry Gershon"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_gershon.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -924,7 +978,8 @@
       "official_full": "Max Rose"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_rose.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -941,7 +996,8 @@
       "official_full": "Antonio Delgado"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_delgado.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -958,7 +1014,8 @@
       "official_full": "Anthony Brindisi"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_brindisi.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -975,7 +1032,8 @@
       "official_full": "Dana Balter"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_balter_2.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -992,7 +1050,8 @@
       "official_full": "Aftab Pureval"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_pureval.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1009,7 +1068,8 @@
       "official_full": "Ken Harbaugh"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_harbaugh.png"
     },
     "campaign": {
       "type": "rep",
@@ -1026,7 +1086,8 @@
       "official_full": "Danny O’Connor"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_oconnor.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1043,7 +1104,8 @@
       "official_full": "Betsy Rader"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_rader.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1060,7 +1122,8 @@
       "official_full": "Scott Wallace"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_wallace.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1077,7 +1140,8 @@
       "official_full": "Chrissy Houlahan"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_houlahan.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1094,7 +1158,8 @@
       "official_full": "Susan Wild"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_wild.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1111,7 +1176,8 @@
       "official_full": "George Scott"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_scott.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1128,7 +1194,8 @@
       "official_full": "Ron DiNicola"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_dinicolo.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1145,7 +1212,8 @@
       "official_full": "Joe Cunningham"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_cunningham.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1162,7 +1230,8 @@
       "official_full": "Todd Litton"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_litton.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1179,7 +1248,8 @@
       "official_full": "Lizzie Fletcher"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_fletcher_2.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1196,7 +1266,8 @@
       "official_full": "Joseph Kopser"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_kopser.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1213,7 +1284,8 @@
       "official_full": "Gina Ortiz Jones"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_ortizjones.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1230,7 +1302,8 @@
       "official_full": "MJ Hegar"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_hegar.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1247,7 +1320,8 @@
       "official_full": "Colin Allred"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_allred_2.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1264,7 +1338,8 @@
       "official_full": "Ben McAdams"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_mcadams.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1281,7 +1356,8 @@
       "official_full": "Elaine Luria"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_luria.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1298,7 +1374,8 @@
       "official_full": "Abigail Spanberger"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_spanberger.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1315,7 +1392,8 @@
       "official_full": "Jennifer Wexton"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_wexton.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1332,7 +1410,8 @@
       "official_full": "Carolyn Long"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_long_2.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1349,7 +1428,8 @@
       "official_full": "Lisa Brown"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_brown.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1366,7 +1446,8 @@
       "official_full": "Kim Schrier"
     },
     "bio": {
-      "gender": "F"
+      "gender": "F",
+      "photo": "redtoblue_web_headshots_all_schrier.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1383,7 +1464,8 @@
       "official_full": "Randy Bryce"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_bryce.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1400,7 +1482,8 @@
       "official_full": "Dan Kohl"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_kohl_final.jpg"
     },
     "campaign": {
       "type": "rep",
@@ -1417,7 +1500,8 @@
       "official_full": "Richard Ojeda"
     },
     "bio": {
-      "gender": "M"
+      "gender": "M",
+      "photo": "redtoblue_web_headshots_all_ojeda_2.jpg"
     },
     "campaign": {
       "type": "rep",
