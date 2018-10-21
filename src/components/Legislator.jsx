@@ -23,6 +23,8 @@ class Legislator extends Component {
 
   getModel = legislator => {
 
+    console.log('legislator: ', legislator);
+
     legislator.attributes = {
       fullName: '',
       DOB: '',
@@ -68,7 +70,10 @@ class Legislator extends Component {
 
   render() {
     const { data } = this.props;
-    // console.log(data);
+    if (!data) {
+      return 'No info available';
+    }
+
     const legislator = this.getModel(data);
 
     const l = legislator.attributes;

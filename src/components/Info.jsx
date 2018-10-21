@@ -17,7 +17,7 @@ class CongressInfo extends Component {
       const state = district.properties.state;
       const district_num = parseInt(district.properties.number);
       const rep = legislatorIndex[state].rep[district_num];
-      const repCandidate = candidateIndex[state].rep[district_num];
+      const repCandidate = candidateIndex[state] ? candidateIndex[state].rep[district_num] : '';
 
       console.log('repCandidate: ', repCandidate);
 
