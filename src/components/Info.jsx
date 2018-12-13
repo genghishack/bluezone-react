@@ -8,7 +8,7 @@ class CongressInfo extends Component {
   render() {
     const { district, legislatorIndex, candidateIndex } = this.props;
 
-    console.log('candidateIndex: ', candidateIndex);
+    // console.log('candidateIndex: ', candidateIndex);
 
     const districtTitle = (district.properties) ? district.properties.title_long : '';
 
@@ -19,7 +19,7 @@ class CongressInfo extends Component {
       const rep = legislatorIndex[state].rep[district_num];
       const repCandidate = candidateIndex[state] ? candidateIndex[state].rep[district_num] : '';
 
-      console.log('repCandidate: ', repCandidate);
+      // console.log('repCandidate: ', repCandidate);
 
       const sens = legislatorIndex[state].sen ? Object.values(legislatorIndex[state].sen) : [];
 

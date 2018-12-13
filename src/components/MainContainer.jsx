@@ -8,7 +8,7 @@ import { indexedLegislators, indexedCandidates } from '../utils/data-index';
 const legislatorIndex = indexedLegislators();
 const candidateIndex = indexedCandidates();
 
-const rDistrictIds = ['districts_1', 'districts_2', 'districts_3', 'districts_4', 'districts_5'];
+const rDistrictIds = ['districts_1', 'districts_2', 'districts_3', 'districts_4', 'districts_5', 'districts_fill'];
 
 class MainContainer extends Component {
   state = {
@@ -21,7 +21,7 @@ class MainContainer extends Component {
 
     const features = map.queryRenderedFeatures(evt.point);
 
-    // console.log('features: ', features);
+    console.log('features: ', features);
 
     let district;
     const rFilteredDistricts = features.filter(feature => {
@@ -36,13 +36,22 @@ class MainContainer extends Component {
       return;
     }
 
-    // console.log('district: ', district);
-    // console.log('source: ', map.getSource('composite'));
-    // console.log('layer: ', map.getLayer('districts_1'));
-
     this.props.focusMap(district.properties.state, district.properties.number);
 
-    this.setState({ district });
+    map.setFeatureState({
+      source: 'districts2018',
+      sourceLayer: 'districts',
+      id: district.id,
+    }, {
+      color: true
+    });
+
+
+    this.setState({ district }, () => {
+      console.log('district: ', district);
+      // console.log('source: ', map.getSource('composite'));
+      // console.log('layer: ', map.getLayer('districts'));
+    });
   };
 
   render() {

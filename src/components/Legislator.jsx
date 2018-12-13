@@ -23,7 +23,7 @@ class Legislator extends Component {
 
   getModel = legislator => {
 
-    console.log('legislator: ', legislator);
+    // console.log('legislator: ', legislator);
 
     legislator.attributes = {
       fullName: '',
