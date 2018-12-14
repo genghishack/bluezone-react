@@ -6,7 +6,7 @@ import ReactMapboxGl, {
 } from "react-mapbox-gl";
 
 const Map = ReactMapboxGl({
-  accessToken: "pk.eyJ1IjoiZ2VuZ2hpc2hhY2siLCJhIjoiZ2x6WjZhbyJ9.P8at90QQiy0C8W_mc21w6Q"
+  accessToken: "pk.eyJ1IjoiYWdyaWJsZSIsImEiOiJjaW1ubDBxeDMwMGpidTdsdmQwanExMDJ4In0.jUZhBfDP_3zEWdUUWCbQ5w"
 });
 
 export class CongressMap extends Component {
