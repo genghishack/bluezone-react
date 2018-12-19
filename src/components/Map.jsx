@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
 import mapboxgl from "mapbox-gl";
-import { polys } from "./fields";
-import { points } from "./fieldpoints";
+import { polys } from "../data/fields";
+import { points } from "../data/fieldpoints";
 import { get } from "lodash";
 import { InfoBox } from "./InfoBox/"
 
