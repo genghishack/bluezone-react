@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { PropTypes } from "prop-types";
 import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
-import mapboxgl from "mapbox-gl";
-import { polys } from "../data/fields";
-import { points } from "../data/fieldpoints";
 import { get } from "lodash";
 import { InfoBox } from "./InfoBox/"
+import { HelpfulMessage } from "./HelpfulMessage/"
+import { ZoomControl, ScaleControl } from 'react-mapbox-gl';
+
+import { createGeoJsonPolys, createGeoJsonPoints } from "../utility/MapHelpers";
 
 const opts = {
   accessToken: "pk.eyJ1IjoiYWdyaWJsZSIsImEiOiJjaW1ubDBxeDMwMGpidTdsdmQwanExMDJ4In0.jUZhBfDP_3zEWdUUWCbQ5w",
@@ -21,29 +23,43 @@ export class FieldMap extends Component {
     this.state = {
       expanded: false,
       fieldProps: null,
-      weatherData: null
+      weatherData: null,
+      polys: null,
+      points: null,
+      showMessage: true
     }
   }
-  getBoundaries(boundingBox) {
-    const boundaries = JSON.parse(boundingBox);
-    var sw = new mapboxgl.LngLat(boundaries[0], boundaries[1]);
-    var ne = new mapboxgl.LngLat(boundaries[2], boundaries[3]);
-    return new mapboxgl.LngLatBounds(sw, ne);
-  }
-  mapLoad(map) {
-    map.fitBounds(polys.boundingBox);
-  }
+  static propTypes = {
+    district: PropTypes.string,
+    region: PropTypes.string,
+    zoom: PropTypes.arrayOf(PropTypes.number),
+    center: PropTypes.arrayOf(PropTypes.number)
+  };
+  // getBoundaries(boundingBox) {
+  //   const boundaries = JSON.parse(boundingBox);
+  //   var sw = new mapboxgl.LngLat(boundaries[0], boundaries[1]);
+  //   var ne = new mapboxgl.LngLat(boundaries[2], boundaries[3]);
+  //   return new mapboxgl.LngLatBounds(sw, ne);
+  // }
+  handleMouseMove = (map, evt) => {
+    const features = map.queryRenderedFeatures(evt.point);
+    let cursorStyle = '';
+    if (features.length > 0) {
+      cursorStyle = 'pointer';
+    }
+    map.getCanvas().style.cursor = cursorStyle;
+  };
   mapClick = (map, e) => {
     if (e) {
       const features = map.queryRenderedFeatures(e.point);
       if (get(features, "[0].properties")) {
         this.setState({
           fieldProps: features[0].properties,
-          expanded: true
+          expanded: true,
+          showMessage: false
         });
-        const centroidArr = JSON.parse( features[0].properties.centroid);
-        const centroid = new mapboxgl.LngLat(centroidArr[0], centroidArr[1]);
-        const url = `https://api.aerisapi.com/observations/summary?p=${centroidArr[1]},${centroidArr[0]}&client_id=dTDYoTwjuurB6gTfchSwy&client_secret=KDGLAOouT5LqRcKHqbW7aJnwkj5McUPGhZstZdpg`;
+        const centroidJson = JSON.parse(features[0].properties.centroid);
+        const url = `https://api.aerisapi.com/observations/summary?p=${centroidJson.coordinates[1]},${centroidJson.coordinates[0]}&client_id=dTDYoTwjuurB6gTfchSwy&client_secret=KDGLAOouT5LqRcKHqbW7aJnwkj5McUPGhZstZdpg`;
           fetch(url)
             .then(resp => resp.json())
             .then(data => {
@@ -51,54 +67,92 @@ export class FieldMap extends Component {
             })
             .catch(error => console.log(error));
         // map.fitBounds(this.getBoundaries(features[0].properties.boundingBox));
-        map.flyTo({ center: centroid, zoom: 15, speed: 3 })
+        map.flyTo({ center: centroidJson.coordinates, zoom: 15, speed: 3 })
       }
     }
   }
   closeClick() {
     this.setState({ expanded: false });
   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.district !== this.props.district) {
+      const url = `http://localhost:4000/v1/geoData/grower/ff040bd3-8151-4fc2-adf4-dddddb41c6fb`;
+      fetch(url, {
+          method: 'GET',
+          headers:{
+            'Content-Type': 'application/json',
+            'Authorization': 'allow',
+            'x-api-key' : 'Q1GG6AytvH471DnYzeCjj5lXOwoDEZgB1REqR7vD'
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            const featureCollectionPolys = createGeoJsonPolys(data.data);
+            const featureCollectionPoints = createGeoJsonPoints(data.data);
+            this.setState({ polys: featureCollectionPolys });
+            this.setState({ points: featureCollectionPoints });
+          })
+          .catch(error => console.log(error));
+    }
+  }
   render() {
     const { zoom, center } = this.props;
     return (
       <Map
       ref={e => { this.props.getMaphandle(e); }}
-      style="mapbox://styles/mapbox/streets-v9"
+      style="mapbox://styles/sdfricke1986/cjpw30wsz1u6f2rla9zn3ge5r"
       zoom={zoom}
       center={center}
       minZoom={10}
       onStyleLoad={this.mapLoad}
       onClick={this.mapClick}
-      onZoom={this.onZoom}
+      onMouseMove={this.handleMouseMove}
       containerStyle={{
         height: "100%",
         width: "100%"
       }}>
       <GeoJSONLayer
-        data={polys}
+        data={this.state.polys}
         fillPaint={{
-          'fill-color': 'rgba(100, 149, 237, 0.5)',
+          'fill-color': 'rgba(100, 149, 237, 0.7)',
           'fill-outline-color': 'rgba(200, 177, 139, 1)',
-          'fill-antialias': true
-        }}	
-        symbolLayout={{
-          "text-field": "{fieldName}",
-          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-          "text-anchor": "bottom"
+          'fill-antialias': true,
         }}
         />
         <GeoJSONLayer
           maxZoom={18}
-          data={points}
+          data={this.state.points}
           symbolLayout={{
-            "icon-image": "circle-stroked-15"
-          }}>
+            "icon-image": "marker-15",
+            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+            "text-field": "{fieldName}",
+            "text-anchor": "bottom",
+            "text-offset": [1, 0]
+          }}
+          symbolPaint={{
+            "text-color": 'rgba(255, 255, 255, 1)',
+            "text-halo-color": 'rgba(0, 0, 0, 1)',
+            "text-halo-width": 1
+          }}
+        >
         </GeoJSONLayer>
         <InfoBox
           fieldProps={this.state.fieldProps}
           weatherData={this.state.weatherData}
           expanded={this.state.expanded}
           closeClick={this.closeClick}
+        />
+        <ZoomControl
+         position={'top-left'}
+        />
+        <ScaleControl
+          measurement="mi"
+          position={'bottom-left'}
+        />
+        <HelpfulMessage
+          region={this.props.region}
+          district={this.props.district}
+          showMessage={this.state.showMessage}
         />
       </Map>
     );
