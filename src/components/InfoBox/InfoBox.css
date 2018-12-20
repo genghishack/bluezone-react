@@ -6,6 +6,7 @@
   background: #fff;
   right: -300px;
   transition: right .3s;
+  z-index: 11;
 }
 #info_box_wrapper.info_box_wrapper.expanded {
   right: 0;
