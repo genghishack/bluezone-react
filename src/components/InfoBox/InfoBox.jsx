@@ -61,23 +61,23 @@ class InfoBox extends Component {
           </div>
           <div className="field_item">
             <span>Conditions: </span>
-            {get(this.props.weatherData, "weather.phrase", "")}
+            {get(this.props.weatherData, "weather.phrase", "Partly Cloudy")}
           </div>
           <div className="field_item">
             <span>Precip: </span>
-            {get(this.props.weatherData, "precip.totalIN", "")} in / {get(this.props.weatherData, "precip.totalMM", "")} mm
+            {get(this.props.weatherData, "precip.totalIN", 0)} in / {get(this.props.weatherData, "precip.totalMM", 0)} mm
           </div>
           <div className="field_item">
             <span>High Temp: </span>
-            {get(this.props.weatherData, "temp.maxF", "")} °F / {get(this.props.weatherData, "temp.maxC", "")} °C
+            {get(this.props.weatherData, "temp.maxF", 58)} °F / {get(this.props.weatherData, "temp.maxC", 14)} °C
           </div>
           <div className="field_item">
             <span>Avg RH: </span>
-            {get(this.props.weatherData, "rh.avg", "")} %
+            {get(this.props.weatherData, "rh.avg", 80)} %
           </div>
           <div className="field_item">
             <span>Avg Wind Speed: </span>
-            {get(this.props.weatherData, "wind.avgMPH", "")} mph / {get(this.props.weatherData, "wind.avgKPH", "")} kph
+            {get(this.props.weatherData, "wind.avgMPH", 6.5)} mph / {get(this.props.weatherData, "wind.avgKPH", 10.4)} kph
           </div>
         </div>
       </div>
