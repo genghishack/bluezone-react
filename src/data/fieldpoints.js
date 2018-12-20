@@ -7,7 +7,6 @@ export const points = {
       "type": "geoData",
       "id": 24,
       "properties": {
-        "centroid": [-76.8610034845323, 34.804900912335],
         "id": 20,
         "growerId": "7c7b2e7c-f403-43d4-ab77-114a66f3c80a",
         "growerName": "Larry Riggs",
@@ -34,7 +33,7 @@ export const points = {
           "geometry": {
             "type": "Point",
             "coordinates": [
-                -76.8610034845323,
+                -86.8610034845323,
                 34.804900912335
             ]
         },
