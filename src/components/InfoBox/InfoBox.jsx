@@ -21,7 +21,6 @@ class InfoBox extends Component {
     this.props.closeClick();
   }
   render() {
-    console.log(this.props.weatherData);
     const expandedClass = this.props.expanded ? "expanded" : "";
     return (
       <div id="info_box_wrapper" className={`info_box_wrapper ${expandedClass}`}>
