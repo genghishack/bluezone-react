@@ -3,9 +3,6 @@ import { PropTypes } from "prop-types";
 import "./HelpfulMessage.css";
 
 class HelpfulMessage extends Component {
-  constructor(props) {
-    super(props);
-  }
   static propTypes = {
     district: PropTypes.string,
     region: PropTypes.string,

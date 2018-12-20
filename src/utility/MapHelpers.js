@@ -34,7 +34,7 @@ export function getDistrictList(id) {
   const regionObject = {
     0: 
       [
-        { value: '0', label: 'CPS - Northwest' }
+        { value: 'CPS - Northwest Region', label: 'CPS - Northwest' }
       ],
     1: 
       [

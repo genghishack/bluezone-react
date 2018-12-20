@@ -3,7 +3,7 @@ import { get } from "lodash";
 import { PropTypes } from "prop-types";
 import "./InfoBox.css";
 
-import closeSVG from "../../assets/close.svg"
+import closeSVG from "../../assets/close_icon.png"
 import weatherPng from "../../assets/weather.png"
 import infoPng from "../../assets/info.png"
 
