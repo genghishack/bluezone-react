@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import "./Header.css";
-import { getDistrictList } from "../utility/MapHelpers";
+import NutrienLogo from "../assets/nutrien_logo.jpg";
 
 export class Header extends Component {
   constructor(props) {
@@ -12,45 +12,72 @@ export class Header extends Component {
       districtOptions: [{ value: null, label: "Please select region first"}]
     };
   }
+  componentDidMount() {
+    const url = `http://localhost:4000/v1/geoData/regions`;
+    fetch(url, {
+        method: 'GET',
+        headers:{
+          'Content-Type': 'application/json',
+          'Authorization': 'allow',
+          'x-api-key' : 'Q1GG6AytvH471DnYzeCjj5lXOwoDEZgB1REqR7vD'
+        }
+      })
+      .then(resp => resp.json())
+      .then(data => {
+        const regions = data.data.map((region) => {
+          return {value: region.attributes.region, label: region.attributes.region};
+        })
+        this.setState({
+          regionOptions: regions
+        });
+      })
+      .catch(error => console.log(error));
+  }
   handleRegionChange(option) {
-    const districts = getDistrictList(option.value);
+    const url = `http://localhost:4000/v1/geoData/divisions?region=${encodeURIComponent(option.label)}`;
+    fetch(url, {
+        method: 'GET',
+        headers:{
+          'Content-Type': 'application/json',
+          'Authorization': 'allow',
+          'x-api-key' : 'Q1GG6AytvH471DnYzeCjj5lXOwoDEZgB1REqR7vD'
+        }
+      })
+      .then(resp => resp.json())
+      .then(data => {
+
+        const districts = data.data.map((district) => {
+          return {value: district.attributes.division, label: district.attributes.division};
+        })
+        this.setState({
+          districtOptions: districts
+        });
+      })
+      .catch(error => console.log(error));
     this.setState({
-      districtOptions: districts,
-      selectedRegion: option.name,
+      selectedRegion: option,
       selectedDistrict: null
     });
-    this.props.setRegion(option.value);
+    this.props.setRegion(option.label);
   }
   handleDistrictChange(option) {
     this.setState({
-      selectedDistrict: option.name
+      selectedDistrict: option
     });
-    this.props.setDistrict(option.value);
+    this.props.setDistrict(option.label);
   }
 
 
   render() {
-    const regionOptions = [
-      { value: '0', label: 'CPS - West Region' },
-      { value: '1', label: 'CPS - Central Cornbelt Region' },
-      { value: '2', label: 'CPS - South Region' },
-      { value: '3', label: 'Nutrien West Region' },
-      { value: '4', label: 'Nutrien Western Cornbelt Region' },
-      { value: '5', label: 'CPS - Eastern Cornbelt Region' },
-      { value: '6', label: 'Nutrien South Region' },
-      { value: '7', label: 'Nutrien Eastern Region' },
-      { value: '8', label: 'Nutrien Central Cornbelt Region' },
-      { value: '9', label: 'CPS - Western Cornbelt Region' }
-    ];
     const { selectedRegion, selectedDistrict } = this.state;
     return (
       <header id="App-header">
         <a href="/" className="home-link">
-          <div className="App-logo">
-            <i className="fas fa-globe"></i>
+          <div className="appLogo">
+            <img src={NutrienLogo} alt="nutrien" />
           </div>
-          <div className="App-title">
-            <span className="light">Schroedinger’s </span>
+          <div className="appTitle">
+            <span className="light">Schröedinger’s </span>
             <span className="normal">Map</span>
           </div>
         </a>
@@ -58,7 +85,7 @@ export class Header extends Component {
           <Select
             value={selectedRegion}
             onChange={this.handleRegionChange}
-            options={regionOptions}
+            options={this.state.regionOptions}
             className="selectMenu"
             placeholder="Select Region..."
           />

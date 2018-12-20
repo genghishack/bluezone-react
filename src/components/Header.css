@@ -9,3 +9,13 @@
   display: inline-flex;
   z-index: 11;
 }
+.appLogo img {
+  width: 23px;
+  margin-right: 8px;
+}
+
+.appTitle {
+  font-family: 'Open sans', sans-serif;
+  font-size: 22px;
+  color: #000;
+}

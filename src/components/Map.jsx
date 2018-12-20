@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { PropTypes } from "prop-types";
 import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
 import { get } from "lodash";
+import bbox from '@turf/bbox';
+// import buffer from '@turf/buffer';
 import { InfoBox } from "./InfoBox/"
 import { HelpfulMessage } from "./HelpfulMessage/"
 import { ZoomControl, ScaleControl } from 'react-mapbox-gl';
@@ -19,7 +21,9 @@ export class FieldMap extends Component {
   constructor(props) {
     super(props);
     this.closeClick = this.closeClick.bind(this);
+    this.mapLoad = this.mapLoad.bind(this);
     this.aerisCredentials = "dTDYoTwjuurB6gTfchSwy_KDGLAOouT5LqRcKHqbW7aJnwkj5McUPGhZstZdpg";
+    this.map = null;
     this.state = {
       expanded: false,
       fieldProps: null,
@@ -35,12 +39,9 @@ export class FieldMap extends Component {
     zoom: PropTypes.arrayOf(PropTypes.number),
     center: PropTypes.arrayOf(PropTypes.number)
   };
-  // getBoundaries(boundingBox) {
-  //   const boundaries = JSON.parse(boundingBox);
-  //   var sw = new mapboxgl.LngLat(boundaries[0], boundaries[1]);
-  //   var ne = new mapboxgl.LngLat(boundaries[2], boundaries[3]);
-  //   return new mapboxgl.LngLatBounds(sw, ne);
-  // }
+  mapLoad(map) {
+    this.map = map;
+  }
   handleMouseMove = (map, evt) => {
     const features = map.queryRenderedFeatures(evt.point);
     let cursorStyle = '';
@@ -66,7 +67,6 @@ export class FieldMap extends Component {
               this.setState({ weatherData: data.response[0].periods[0].summary })
             })
             .catch(error => console.log(error));
-        // map.fitBounds(this.getBoundaries(features[0].properties.boundingBox));
         map.flyTo({ center: centroidJson.coordinates, zoom: 15, speed: 3 })
       }
     }
@@ -75,8 +75,9 @@ export class FieldMap extends Component {
     this.setState({ expanded: false });
   }
   componentDidUpdate(prevProps) {
-    if (prevProps.district !== this.props.district) {
-      const url = `http://localhost:4000/v1/geoData/grower/ff040bd3-8151-4fc2-adf4-dddddb41c6fb`;
+    if (prevProps.district !== this.props.district && this.props.district) {
+      const districtId = encodeURIComponent(this.props.district);
+      const url = `http://localhost:4000/v1/geoData/division/${districtId}`;
       fetch(url, {
           method: 'GET',
           headers:{
@@ -89,8 +90,10 @@ export class FieldMap extends Component {
           .then(data => {
             const featureCollectionPolys = createGeoJsonPolys(data.data);
             const featureCollectionPoints = createGeoJsonPoints(data.data);
+            const extent = bbox(featureCollectionPolys);
             this.setState({ polys: featureCollectionPolys });
             this.setState({ points: featureCollectionPoints });
+            this.map.fitBounds(extent);
           })
           .catch(error => console.log(error));
     }
@@ -113,9 +116,10 @@ export class FieldMap extends Component {
       }}>
       <GeoJSONLayer
         data={this.state.polys}
+        fillOnMouseEnter={this.mouseEnter}
         fillPaint={{
-          'fill-color': 'rgba(100, 149, 237, 0.7)',
-          'fill-outline-color': 'rgba(200, 177, 139, 1)',
+          'fill-color': 'rgba(167, 199, 130, 0.7)',
+          'fill-outline-color': 'rgba(0, 0, 0, 1)',
           'fill-antialias': true,
         }}
         />
