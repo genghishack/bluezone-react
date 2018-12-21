@@ -136,6 +136,18 @@ export class FieldMap extends Component {
   }
   componentDidUpdate(prevProps) {
     if (prevProps.district !== this.props.district && this.props.district) {
+      if (this.map.getLayer("fieldPolygonsLayer")){
+        this.map.removeLayer("fieldPolygonsLayer");
+      }
+      if (this.map.getLayer("fieldPointsLayer")){
+        this.map.removeLayer("fieldPointsLayer");
+      }
+      if (this.map.getSource("fieldPolygons")){
+        this.map.removeSource("fieldPolygons");
+      }
+      if (this.map.getSource("fieldPoints")){
+        this.map.removeSource("fieldPoints");
+      }
       const districtId = encodeURIComponent(this.props.district);
       const url = `http://localhost:4000/v1/geoData/division/${districtId}`;
       fetch(url, {
