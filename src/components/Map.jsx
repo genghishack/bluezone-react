@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from "prop-types";
-import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
+import ReactMapboxGl from "react-mapbox-gl";
 import { get } from "lodash";
 import bbox from '@turf/bbox';
 // import buffer from '@turf/buffer';
@@ -148,6 +148,7 @@ export class FieldMap extends Component {
       if (this.map.getSource("fieldPoints")){
         this.map.removeSource("fieldPoints");
       }
+      this.setState({ expanded: false })
       const districtId = encodeURIComponent(this.props.district);
       const url = `http://localhost:4000/v1/geoData/division/${districtId}`;
       fetch(url, {
