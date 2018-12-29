@@ -5,8 +5,8 @@ import MainContainer from './components/MainContainer';
 
 import geoViewport from "@mapbox/geo-viewport/index";
 
-// Use GeoViewport and the window size to determine and appropriate center and zoom for the continental US
-const continentalBbox = [-128.8, 23.6, -65.4, 50.2];
+// Use GeoViewport and the window size to determine an appropriate center and zoom for the continental US
+const continentalBbox = [-128.8, 23.6, -65.4, 60.2];
 const continentalView = (w,h) => {
   return geoViewport.viewport(continentalBbox, [w, h]);
 };

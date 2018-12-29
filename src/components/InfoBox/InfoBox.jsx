@@ -36,16 +36,24 @@ class InfoBox extends Component {
             {get(this.props.fieldProps, "fieldName", "")}
           </div>
           <div className="field_item">
+            <span>Field Area: </span>
+            {Math.round(get(this.props.fieldProps, "fieldArea", 0) * 10) / 10} {get(this.props.fieldProps, "fieldAreaUnit", "")}
+          </div>
+          <div className="field_item">
             <span>Farm Name: </span>
             {get(this.props.fieldProps, "farmName", "")}
           </div>
           <div className="field_item">
-            <span>Division: </span>
-            {get(this.props.fieldProps, "division", "")}
+            <span>Grower Name: </span>
+            {get(this.props.fieldProps, "growerName", "")}
           </div>
           <div className="field_item">
             <span>Branch: </span>
-            {get(this.props.fieldProps, "corporate", "")}
+            {get(this.props.fieldProps, "branch", "")}
+          </div>
+          <div className="field_item">
+            <span>Division: </span>
+            {get(this.props.fieldProps, "division", "")}
           </div>
           <div className="field_item">
             <span>Region: </span>
@@ -54,10 +62,6 @@ class InfoBox extends Component {
           <div className="field_item">
             <span>Corporate: </span>
             {get(this.props.fieldProps, "corporate", "")}
-          </div>
-          <div className="field_item">
-            <span>Field Area: </span>
-            {Math.round(get(this.props.fieldProps, "fieldArea", 0) * 10) / 10} {get(this.props.fieldProps, "fieldAreaUnit", "")}
           </div>
           <div className="infoBoxTitle">
             <img className="infoBoxTitleIcon" src={weatherPng} alt="weather"></img>
