@@ -100,7 +100,7 @@ export class FieldMap extends Component {
       "layout": {
         "icon-image": "marker-15",
         "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-        "text-field": "{fieldName}",
+        "text-field": "{growerName}\n({fieldName})",
         "text-anchor": "bottom",
         "text-offset": [1, 0]
       },
