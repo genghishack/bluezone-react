@@ -15,11 +15,13 @@ const continental = continentalView(window.innerWidth/2, window.innerHeight/2);
 class App extends Component {
   constructor(props) {
     super(props);
-    this.setDistrict = this.setDistrict.bind(this);
+    this.setDivision = this.setDivision.bind(this);
     this.setRegion = this.setRegion.bind(this);
+    this.setBranch = this.setBranch.bind(this);
     this.state = {
-      district: null,
-      region: null
+      region: null,
+      division: null,
+      branch: null
     }
   }
   state = {
@@ -31,23 +33,32 @@ class App extends Component {
     this.map = e;
   };
 
-  setDistrict(district) {
-    this.setState({ district: district })
-  }
   setRegion(region) {
-    this.setState({ region: region })
+    this.setState({ region: region });
+  }
+
+  setDivision(division) {
+    this.setState({ division: division });
+  }
+
+  setBranch(branch) {
+    this.setState({ branch: branch });
   }
 
   render() {
     return (
       <div className="App">
-        <Header setDistrict={this.setDistrict} setRegion={this.setRegion} />
+        <Header
+          setRegion={this.setRegion}
+          setDivision={this.setDivision}
+          setBranch={this.setBranch}
+        />
         <MainContainer
           getMapHandle={this.getMapHandle}
           focusMap={this.focusMap}
           zoom={[continental.zoom]}
           center={continental.center}
-          district={this.state.district}
+          division={this.state.division}
           region={this.state.region}
         />
       </div>

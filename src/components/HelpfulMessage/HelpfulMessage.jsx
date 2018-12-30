@@ -4,14 +4,14 @@ import "./HelpfulMessage.css";
 
 class HelpfulMessage extends Component {
   static propTypes = {
-    district: PropTypes.string,
+    division: PropTypes.string,
     region: PropTypes.string,
     showMessage: PropTypes.bool
   };
   render() {
-    const { district, region, showMessage } = this.props;
-    let message = region ? "Select a district" : "Select a region";
-    if (district) {
+    const { division, region, showMessage } = this.props;
+    let message = region ? "Select a division" : "Select a region";
+    if (division) {
       message = "Click on marker to zoom in and see field data";
     }
     const hidden = !showMessage ? "hidden" : "";

@@ -10,8 +10,8 @@ class MainContainer extends Component {
         <FieldMap
           zoom={this.props.zoom}
           center={this.props.center}
-          getMaphandle={this.props.getMapHandle}
-          district={this.props.district}
+          getMapHandle={this.props.getMapHandle}
+          division={this.props.division}
           region={this.props.region}
         />
       </div>

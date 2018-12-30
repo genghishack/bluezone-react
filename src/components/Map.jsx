@@ -35,7 +35,7 @@ export class FieldMap extends Component {
   }
 
   static propTypes = {
-    district: PropTypes.string,
+    division: PropTypes.string,
     region: PropTypes.string,
     zoom: PropTypes.arrayOf(PropTypes.number),
     center: PropTypes.arrayOf(PropTypes.number)
@@ -146,8 +146,8 @@ export class FieldMap extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    // If we're changing districts...
-    if (prevProps.district !== this.props.district && this.props.district) {
+    // If we're changing divisions...
+    if (prevProps.division !== this.props.division && this.props.division) {
       // get rid of all the old polygons and points
       if (this.map.getLayer("fieldPolygonsLayer")) {
         this.map.removeLayer("fieldPolygonsLayer");
@@ -162,9 +162,9 @@ export class FieldMap extends Component {
         this.map.removeSource("fieldPoints");
       }
       this.setState({expanded: false});
-      // Do a fetch to get the new set of data for the district
-      const districtId = encodeURIComponent(this.props.district);
-      const url = `http://localhost:4000/v1/geoData/division/${districtId}`;
+      // Do a fetch to get the new set of data for the division
+      const divisionId = encodeURIComponent(this.props.division);
+      const url = `http://localhost:4000/v1/geoData/division/${divisionId}`;
       fetch(url, {
         method: 'GET',
         headers: {
@@ -191,7 +191,7 @@ export class FieldMap extends Component {
     return (
       <Map
         ref={e => {
-          this.props.getMaphandle(e);
+          this.props.getMapHandle(e);
         }}
         style="mapbox://styles/sdfricke1986/cjpw30wsz1u6f2rla9zn3ge5r"
         zoom={zoom}
@@ -220,7 +220,7 @@ export class FieldMap extends Component {
         />
         <HelpfulMessage
           region={this.props.region}
-          district={this.props.district}
+          division={this.props.division}
           showMessage={this.state.showMessage}
         />
       </Map>
