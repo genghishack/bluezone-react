@@ -33,9 +33,30 @@ export class FieldMap extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.division !== this.props.division && this.props.division) {
+
+      this.resetMap();
+      this.getDivisionData();
+
+    } else if (prevProps.branch !== this.props.branch && this.props.branch) {
+
+      this.resetMap();
+      this.getBranchData();
+
+    } else if (prevProps.grower !== this.props.grower && this.props.grower) {
+
+      this.resetMap();
+      this.getGrowerData();
+
+    }
+  }
+
   static propTypes = {
-    division: PropTypes.string,
     region: PropTypes.string,
+    division: PropTypes.string,
+    branch: PropTypes.string,
+    grower: PropTypes.string,
     zoom: PropTypes.arrayOf(PropTypes.number),
     center: PropTypes.arrayOf(PropTypes.number)
   };
@@ -180,19 +201,11 @@ export class FieldMap extends Component {
       .then(this.renderAndZoomToData.bind(this));
   };
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.division !== this.props.division && this.props.division) {
-
-      this.resetMap();
-      this.getDivisionData();
-
-    } else if (prevProps.branch !== this.props.branch && this.props.branch) {
-
-      this.resetMap();
-      this.getBranchData();
-
-    }
-  }
+  getGrowerData() {
+    const growerId = encodeURIComponent(this.props.grower);
+    getJsonData(`v1/geoData/grower/${growerId}`)
+      .then(this.renderAndZoomToData.bind(this));
+  };
 
   render() {
     const {zoom, center} = this.props;
@@ -229,6 +242,8 @@ export class FieldMap extends Component {
         <HelpfulMessage
           region={this.props.region}
           division={this.props.division}
+          branch={this.props.branch}
+          grower={this.props.grower}
           showMessage={this.state.showMessage}
         />
       </Map>

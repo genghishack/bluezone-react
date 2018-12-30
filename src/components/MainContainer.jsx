@@ -14,6 +14,7 @@ class MainContainer extends Component {
           region={this.props.region}
           division={this.props.division}
           branch={this.props.branch}
+          grower={this.props.grower}
         />
       </div>
     )

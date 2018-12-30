@@ -10,9 +10,11 @@ export class Header extends Component {
     this.handleRegionChange = this.handleRegionChange.bind(this);
     this.handleDivisionChange = this.handleDivisionChange.bind(this);
     this.handleBranchChange = this.handleBranchChange.bind(this);
+    this.handleGrowerChange = this.handleGrowerChange.bind(this);
     this.state = {
       divisionOptions: [{value: null, label: "Please select region first"}],
-      branchOptions: [{value: null, label: "Please select division first"}]
+      branchOptions: [{value: null, label: "Please select division first"}],
+      growerOptions: [{value: null, label: "Please select branch first"}]
     };
   }
 
@@ -65,6 +67,21 @@ export class Header extends Component {
       });
   }
 
+  getGrowerOptions(branch) {
+    getJsonData(`v1/geoData/growers?branch=${encodeURIComponent(branch.label)}`)
+      .then(data => {
+        const growers = data.data.map((grower) => {
+          return {
+            value: grower.attributes.growerId,
+            label: grower.attributes.growerName
+          };
+        });
+        this.setState({
+          growerOptions: growers
+        });
+      });
+  }
+
   handleRegionChange(option) {
     this.getDivisionOptions(option);
     this.setState({
@@ -84,7 +101,7 @@ export class Header extends Component {
   }
 
   handleBranchChange(option) {
-    // this.getGrowerOptions(option);
+    this.getGrowerOptions(option);
     this.setState({
       selectedBranch: option,
       selectedGrower: null
@@ -92,8 +109,20 @@ export class Header extends Component {
     this.props.setBranch(option.label);
   }
 
+  handleGrowerChange(option) {
+    this.setState({
+      selectedGrower: option,
+    });
+    this.props.setGrower(option.value);
+  }
+
   render() {
-    const {selectedRegion, selectedDivision, selectedBranch} = this.state;
+    const {
+      selectedRegion,
+      selectedDivision,
+      selectedBranch,
+      selectedGrower
+    } = this.state;
     return (
       <header id="App-header">
         <a href="/" className="home-link">
@@ -126,6 +155,13 @@ export class Header extends Component {
             options={this.state.branchOptions}
             className="selectMenu"
             placeholder="Select Branch..."
+          />
+          <Select
+            value={selectedGrower}
+            onChange={this.handleGrowerChange}
+            options={this.state.growerOptions}
+            className="selectMenu"
+            placeholder="Select Grower..."
           />
         </div>
       </header>

@@ -18,10 +18,12 @@ class App extends Component {
     this.setDivision = this.setDivision.bind(this);
     this.setRegion = this.setRegion.bind(this);
     this.setBranch = this.setBranch.bind(this);
+    this.setGrower = this.setGrower.bind(this);
     this.state = {
       region: null,
       division: null,
-      branch: null
+      branch: null,
+      grower: null
     }
   }
   state = {
@@ -45,6 +47,10 @@ class App extends Component {
     this.setState({ branch: branch });
   }
 
+  setGrower(grower) {
+    this.setState({ grower: grower });
+  }
+
   render() {
     return (
       <div className="App">
@@ -52,6 +58,7 @@ class App extends Component {
           setRegion={this.setRegion}
           setDivision={this.setDivision}
           setBranch={this.setBranch}
+          setGrower={this.setGrower}
         />
         <MainContainer
           getMapHandle={this.getMapHandle}
@@ -61,6 +68,7 @@ class App extends Component {
           region={this.state.region}
           division={this.state.division}
           branch={this.state.branch}
+          grower={this.state.grower}
         />
       </div>
     );

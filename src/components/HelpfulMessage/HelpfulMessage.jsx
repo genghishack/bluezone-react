@@ -9,14 +9,19 @@ class HelpfulMessage extends Component {
     showMessage: PropTypes.bool
   };
   render() {
-    const { region, division, branch, showMessage } = this.props;
+    const { region, division, branch, grower, showMessage } = this.props;
     let message = '';
     if (region) {
       if (division) {
         if (branch) {
-          message = 'Click on a marker to zoom in and see field data';
+          if (grower) {
+            message = 'Click on a marker to zoom in and see field data';
+          } else {
+            message = 'Select a grower, or click on a marker to zoom in and see field data';
+          }
+        } else {
+          message = 'Select a branch, or click on a marker to zoom in and see field data';
         }
-        message = 'Select a branch, or click on a marker to zoom in and see field data';
       } else {
         message = 'Select a division';
       }
