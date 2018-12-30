@@ -48,7 +48,7 @@ export class Header extends Component {
 
         const districts = data.data.map((district) => {
           return {value: district.attributes.division, label: district.attributes.division};
-        })
+        });
         this.setState({
           districtOptions: districts
         });

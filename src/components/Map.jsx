@@ -146,7 +146,9 @@ export class FieldMap extends Component {
   };
 
   componentDidUpdate(prevProps) {
+    // If we're changing districts...
     if (prevProps.district !== this.props.district && this.props.district) {
+      // get rid of all the old polygons and points
       if (this.map.getLayer("fieldPolygonsLayer")) {
         this.map.removeLayer("fieldPolygonsLayer");
       }
@@ -159,7 +161,8 @@ export class FieldMap extends Component {
       if (this.map.getSource("fieldPoints")) {
         this.map.removeSource("fieldPoints");
       }
-      this.setState({expanded: false})
+      this.setState({expanded: false});
+      // Do a fetch to get the new set of data for the district
       const districtId = encodeURIComponent(this.props.district);
       const url = `http://localhost:4000/v1/geoData/division/${districtId}`;
       fetch(url, {
