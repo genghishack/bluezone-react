@@ -9,10 +9,19 @@ class HelpfulMessage extends Component {
     showMessage: PropTypes.bool
   };
   render() {
-    const { division, region, showMessage } = this.props;
-    let message = region ? "Select a division" : "Select a region";
-    if (division) {
-      message = "Click on marker to zoom in and see field data";
+    const { region, division, branch, showMessage } = this.props;
+    let message = '';
+    if (region) {
+      if (division) {
+        if (branch) {
+          message = 'Click on a marker to zoom in and see field data';
+        }
+        message = 'Select a branch, or click on a marker to zoom in and see field data';
+      } else {
+        message = 'Select a division';
+      }
+    } else {
+      message = 'Select a region';
     }
     const hidden = !showMessage ? "hidden" : "";
     return (
