@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Select from 'react-select';
+import {getJsonData} from '../utility/DataHelpers';
 import "./Header.css";
 import NutrienLogo from "../assets/nutrien_logo.jpg";
 
@@ -7,74 +8,85 @@ export class Header extends Component {
   constructor(props) {
     super(props);
     this.handleRegionChange = this.handleRegionChange.bind(this);
-    this.handleDistrictChange = this.handleDistrictChange.bind(this);
+    this.handleDivisionChange = this.handleDivisionChange.bind(this);
     this.state = {
-      districtOptions: [{ value: null, label: "Please select region first"}]
+      divisionOptions: [{value: null, label: "Please select region first"}]
     };
   }
+
   componentDidMount() {
-    const url = `http://localhost:4000/v1/geoData/regions`;
-    fetch(url, {
-        method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': 'allow',
-          'x-api-key' : 'Q1GG6AytvH471DnYzeCjj5lXOwoDEZgB1REqR7vD'
-        }
-      })
-      .then(resp => resp.json())
+    this.getRegionOptions();
+  }
+
+  getRegionOptions() {
+    getJsonData('v1/geoData/regions')
       .then(data => {
         const regions = data.data.map((region) => {
-          return {value: region.attributes.region, label: region.attributes.region};
-        })
+          return {
+            value: region.attributes.region,
+            label: region.attributes.region
+          };
+        });
         this.setState({
           regionOptions: regions
         });
-      })
-      .catch(error => console.log(error));
+      });
   }
-  handleRegionChange(option) {
-    const url = `http://localhost:4000/v1/geoData/divisions?region=${encodeURIComponent(option.label)}`;
-    fetch(url, {
-        method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': 'allow',
-          'x-api-key' : 'Q1GG6AytvH471DnYzeCjj5lXOwoDEZgB1REqR7vD'
-        }
-      })
-      .then(resp => resp.json())
-      .then(data => {
 
-        const districts = data.data.map((district) => {
-          return {value: district.attributes.division, label: district.attributes.division};
+  getDivisionOptions(region) {
+    getJsonData(`v1/geoData/divisions?region=${encodeURIComponent(region.label)}`)
+      .then(data => {
+        const divisions = data.data.map((division) => {
+          return {
+            value: division.attributes.division,
+            label: division.attributes.division
+          };
         });
         this.setState({
-          districtOptions: districts
+          divisionOptions: divisions
         });
-      })
-      .catch(error => console.log(error));
+      });
+  }
+
+  // getBranchOptions(district) {
+  //   getJsonData(`v1/geoData/branches?division=${encodeURIComponent(region.label)}`)
+  //     .then(data => {
+  //       const districts = data.data.map((district) => {
+  //         return {
+  //           value: district.attributes.division,
+  //           label: district.attributes.division
+  //         };
+  //       });
+  //       this.setState({
+  //         divisionOptions: districts
+  //       });
+  //     });
+  // }
+
+  handleRegionChange(option) {
+    this.getDivisionOptions(option);
     this.setState({
       selectedRegion: option,
-      selectedDistrict: null
+      selectedDivision: null
     });
     this.props.setRegion(option.label);
   }
-  handleDistrictChange(option) {
+
+  handleDivisionChange(option) {
     this.setState({
-      selectedDistrict: option
+      selectedDivision: option
     });
     this.props.setDistrict(option.label);
   }
 
 
   render() {
-    const { selectedRegion, selectedDistrict } = this.state;
+    const {selectedRegion, selectedDivision} = this.state;
     return (
       <header id="App-header">
         <a href="/" className="home-link">
           <div className="appLogo">
-            <img src={NutrienLogo} alt="nutrien" />
+            <img src={NutrienLogo} alt="nutrien"/>
           </div>
           <div className="appTitle">
             <span className="light">Schröedinger’s </span>
@@ -90,11 +102,11 @@ export class Header extends Component {
             placeholder="Select Region..."
           />
           <Select
-            value={selectedDistrict}
-            onChange={this.handleDistrictChange}
-            options={this.state.districtOptions}
+            value={selectedDivision}
+            onChange={this.handleDivisionChange}
+            options={this.state.divisionOptions}
             className="selectMenu"
-            placeholder="Select District..."
+            placeholder="Select Division..."
           />
         </div>
       </header>
