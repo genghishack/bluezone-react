@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {PropTypes} from "prop-types";
-import ReactMapboxGl from "react-mapbox-gl";
+import ReactMapboxGl, {ZoomControl, ScaleControl} from "react-mapbox-gl";
 import {get} from "lodash";
 import bbox from '@turf/bbox';
 // import buffer from '@turf/buffer';
-import {InfoBox} from "./InfoBox/"
-import {HelpfulMessage} from "./HelpfulMessage/"
-import {ZoomControl, ScaleControl} from 'react-mapbox-gl';
-
+import {InfoBox} from "./InfoBox/";
+import {HelpfulMessage} from "./HelpfulMessage/";
+import {getJsonData} from '../utility/DataHelpers';
 import {createGeoJsonPolys, createGeoJsonPoints} from "../utility/MapHelpers";
 
 const opts = {
@@ -145,44 +144,53 @@ export class FieldMap extends Component {
     this.setState({expanded: false});
   };
 
-  componentDidUpdate(prevProps) {
-    // If we're changing divisions...
-    if (prevProps.division !== this.props.division && this.props.division) {
-      // get rid of all the old polygons and points
-      if (this.map.getLayer("fieldPolygonsLayer")) {
-        this.map.removeLayer("fieldPolygonsLayer");
-      }
-      if (this.map.getLayer("fieldPointsLayer")) {
-        this.map.removeLayer("fieldPointsLayer");
-      }
-      if (this.map.getSource("fieldPolygons")) {
-        this.map.removeSource("fieldPolygons");
-      }
-      if (this.map.getSource("fieldPoints")) {
-        this.map.removeSource("fieldPoints");
-      }
-      this.setState({expanded: false});
-      // Do a fetch to get the new set of data for the division
-      const divisionId = encodeURIComponent(this.props.division);
-      const url = `http://localhost:4000/v1/geoData/division/${divisionId}`;
-      fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'allow',
-          'x-api-key': 'Q1GG6AytvH471DnYzeCjj5lXOwoDEZgB1REqR7vD'
-        }
-      })
-        .then(resp => resp.json())
-        .then(data => {
-          const featureCollectionPolys = createGeoJsonPolys(data.data);
-          const featureCollectionPoints = createGeoJsonPoints(data.data);
-          const extent = bbox(featureCollectionPolys);
-          this.map.fitBounds(extent);
-          this.addGeoJson(featureCollectionPolys, featureCollectionPoints);
+  resetMap() {
+    if (this.map.getLayer("fieldPolygonsLayer")) {
+      this.map.removeLayer("fieldPolygonsLayer");
+    }
+    if (this.map.getLayer("fieldPointsLayer")) {
+      this.map.removeLayer("fieldPointsLayer");
+    }
+    if (this.map.getSource("fieldPolygons")) {
+      this.map.removeSource("fieldPolygons");
+    }
+    if (this.map.getSource("fieldPoints")) {
+      this.map.removeSource("fieldPoints");
+    }
+    this.setState({expanded: false});
+  };
 
-        })
-        .catch(error => console.log(error));
+  renderAndZoomToData(data) {
+    const featureCollectionPolys = createGeoJsonPolys(data.data);
+    const featureCollectionPoints = createGeoJsonPoints(data.data);
+    const extent = bbox(featureCollectionPolys);
+    this.map.fitBounds(extent);
+    this.addGeoJson(featureCollectionPolys, featureCollectionPoints);
+  }
+
+  getDivisionData() {
+    const divisionId = encodeURIComponent(this.props.division);
+    getJsonData(`v1/geoData/division/${divisionId}`)
+      .then(this.renderAndZoomToData.bind(this));
+  };
+
+  getBranchData() {
+    const branchId = encodeURIComponent(this.props.branch);
+    getJsonData(`v1/geoData/branch/${branchId}`)
+      .then(this.renderAndZoomToData.bind(this));
+  };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.division !== this.props.division && this.props.division) {
+
+      this.resetMap();
+      this.getDivisionData();
+
+    } else if (prevProps.branch !== this.props.branch && this.props.branch) {
+
+      this.resetMap();
+      this.getBranchData();
+
     }
   }
 

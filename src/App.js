@@ -58,8 +58,9 @@ class App extends Component {
           focusMap={this.focusMap}
           zoom={[continental.zoom]}
           center={continental.center}
-          division={this.state.division}
           region={this.state.region}
+          division={this.state.division}
+          branch={this.state.branch}
         />
       </div>
     );
