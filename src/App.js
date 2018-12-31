@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.less';
 import Header from './components/Header';
-import MainContainer from './components/MainContainer';
+import FieldMap from './components/Map';
 
 import geoViewport from "@mapbox/geo-viewport/index";
 
@@ -60,7 +60,7 @@ class App extends Component {
           setBranch={this.setBranch}
           setGrower={this.setGrower}
         />
-        <MainContainer
+        <FieldMap
           getMapHandle={this.getMapHandle}
           focusMap={this.focusMap}
           zoom={[continental.zoom]}

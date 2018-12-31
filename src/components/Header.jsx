@@ -130,7 +130,7 @@ export class Header extends Component {
             <img src={NutrienLogo} alt="nutrien"/>
           </div>
           <div className="appTitle">
-            <span className="light">Schröedinger’s </span>
+            <span className="light">Schrödinger’s </span>
             <span className="normal">Map</span>
           </div>
         </a>
