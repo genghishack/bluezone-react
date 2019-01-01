@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.less';
 import Header from './components/Header';
-import MainContainer from './components/MainContainer';
+import CongressMap from './components/Map';
 
 import states from './data/states.json';
 import bboxes from './data/bboxes.json';
@@ -84,7 +84,7 @@ class App extends Component {
           districts={districts}
           handleSelection={this.handleSelection}
         />
-        <MainContainer
+        <CongressMap
           bboxes={bboxes}
           selectedState={this.state.selectedState}
           selectedDistrict={this.state.selectedDistrict}
