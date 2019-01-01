@@ -9,9 +9,9 @@ import {InfoBox} from './InfoBox/';
 const mapConf = {
   accessToken: "pk.eyJ1IjoiZ2VuZ2hpc2hhY2siLCJhIjoiZ2x6WjZhbyJ9.P8at90QQiy0C8W_mc21w6Q",
   // style: "mapbox://styles/genghishack/cjga1amoc2xx02ro7nzpv1e7s", // 2017 congress map
-  style: "mapbox://styles/genghishack/cjnjjdyk64avs2rqgldz3j2ok", // 2018 congress map
-  // style: "mapbox://styles/genghishack/cjftwwb9b8kw32sqpariydkrk", // basic
-  rDistrictIds: ['districts_1', 'districts_2', 'districts_3', 'districts_4', 'districts_5', 'districts_fill']
+  // style: "mapbox://styles/genghishack/cjnjjdyk64avs2rqgldz3j2ok", // 2018 congress map
+  style: "mapbox://styles/genghishack/cjftwwb9b8kw32sqpariydkrk", // basic
+  layerIds: ['districts_fill']
 };
 
 const Map = ReactMapboxGl(mapConf);
@@ -24,6 +24,7 @@ export class CongressMap extends Component {
     this.mapLoad = this.mapLoad.bind(this);
     this.addGeoJson = this.addGeoJson.bind(this);
     this.addDistrictLabels = this.addDistrictLabels.bind(this);
+    this.setHoveredDistrict = this.setHoveredDistrict.bind(this);
     this.map = null;
     this.hoveredDistrictId = null;
     this.state = {
@@ -40,7 +41,7 @@ export class CongressMap extends Component {
 
   mapLoad(map) {
     this.map = map;
-    // this.addGeoJson();
+    this.addGeoJson();
   }
 
   addGeoJson() {
@@ -49,7 +50,7 @@ export class CongressMap extends Component {
       url: 'mapbox://genghishack.cd-116-2018'
     });
 
-    // this.addDistrictBoundaries();
+    this.addDistrictBoundaries();
 
     this.addDistrictLabels();
 
@@ -65,7 +66,7 @@ export class CongressMap extends Component {
       'source': 'districts2018',
       'source-layer': 'districts',
       'paint': {
-        'line-color': '#292929',
+        'line-color': 'rgba(128, 128, 128, 0.4)',
         'line-width': 1
       },
       'filter': ['all']
@@ -107,9 +108,8 @@ export class CongressMap extends Component {
       'type': 'fill',
       'source': 'districts2018',
       'source-layer': 'districts',
+      'filter': ['!=', 'fill', ''],
       'paint': {
-        // 'fill-color': '#7b68ee',
-        // 'fill-opacity': 1,
         'fill-color': [
           'case',
           ['boolean', ['feature-state', 'hover'], false],
@@ -122,7 +122,7 @@ export class CongressMap extends Component {
         //   1,
         //   0.2
         // ],
-        'fill-outline-color': 'rgba(128, 128, 128, 0)',
+        // 'fill-outline-color': 'rgba(128, 128, 128, 0.4)',
         'fill-antialias': true
       }
     });
@@ -139,43 +139,52 @@ export class CongressMap extends Component {
 
   }
 
-  mouseMove = (map, evt) => {
-    const features = map.queryRenderedFeatures(evt.point);
-    let cursorStyle = '';
+  setHoveredDistrict(district) {
 
-    const {rDistrictIds} = mapConf;
-
-    const hoveredDistricts = features.filter(feature => {
-      return rDistrictIds.indexOf(feature.layer.id) !== -1;
-    });
-
-    if (hoveredDistricts.length) {
-
-      // Make sure the cursor is a pointer over any visible district.
-      cursorStyle = 'pointer';
-
-      // remove the hover setting from whatever district was being hovered before
-      if (this.hoveredDistrictId) {
-        map.setFeatureState({
-          source: 'districts2018',
-          sourceLayer: 'districts',
-          id: this.hoveredDistrictId
-        }, {
-          hover: false
-        });
-      }
-
-      // Change the hovered district id to the current one
-      this.hoveredDistrictId = hoveredDistricts[0].id;
-
-      // Set hover to true on the currently hovered district
-      map.setFeatureState({
+    // remove the hover setting from whatever district was being hovered before
+    if (this.hoveredDistrictId) {
+      this.map.setFeatureState({
         source: 'districts2018',
         sourceLayer: 'districts',
         id: this.hoveredDistrictId
       }, {
-        hover: true
+        hover: false
       });
+    }
+
+    // Change the hovered district id to the current one
+    this.hoveredDistrictId = district[0].id;
+
+    // Set hover to true on the currently hovered district
+    this.map.setFeatureState({
+      source: 'districts2018',
+      sourceLayer: 'districts',
+      id: this.hoveredDistrictId
+    }, {
+      hover: true
+    });
+
+  }
+
+  mouseMove = (map, evt) => {
+    const features = map.queryRenderedFeatures(evt.point);
+    let cursorStyle = '';
+
+    const {layerIds} = mapConf;
+
+    // Make sure the district we are hovering is being displayed by the filter
+    const hoveredDistrict = features.filter(feature => {
+      return layerIds.indexOf(feature.layer.id) !== -1;
+    });
+
+    // console.log(hoveredDistrict);
+
+    if (hoveredDistrict.length) {
+
+      // Make sure the cursor is a pointer over any visible district.
+      cursorStyle = 'pointer';
+
+      this.setHoveredDistrict(hoveredDistrict);
 
     }
 
@@ -188,9 +197,11 @@ export class CongressMap extends Component {
 
     console.log('features: ', features);
 
+    const layerIds = mapConf.layerIds;
+
     let district;
     const rFilteredDistricts = features.filter(feature => {
-      return mapConf.rDistrictIds.indexOf(feature.layer.id) !== -1;
+      return layerIds.indexOf(feature.layer.id) !== -1;
     });
     if (rFilteredDistricts.length) {
       district = rFilteredDistricts[0];
