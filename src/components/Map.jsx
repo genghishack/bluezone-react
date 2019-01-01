@@ -6,6 +6,8 @@ import ReactMapboxGl, {
 } from "react-mapbox-gl";
 import {InfoBox} from './InfoBox/';
 
+import { indexedLegislators, indexedCandidates } from '../utils/data-index';
+
 const mapConf = {
   accessToken: "pk.eyJ1IjoiZ2VuZ2hpc2hhY2siLCJhIjoiZ2x6WjZhbyJ9.P8at90QQiy0C8W_mc21w6Q",
   // style: "mapbox://styles/genghishack/cjga1amoc2xx02ro7nzpv1e7s", // 2017 congress map
@@ -27,6 +29,8 @@ export class CongressMap extends Component {
     this.setHoveredDistrict = this.setHoveredDistrict.bind(this);
     this.map = null;
     this.hoveredDistrictId = null;
+    this.legislatorIndex = indexedLegislators();
+    this.candidateIndex = indexedCandidates();
     this.state = {
       expanded: false,
       districtProps: null,
@@ -271,6 +275,8 @@ export class CongressMap extends Component {
             district={this.state.district}
             expanded={this.state.expanded}
             closeClick={this.closeClick}
+            legislatorIndex={this.legislatorIndex}
+            candidateIndex={this.candidateIndex}
           />
           <ZoomControl
             position={'top-left'}

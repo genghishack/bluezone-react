@@ -5,8 +5,6 @@ import { PropTypes } from "prop-types";
 import Legislator from '../Legislator';
 import Candidate from '../Candidate';
 
-import { indexedLegislators, indexedCandidates } from '../../utils/data-index';
-
 import "./InfoBox.css";
 
 import closeSVG from "../../assets/close_icon.png"
@@ -16,8 +14,6 @@ class InfoBox extends Component {
   constructor(props) {
     super(props);
     this.closeClick = this.closeClick.bind(this);
-    this.legislatorIndex = indexedLegislators();
-    this.candidateIndex = indexedCandidates();
   }
   static propTypes = {
     expanded: PropTypes.bool,
@@ -28,31 +24,52 @@ class InfoBox extends Component {
     this.props.closeClick();
   }
   render() {
-    const { district, legislatorIndex, candidateIndex, expanded } = this.props;
+    const {
+      district,
+      legislatorIndex,
+      candidateIndex,
+      expanded
+    } = this.props;
 
-    const expandedClass = this.props.expanded ? "expanded" : "";
+    const expandedClass = expanded ? "expanded" : "";
     const districtTitle = (district.properties) ? district.properties.title_long : '';
 
     if (district.properties) {
-      const rep_id = district.properties.rep_id;
       const state = district.properties.state;
       const district_num = parseInt(district.properties.number);
-      const rep = this.legislatorIndex[state].rep[district_num];
-      const repCandidate = this.candidateIndex[state] ? this.candidateIndex[state].rep[district_num] : '';
+      const rep = legislatorIndex[state].rep[district_num];
+      const repCandidate = candidateIndex[state] ? candidateIndex[state].rep[district_num] : '';
 
       // console.log('repCandidate: ', repCandidate);
 
-      const sens = this.legislatorIndex[state].sen ? Object.values(this.legislatorIndex[state].sen) : [];
+      const sens = legislatorIndex[state].sen ? Object.values(legislatorIndex[state].sen) : [];
 
       // console.log(rep, sens);
 
       return (
-        <div id="info_box_wrapper" className={`info_box_wrapper ${expandedClass}`}>
-          <img className="modal_close" src={closeSVG} alt="close" onClick={this.closeClick}></img>
+        <div
+          id="info_box_wrapper"
+          className={`info_box_wrapper ${expandedClass}`}
+        >
+          <img
+            className="modal_close"
+            src={closeSVG}
+            alt="close"
+            onClick={this.closeClick}
+          ></img>
           <div className="field_item_wrapper">
-            <img className="modal_close" src={closeSVG} alt="close" onClick={this.closeClick}></img>
+            <img
+              className="modal_close"
+              src={closeSVG}
+              alt="close"
+              onClick={this.closeClick}
+            ></img>
             <div className="infoBoxTitle">
-              <img className="infoBoxTitleIcon" src={infoPng} alt="info"></img>
+              <img
+                className="infoBoxTitleIcon"
+                src={infoPng}
+                alt="info"
+              ></img>
               <h2>Information</h2>
             </div>
             <div className="congress-info">
