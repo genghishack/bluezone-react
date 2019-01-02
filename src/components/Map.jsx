@@ -117,7 +117,7 @@ export class CongressMap extends Component {
         'fill-color': [
           'case',
           ['boolean', ['feature-state', 'hover'], false],
-          'rgba(123, 104, 238, 0.7)', // medium slate blue
+          'rgba(123, 104, 238, 0.3)', // medium slate blue
           'rgba(0, 0, 0, 0)'
         ],
         // 'fill-opacity': [
