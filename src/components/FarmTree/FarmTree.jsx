@@ -6,7 +6,8 @@ import "./FarmTree.css";
 
 class FarmTree extends Component {
   static propTypes = {
-    handleClick: PropTypes.func
+    handleClick: PropTypes.func,
+    showFarmTree: PropTypes.bool
   };
   constructor(props) {
     super(props);
@@ -36,11 +37,12 @@ class FarmTree extends Component {
   }
 
   render() {
+    const showFarmTreeClass = this.props.showFarmTree ? "show" : "";
     const regionList = this.state.regionOptions.map((region, index) => {
       return <EntityItem key={`region${index}`} name={region.label} type="regions" handleClick={this.props.handleClick} />;
     });
     return (
-      <div className="farmTreeWrapper">
+      <div className={`farmTreeWrapper ${showFarmTreeClass}`}>
         <div>{regionList}</div>
       </div>
     );

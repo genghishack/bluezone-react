@@ -127,9 +127,9 @@ export class Header extends Component {
             <span className="normal">Map</span>
           </div>
         </a>
+        <div className="farmTreeButton" onClick={this.props.farmTreeClick}>Farm Tree</div>
       </header>
     )
   }
 }
-
 export default Header;
