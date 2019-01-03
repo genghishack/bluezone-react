@@ -6,7 +6,7 @@ import FieldMap from './components/Map';
 import geoViewport from "@mapbox/geo-viewport/index";
 
 // Use GeoViewport and the window size to determine an appropriate center and zoom for the continental US
-const continentalBbox = [-128.8, 23.6, -65.4, 60.2];
+const continentalBbox = [-148.8, 32.6, -65.4, 50.2];
 const continentalView = (w,h) => {
   return geoViewport.viewport(continentalBbox, [w, h]);
 };

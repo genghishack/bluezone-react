@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Select from 'react-select';
 import {getJsonData} from '../utility/DataHelpers';
 import "./Header.css";
 import NutrienLogo from "../assets/nutrien_logo.jpg";
@@ -117,12 +116,6 @@ export class Header extends Component {
   }
 
   render() {
-    const {
-      selectedRegion,
-      selectedDivision,
-      selectedBranch,
-      selectedGrower
-    } = this.state;
     return (
       <header id="App-header">
         <a href="/" className="home-link">
@@ -134,36 +127,6 @@ export class Header extends Component {
             <span className="normal">Map</span>
           </div>
         </a>
-        <div className="selectGroup">
-          <Select
-            value={selectedRegion}
-            onChange={this.handleRegionChange}
-            options={this.state.regionOptions}
-            className="selectMenu"
-            placeholder="Select Region..."
-          />
-          <Select
-            value={selectedDivision}
-            onChange={this.handleDivisionChange}
-            options={this.state.divisionOptions}
-            className="selectMenu"
-            placeholder="Select Division..."
-          />
-          <Select
-            value={selectedBranch}
-            onChange={this.handleBranchChange}
-            options={this.state.branchOptions}
-            className="selectMenu"
-            placeholder="Select Branch..."
-          />
-          <Select
-            value={selectedGrower}
-            onChange={this.handleGrowerChange}
-            options={this.state.growerOptions}
-            className="selectMenu"
-            placeholder="Select Grower..."
-          />
-        </div>
       </header>
     )
   }

@@ -1,0 +1,8 @@
+.farmTreeWrapper {
+  background: #FFF;
+  width: 250px;
+  height: 100%;
+  position: absolute;
+  padding: 8px;
+  overflow-y: auto;
+}

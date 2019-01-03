@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
-import {PropTypes} from "prop-types";
-import ReactMapboxGl, {ZoomControl, ScaleControl} from "react-mapbox-gl";
+import React, { Component } from 'react';
+import { PropTypes } from "prop-types";
+import ReactMapboxGl, { ZoomControl, ScaleControl } from "react-mapbox-gl";
 import {get} from "lodash";
 import bbox from '@turf/bbox';
 // import buffer from '@turf/buffer';
-import {InfoBox} from "./InfoBox/";
-import {HelpfulMessage} from "./HelpfulMessage/";
-import {getJsonData} from '../utility/DataHelpers';
-import {createGeoJsonPolys, createGeoJsonPoints} from "../utility/MapHelpers";
+import { InfoBox } from "./InfoBox/";
+import { FarmTree } from "./FarmTree/";
+import { getJsonData } from '../utility/DataHelpers';
+import { createGeoJsonPolys, createGeoJsonPoints } from "../utility/MapHelpers";
 
 const opts = {
   accessToken: "pk.eyJ1IjoiYWdyaWJsZSIsImEiOiJjaW1ubDBxeDMwMGpidTdsdmQwanExMDJ4In0.jUZhBfDP_3zEWdUUWCbQ5w",
@@ -22,9 +22,11 @@ export class FieldMap extends Component {
     super(props);
     this.closeClick = this.closeClick.bind(this);
     this.mapLoad = this.mapLoad.bind(this);
+    this.entityClick = this.entityClick.bind(this);
     this.aerisCredentials = "dTDYoTwjuurB6gTfchSwy_KDGLAOouT5LqRcKHqbW7aJnwkj5McUPGhZstZdpg";
     this.map = null;
     this.hoveredFieldId = null;
+    this.renderAndZoomToData = this.renderAndZoomToData.bind(this);
     this.state = {
       expanded: false,
       fieldProps: null,
@@ -32,26 +34,6 @@ export class FieldMap extends Component {
       showMessage: true
     }
   }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.division !== this.props.division && this.props.division) {
-
-      this.resetMap();
-      this.getAndDisplayDivisionFields();
-
-    } else if (prevProps.branch !== this.props.branch && this.props.branch) {
-
-      this.resetMap();
-      this.getAndDisplayBranchFields();
-
-    } else if (prevProps.grower !== this.props.grower && this.props.grower) {
-
-      this.resetMap();
-      this.getAndDisplayGrowerFields();
-
-    }
-  }
-
   static propTypes = {
     region: PropTypes.string,
     division: PropTypes.string,
@@ -60,11 +42,9 @@ export class FieldMap extends Component {
     zoom: PropTypes.arrayOf(PropTypes.number),
     center: PropTypes.arrayOf(PropTypes.number)
   };
-
   mapLoad(map) {
     this.map = map;
   }
-
   resetMap() {
     if (this.map.getLayer("fieldPolygonsLayer")) {
       this.map.removeLayer("fieldPolygonsLayer");
@@ -81,43 +61,39 @@ export class FieldMap extends Component {
     this.setState({expanded: false});
   };
 
-  getAndDisplayDivisionFields() {
-    const divisionId = encodeURIComponent(this.props.division);
+  getAndDisplayDivisionFields(id) {
+    const divisionId = encodeURIComponent(id);
     getJsonData(`v1/geoData/division/${divisionId}`)
-      .then(this.renderAndZoomToData.bind(this));
+      .then((data) => {this.renderAndZoomToData(data)});
   };
 
-  getAndDisplayBranchFields() {
-    const branchId = encodeURIComponent(this.props.branch);
+  getAndDisplayBranchFields(id) {
+    const branchId = encodeURIComponent(id);
     getJsonData(`v1/geoData/branch/${branchId}`)
-      .then(this.renderAndZoomToData.bind(this));
+      .then((data) => {this.renderAndZoomToData(data)});
   };
 
-  getAndDisplayGrowerFields() {
-    const growerId = encodeURIComponent(this.props.grower);
+  getAndDisplayGrowerFields(id) {
+    const growerId = encodeURIComponent(id);
     getJsonData(`v1/geoData/grower/${growerId}`)
-      .then(this.renderAndZoomToData.bind(this));
+      .then((data) => {this.renderAndZoomToData(data)});
   };
 
   renderAndZoomToData(data) {
     const featureCollectionPolys = createGeoJsonPolys(data.data);
     const featureCollectionPoints = createGeoJsonPoints(data.data);
     const extent = bbox(featureCollectionPolys);
-    this.map.fitBounds(extent);
+    this.map.fitBounds(extent, {padding: {top: 82, bottom: 30, left: 286, right: 30} });
     this.addGeoJson(featureCollectionPolys, featureCollectionPoints);
     this.addMouseEvents();
   }
 
   addGeoJson(fieldPolys, fieldPoints) {
-
     this.addFieldPolygons(fieldPolys);
-
     this.addFieldPoints(fieldPoints);
-
   }
 
   addFieldPolygons(fieldPolys) {
-
     this.map.addSource("fieldPolygons", {
       "type": "geojson",
       "data": fieldPolys
@@ -142,7 +118,6 @@ export class FieldMap extends Component {
   }
 
   addFieldPoints(fieldPoints) {
-
     this.map.addSource("fieldPoints", {
       "type": "geojson",
       "data": fieldPoints
@@ -169,7 +144,6 @@ export class FieldMap extends Component {
   }
 
   addMouseEvents() {
-
     this.map.on("mousemove", "fieldPolygonsLayer", (e) => {
       if (e.features.length > 0) {
         if (this.hoveredFieldId) {
@@ -188,7 +162,6 @@ export class FieldMap extends Component {
     });
 
   }
-
   handleMouseMove = (map, evt) => {
     const features = map.queryRenderedFeatures(evt.point);
     let cursorStyle = '';
@@ -197,7 +170,6 @@ export class FieldMap extends Component {
     }
     map.getCanvas().style.cursor = cursorStyle;
   };
-
   mapClick = (map, e) => {
     if (e) {
       const features = map.queryRenderedFeatures(e.point);
@@ -220,11 +192,23 @@ export class FieldMap extends Component {
       }
     }
   };
-
   closeClick() {
     this.setState({expanded: false});
   };
 
+  entityClick(type, id) {
+    console.log(type, id, "typeid");
+    this.resetMap();
+    if (type === "divisions") {
+      this.getAndDisplayDivisionFields(id);
+    }
+    else if (type === "branches") {
+      this.getAndDisplayBranchFields(id);
+    }
+    else if (type === "growers") {
+      this.getAndDisplayGrowerFields(id);
+    }
+  }
   render() {
     const {zoom, center} = this.props;
     return (
@@ -245,6 +229,7 @@ export class FieldMap extends Component {
             width: "100%"
           }}
         >
+          <FarmTree handleClick={this.entityClick} />
           <InfoBox
             fieldProps={this.state.fieldProps}
             weatherData={this.state.weatherData}
@@ -252,18 +237,14 @@ export class FieldMap extends Component {
             closeClick={this.closeClick}
           />
           <ZoomControl
-            position={'top-left'}
+            position={'top-right'}
           />
           <ScaleControl
             measurement="mi"
             position={'bottom-left'}
-          />
-          <HelpfulMessage
-            region={this.props.region}
-            division={this.props.division}
-            branch={this.props.branch}
-            grower={this.props.grower}
-            showMessage={this.state.showMessage}
+            style={{
+              marginLeft: "266px",
+            }}
           />
         </Map>
       </div>
