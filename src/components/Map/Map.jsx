@@ -41,13 +41,8 @@ export class FieldMap extends Component {
     }
   }
   static propTypes = {
-    region: PropTypes.string,
-    division: PropTypes.string,
-    branch: PropTypes.string,
-    grower: PropTypes.string,
     zoom: PropTypes.arrayOf(PropTypes.number),
     center: PropTypes.arrayOf(PropTypes.number),
-    showFarmTree: PropTypes.bool
   };
   mapLoad(map) {
     this.map = map;
@@ -230,9 +225,6 @@ export class FieldMap extends Component {
     return (
       <div id="main-container">
         <Map
-          ref={e => {
-            this.props.getMapHandle(e);
-          }}
           style="mapbox://styles/sdfricke1986/cjpw30wsz1u6f2rla9zn3ge5r"
           zoom={zoom}
           center={center}
