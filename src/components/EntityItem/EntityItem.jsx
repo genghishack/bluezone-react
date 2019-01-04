@@ -9,7 +9,10 @@ import "./EntityItem.css";
 
 class EntityItem extends Component {
   static propTypes = {
-    name: PropTypes.string
+    name: PropTypes.string,
+    id: PropTypes.string,
+    type: PropTypes.string,
+    handleClick: PropTypes.func
   };
   constructor(props) {
     super(props);

@@ -20,7 +20,6 @@ const opts = {
 const Map = ReactMapboxGl(opts);
 
 export class FieldMap extends Component {
-
   constructor(props) {
     super(props);
     this.closeClick = this.closeClick.bind(this);
@@ -200,7 +199,6 @@ export class FieldMap extends Component {
   };
 
   entityClick(type, id) {
-    console.log("entityClick");
     this.props.dispatch(setCurrentEntity(id));
     this.resetMap();
     if (type === "regions") {
