@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import {getJsonData} from '../../utility/DataHelpers';
 import chevron from "../../assets/chevron.svg"
@@ -18,8 +19,6 @@ class EntityItem extends Component {
       childrenType: null,
       open: false
     };
-  }
-  componentDidMount() {
   }
 
   handleChevronClick() {
@@ -61,7 +60,7 @@ class EntityItem extends Component {
     const openClass = this.state.open ? "open" : "closed";
     const children = this.state.children.map((entity, index) => {
       return (
-        <EntityItem
+        <EntityItemExport
           key={`entity${index}`}
           id={entity.attributes.growerId}
           name={entity.attributes.division || entity.attributes.branch || entity.attributes.growerName}
@@ -71,11 +70,13 @@ class EntityItem extends Component {
       );
     });
     const hideChevron = this.props.type === "growers" ? "hidden" : "";
+    const entityId = this.props.id || this.props.name;
+    const activeClass = this.props.currentId === entityId ? "active" : "";
     return (
       <div className="entityItem">
         <div className="entityNameAndChevron">
-          <div className="entityName" onClick={this.entityClick}>
-            {this.props.name}
+          <div className={`entityName ${activeClass}`} onClick={this.entityClick}>
+            <span className={`entityName ${activeClass}`}>{this.props.name}</span>
           </div>
           <div className={`chevronContainer ${hideChevron}`}>
             <img className={`entityChevron ${openClass}`} src={chevron} alt="chevron" onClick={this.handleChevronClick}></img>
@@ -89,4 +90,12 @@ class EntityItem extends Component {
   };
 }
 
-export default EntityItem;
+function mapStateToProps(state) {
+  return {
+    currentId: state.entities.currentEntity
+  };
+}
+
+const EntityItemExport = connect(mapStateToProps)(EntityItem);
+
+export default EntityItemExport;

@@ -7,7 +7,8 @@ import "./FarmTree.css";
 class FarmTree extends Component {
   static propTypes = {
     handleClick: PropTypes.func,
-    showFarmTree: PropTypes.bool
+    showFarmTree: PropTypes.bool,
+    currentId: PropTypes.string
   };
   constructor(props) {
     super(props);
@@ -32,10 +33,6 @@ class FarmTree extends Component {
         });
       });
   }
-  handleClick() {
-    this.props.entityClick
-  }
-
   render() {
     const showFarmTreeClass = this.props.showFarmTree ? "show" : "";
     const regionList = this.state.regionOptions.map((region, index) => {
