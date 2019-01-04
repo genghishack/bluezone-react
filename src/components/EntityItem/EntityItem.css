@@ -47,7 +47,7 @@
   }
 }
 @media (max-width: 700px) {
-  .entityItem {
-    margin-right: 16px;
+  .chevronContainer {
+    margin-right: 20px;
   }
  }

@@ -7,6 +7,9 @@
   overflow-y: auto;
   z-index: 11;
   display: block;
+  > div {
+    margin-bottom: 10px;
+  }
 }
 
 @media (max-width: 700px) {

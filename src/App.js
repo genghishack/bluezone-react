@@ -19,7 +19,6 @@ class App extends Component {
     this.setRegion = this.setRegion.bind(this);
     this.setBranch = this.setBranch.bind(this);
     this.setGrower = this.setGrower.bind(this);
-    this.farmTreeClick = this.farmTreeClick.bind(this);
     this.state = {
       region: null,
       division: null,
@@ -52,9 +51,6 @@ class App extends Component {
   setGrower(grower) {
     this.setState({ grower: grower });
   }
-  farmTreeClick() {
-    this.setState({ showFarmTree: !this.state.showFarmTree });
-  }
 
   render() {
     return (
@@ -64,7 +60,6 @@ class App extends Component {
           setDivision={this.setDivision}
           setBranch={this.setBranch}
           setGrower={this.setGrower}
-          farmTreeClick={this.farmTreeClick}
         />
         <FieldMap
           getMapHandle={this.getMapHandle}
@@ -75,7 +70,6 @@ class App extends Component {
           division={this.state.division}
           branch={this.state.branch}
           grower={this.state.grower}
-          showFarmTree={this.state.showFarmTree}
         />
       </div>
     );

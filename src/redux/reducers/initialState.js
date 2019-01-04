@@ -1,5 +1,6 @@
 export default {
   entities: {
-    currentEntity: null
+    currentEntity: null,
+    showFarmTree: false
   }
 };

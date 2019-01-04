@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import {getJsonData} from '../../utility/DataHelpers';
 import {EntityItem} from '../EntityItem/';
@@ -46,4 +47,10 @@ class FarmTree extends Component {
   };
 }
 
-export default FarmTree;
+function mapStateToProps(state) {
+  return {
+    showFarmTree: state.entities.showFarmTree
+  };
+}
+
+export default connect(mapStateToProps)(FarmTree);

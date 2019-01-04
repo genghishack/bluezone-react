@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
+import { connect } from "react-redux";
 import {getJsonData} from '../utility/DataHelpers';
 import "./Header.css";
 import NutrienLogo from "../assets/nutrien_logo.jpg";
+import closeSVG from "../assets/close_icon.png";
+import {farmTreeClick} from '../redux/actions/entities';
 
 export class Header extends Component {
   constructor(props) {
@@ -10,6 +13,8 @@ export class Header extends Component {
     this.handleDivisionChange = this.handleDivisionChange.bind(this);
     this.handleBranchChange = this.handleBranchChange.bind(this);
     this.handleGrowerChange = this.handleGrowerChange.bind(this);
+    this.farmTreeClick = this.farmTreeClick.bind(this);
+    this.closeClick = this.closeClick.bind(this);
     this.state = {
       divisionOptions: [{value: null, label: "Please select region first"}],
       branchOptions: [{value: null, label: "Please select division first"}],
@@ -115,7 +120,17 @@ export class Header extends Component {
     this.props.setGrower(option.value);
   }
 
+  farmTreeClick() {
+    this.props.dispatch(farmTreeClick(true));
+  }
+  closeClick() {
+    this.props.dispatch(farmTreeClick(false));
+  }
+
   render() {
+    const farmTreeButton = this.props.showFarmTree ?
+      <img className="farmTreeClose" src={closeSVG} alt="close" onClick={this.closeClick}></img> :
+      <div className="farmTreeButton" onClick={this.farmTreeClick}>Farm Tree</div>;
     return (
       <header id="App-header">
         <a href="/" className="home-link">
@@ -127,9 +142,16 @@ export class Header extends Component {
             <span className="normal">Map</span>
           </div>
         </a>
-        <div className="farmTreeButton" onClick={this.props.farmTreeClick}>Farm Tree</div>
+        {farmTreeButton}
       </header>
     )
   }
 }
-export default Header;
+
+function mapStateToProps(state) {
+  return {
+    showFarmTree: state.entities.showFarmTree
+  };
+}
+
+export default connect(mapStateToProps)(Header);
