@@ -4,7 +4,7 @@ import { PropTypes } from "prop-types";
 import {getJsonData} from '../../utility/DataHelpers';
 import darkChevron from "../../assets/chevron.svg"
 import lightChevron from "../../assets/light_chevron.svg"
-import {setCurrentEntity} from '../../redux/actions/entities';
+import {setCurrentEntity, farmTreeClick} from '../../redux/actions/entities';
 
 import "./EntityItem.css";
 
@@ -57,6 +57,7 @@ class EntityItem extends Component {
   }
 
   entityClick() {
+    this.props.dispatch(farmTreeClick(false));
     this.props.dispatch(setCurrentEntity({id: this.props.id || this.props.name, type: this.props.type}));
   }
 
