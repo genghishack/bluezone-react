@@ -1,0 +1,23 @@
+.farmTreeWrapper {
+  background: #FFF;
+  width: 250px;
+  height: 100%;
+  position: absolute;
+  padding: 8px;
+  overflow-y: auto;
+  z-index: 11;
+  display: block;
+  > div {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 700px) {
+ .farmTreeWrapper {
+   width: 100%;
+   display: none;
+   &.show {
+     display: block;
+   }
+ }
+}

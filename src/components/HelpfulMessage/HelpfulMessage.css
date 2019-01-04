@@ -2,7 +2,7 @@
   background: #F5F5F5;
   position: absolute;
   bottom: 28px;
-  right: 50%;
+  right: calc(50% - 133px);
   transform: translateX(50%);
   text-align: center;
   border-radius: 20px;

@@ -1,0 +1,53 @@
+.entityChildren {
+  margin-left: 16px;
+  &.closed {
+    display: none;
+  }
+}
+
+.entityItem {
+  cursor: pointer;
+}
+
+.chevronContainer {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-block;
+  right: 0;
+  height: 15px;
+  .entityChevron {
+    width: 15px;
+    margin: 0px 6px;
+    transition: transform .2s linear;
+    &.open {
+      transform: rotate(180deg);
+    }
+  }
+  &.hidden {
+    display: none;
+  }
+}
+
+.entityNameAndChevron {
+  border-bottom: 1px solid #ccc;
+  position: relative;
+  &.active {
+    background: #4aa824;
+    color: #fff;
+  }
+  .entityName {
+    max-width: 195px;
+    font-weight: 700;
+    padding: 8px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+}
+@media (max-width: 700px) {
+  .chevronContainer {
+    margin-right: 20px;
+  }
+ }

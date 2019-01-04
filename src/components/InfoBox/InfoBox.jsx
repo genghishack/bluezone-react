@@ -24,7 +24,6 @@ class InfoBox extends Component {
     const expandedClass = this.props.expanded ? "expanded" : "";
     return (
       <div id="info_box_wrapper" className={`info_box_wrapper ${expandedClass}`}>
-        <img className="modal_close" src={closeSVG} alt="close" onClick={this.closeClick}></img>
         <div className="field_item_wrapper">
           <img className="modal_close" src={closeSVG} alt="close" onClick={this.closeClick}></img>
           <div className="infoBoxTitle">

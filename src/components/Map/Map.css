@@ -1,0 +1,9 @@
+.scaleControl, .zoomControl {
+  margin-left: 266px;
+}
+
+@media (max-width: 700px) {
+  .scaleControl, .zoomControl {
+    margin-left: 0;
+  }
+ }

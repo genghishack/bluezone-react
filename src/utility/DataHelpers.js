@@ -10,7 +10,6 @@ export function getJsonData(endpoint) {
   })
     .then(resp => {
       const jsonResponse = resp.json();
-      console.log(endpoint + ': ', jsonResponse);
       return jsonResponse;
     })
     .catch(error => console.log(error));
