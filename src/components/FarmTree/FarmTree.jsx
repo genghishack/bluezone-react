@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
-import { PropTypes } from "prop-types";
 import {getJsonData} from '../../utility/DataHelpers';
 import {EntityItem} from '../EntityItem/';
 import "./FarmTree.css";
 
 class FarmTree extends Component {
-  static propTypes = {
-    handleClick: PropTypes.func
-  };
   constructor(props) {
     super(props);
     this.state = {
@@ -35,7 +31,7 @@ class FarmTree extends Component {
   render() {
     const showFarmTreeClass = this.props.showFarmTree ? "show" : "";
     const regionList = this.state.regionOptions.map((region, index) => {
-      return <EntityItem key={`region${index}`} name={region.label} type="regions" handleClick={this.props.handleClick} />;
+      return <EntityItem key={`region${index}`} name={region.label} type="regions" />;
     });
     return (
       <div className={`farmTreeWrapper ${showFarmTreeClass}`}>

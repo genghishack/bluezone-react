@@ -8,7 +8,6 @@ import { InfoBox } from "../InfoBox";
 import { FarmTree } from "../FarmTree";
 import { getJsonData } from '../../utility/DataHelpers';
 import { createGeoJsonPolys, createGeoJsonPoints } from "../../utility/MapHelpers";
-import {setCurrentEntity} from '../../redux/actions/entities';
 
 import "./Map.css";
 
@@ -24,7 +23,6 @@ export class FieldMap extends Component {
     super(props);
     this.closeClick = this.closeClick.bind(this);
     this.mapLoad = this.mapLoad.bind(this);
-    this.entityClick = this.entityClick.bind(this);
     this.aerisCredentials = "dTDYoTwjuurB6gTfchSwy_KDGLAOouT5LqRcKHqbW7aJnwkj5McUPGhZstZdpg";
     this.map = null;
     this.hoveredFieldId = null;
@@ -198,25 +196,25 @@ export class FieldMap extends Component {
     this.setState({expanded: false});
   };
 
-  entityClick(type, id) {
-    this.props.dispatch(setCurrentEntity(id));
-    this.resetMap();
-    if (type === "regions") {
-      this.map.fitBounds([-148.8, 32.6, -65.4, 50.2]);
-    }
-    else if (type === "divisions") {
-      this.getAndDisplayDivisionFields(id);
-    }
-    else if (type === "branches") {
-      this.getAndDisplayBranchFields(id);
-    }
-    else if (type === "growers") {
-      this.getAndDisplayGrowerFields(id);
-    }
-  }
   componentDidUpdate(prevProps) {
+    const { currentType, currentId } = this.props;
     if (prevProps.showFarmTree !== this.props.showFarmTree) {
       this.setState({ showFarmTree: !this.state.showFarmTree });
+    }
+    else if (prevProps.currentId !== this.props.currentId) {
+      this.resetMap();
+      if (currentType === "regions") {
+        this.map.fitBounds([-148.8, 32.6, -65.4, 50.2]);
+      }
+      else if (currentType === "divisions") {
+        this.getAndDisplayDivisionFields(currentId);
+      }
+      else if (currentType === "branches") {
+        this.getAndDisplayBranchFields(currentId);
+      }
+      else if (currentType === "growers") {
+        this.getAndDisplayGrowerFields(currentId);
+      }
     }
   }
   render() {
@@ -236,7 +234,7 @@ export class FieldMap extends Component {
             width: "100%"
           }}
         >
-          <FarmTree handleClick={this.entityClick} />
+          <FarmTree />
           <InfoBox
             fieldProps={this.state.fieldProps}
             weatherData={this.state.weatherData}
@@ -258,4 +256,11 @@ export class FieldMap extends Component {
   }
 }
 
-export default connect()(FieldMap);
+function mapStateToProps(state) {
+  return {
+    currentId: state.entities.currentEntity,
+    currentType: state.entities.currentType
+  };
+}
+
+export default connect(mapStateToProps)(FieldMap);

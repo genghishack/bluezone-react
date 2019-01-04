@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 
-export function setCurrentEntity(id) {
-  return {type: types.SET_CURRENT_ENTITY, payload: id};
+export function setCurrentEntity(payload) {
+  return {type: types.SET_CURRENT_ENTITY, payload: payload};
 }
 
 export function farmTreeClick(bool) {

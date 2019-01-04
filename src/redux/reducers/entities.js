@@ -6,7 +6,8 @@ export default function entities(state = initialState.entities, action) {
     case actionTypes.SET_CURRENT_ENTITY:
       return {
         ...state,
-        currentEntity: action.payload
+        currentEntity: action.payload.id,
+        currentType: action.payload.type
       }
     case actionTypes.SET_FARM_TREE_VISIBLE:
       return {

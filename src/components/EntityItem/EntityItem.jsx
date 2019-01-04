@@ -4,6 +4,7 @@ import { PropTypes } from "prop-types";
 import {getJsonData} from '../../utility/DataHelpers';
 import darkChevron from "../../assets/chevron.svg"
 import lightChevron from "../../assets/light_chevron.svg"
+import {setCurrentEntity} from '../../redux/actions/entities';
 
 import "./EntityItem.css";
 
@@ -11,8 +12,7 @@ class EntityItem extends Component {
   static propTypes = {
     name: PropTypes.string,
     id: PropTypes.string,
-    type: PropTypes.string,
-    handleClick: PropTypes.func
+    type: PropTypes.string
   };
   constructor(props) {
     super(props);
@@ -57,7 +57,7 @@ class EntityItem extends Component {
   }
 
   entityClick() {
-    this.props.handleClick(this.props.type, this.props.id || this.props.name);
+    this.props.dispatch(setCurrentEntity({id: this.props.id || this.props.name, type: this.props.type}));
   }
 
   render() {
@@ -69,7 +69,6 @@ class EntityItem extends Component {
           id={entity.attributes.growerId}
           name={entity.attributes.division || entity.attributes.branch || entity.attributes.growerName}
           type={this.state.childrenType}
-          handleClick={this.props.handleClick}
         />
       );
     });
