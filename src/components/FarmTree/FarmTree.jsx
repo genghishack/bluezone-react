@@ -7,9 +7,7 @@ import "./FarmTree.css";
 
 class FarmTree extends Component {
   static propTypes = {
-    handleClick: PropTypes.func,
-    showFarmTree: PropTypes.bool,
-    currentId: PropTypes.string
+    handleClick: PropTypes.func
   };
   constructor(props) {
     super(props);

@@ -4,7 +4,6 @@ import { PropTypes } from "prop-types";
 import ReactMapboxGl, { ZoomControl, ScaleControl } from "react-mapbox-gl";
 import {get} from "lodash";
 import bbox from '@turf/bbox';
-// import buffer from '@turf/buffer';
 import { InfoBox } from "../InfoBox";
 import { FarmTree } from "../FarmTree";
 import { getJsonData } from '../../utility/DataHelpers';
@@ -41,8 +40,9 @@ export class FieldMap extends Component {
     }
   }
   static propTypes = {
+    dispatch: PropTypes.func,
     zoom: PropTypes.arrayOf(PropTypes.number),
-    center: PropTypes.arrayOf(PropTypes.number),
+    center: PropTypes.arrayOf(PropTypes.number)
   };
   mapLoad(map) {
     this.map = map;
@@ -200,6 +200,7 @@ export class FieldMap extends Component {
   };
 
   entityClick(type, id) {
+    console.log("entityClick");
     this.props.dispatch(setCurrentEntity(id));
     this.resetMap();
     if (type === "regions") {
@@ -221,7 +222,7 @@ export class FieldMap extends Component {
     }
   }
   render() {
-    const {zoom, center} = this.props;
+    const { zoom, center } = this.props;
     return (
       <div id="main-container">
         <Map
@@ -237,7 +238,7 @@ export class FieldMap extends Component {
             width: "100%"
           }}
         >
-          <FarmTree handleClick={this.entityClick} showFarmTree={this.state.showFarmTree} currentId={this.state.currentId} />
+          <FarmTree handleClick={this.entityClick} />
           <InfoBox
             fieldProps={this.state.fieldProps}
             weatherData={this.state.weatherData}
