@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import {getJsonData} from '../../utility/DataHelpers';
-import chevron from "../../assets/chevron.svg"
+import darkChevron from "../../assets/chevron.svg"
+import lightChevron from "../../assets/light_chevron.svg"
 
 import "./EntityItem.css";
 
@@ -72,11 +73,12 @@ class EntityItem extends Component {
     const hideChevron = this.props.type === "growers" ? "hidden" : "";
     const entityId = this.props.id || this.props.name;
     const activeClass = this.props.currentId === entityId ? "active" : "";
+    const chevron = this.props.currentId === entityId ? lightChevron : darkChevron;
     return (
       <div className="entityItem">
-        <div className="entityNameAndChevron">
-          <div className={`entityName ${activeClass}`} onClick={this.entityClick}>
-            <span className={`entityName ${activeClass}`}>{this.props.name}</span>
+        <div className={`entityNameAndChevron ${activeClass}`}>
+          <div className="entityName" onClick={this.entityClick}>
+            <span>{this.props.name}</span>
           </div>
           <div className={`chevronContainer ${hideChevron}`}>
             <img className={`entityChevron ${openClass}`} src={chevron} alt="chevron" onClick={this.handleChevronClick}></img>

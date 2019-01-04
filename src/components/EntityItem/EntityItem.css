@@ -30,29 +30,22 @@
 }
 
 .entityNameAndChevron {
-  padding: 1px 0;
   border-bottom: 1px solid #ccc;
   position: relative;
+  &.active {
+    background: #4aa824;
+    color: #fff;
+  }
   .entityName {
     max-width: 195px;
     font-weight: 700;
-    padding: 7px;
+    padding: 8px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     border-radius: 4px;
-    &.active {
-      color: #fff;
-    }
-    >span {
-      &.active {
-        background: #4aa824;
-        color: #fff;
-      }
-    }
   }
 }
-
 @media (max-width: 700px) {
   .entityItem {
     margin-right: 16px;

@@ -205,10 +205,12 @@ export class FieldMap extends Component {
   };
 
   entityClick(type, id) {
-    console.log("entityClick");
     this.props.dispatch(setCurrentEntity(id));
     this.resetMap();
-    if (type === "divisions") {
+    if (type === "regions") {
+      this.map.fitBounds([-148.8, 32.6, -65.4, 50.2]);
+    }
+    else if (type === "divisions") {
       this.getAndDisplayDivisionFields(id);
     }
     else if (type === "branches") {
