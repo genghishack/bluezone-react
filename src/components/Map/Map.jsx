@@ -90,8 +90,12 @@ export class FieldMap extends Component {
   }
 
   addGeoJson(fieldPolys, fieldPoints) {
-    this.addFieldPolygons(fieldPolys);
-    this.addFieldPoints(fieldPoints);
+    if (!this.map.getSource("fieldPolygons")) {
+      this.addFieldPolygons(fieldPolys);
+    }
+    if (!this.map.getSource("fieldPoints")) {
+      this.addFieldPoints(fieldPoints);
+    }
   }
 
   addFieldPolygons(fieldPolys) {
@@ -115,7 +119,6 @@ export class FieldMap extends Component {
         'fill-antialias': true
       },
     });
-
   }
 
   addFieldPoints(fieldPoints) {
