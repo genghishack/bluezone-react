@@ -64,14 +64,14 @@ class InfoBox extends Component {
               alt="close"
               onClick={this.closeClick}
             ></img>
-            <div className="infoBoxTitle">
-              <img
-                className="infoBoxTitleIcon"
-                src={infoPng}
-                alt="info"
-              ></img>
-              <h2>Information</h2>
-            </div>
+            {/*<div className="infoBoxTitle">*/}
+              {/*<img*/}
+                {/*className="infoBoxTitleIcon"*/}
+                {/*src={infoPng}*/}
+                {/*alt="info"*/}
+              {/*></img>*/}
+              {/*<h2>Information</h2>*/}
+            {/*</div>*/}
             <div className="congress-info">
               <div className="district-name">
                 {districtTitle}
@@ -82,14 +82,14 @@ class InfoBox extends Component {
                   data={rep}
                 />
               </section>
-              {repCandidate ? (
-                <section id="rep-candidate-section">
-                  <div className="title">Challenger</div>
-                  <Candidate
-                    data={repCandidate}
-                  />
-                </section>
-              ) : ''}
+              {/*{repCandidate ? (*/}
+                {/*<section id="rep-candidate-section">*/}
+                  {/*<div className="title">Challenger</div>*/}
+                  {/*<Candidate*/}
+                    {/*data={repCandidate}*/}
+                  {/*/>*/}
+                {/*</section>*/}
+              {/*) : ''}*/}
               <section id="sen-section">
                 <div className="title">Senators</div>
                 {sens.length ?
