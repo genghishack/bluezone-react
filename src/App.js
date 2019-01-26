@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.less';
 import Header from './components/Header';
-import MainContainer from './components/MainContainer';
+import CongressMap from './components/Map';
 
 import states from './data/states.json';
 import bboxes from './data/bboxes.json';
@@ -46,8 +46,10 @@ class App extends Component {
   filterMap = (stateAbbr, districtCode) => {
     const map = this.map.state.map;
 
-    for (var i = 1; i <= 5; i++) {
-      let existingFilter = map.getFilter('districts_' + i);
+    // for (var i = 1; i <= 5; i++) {
+      let existingFilter = map.getFilter('districts_fill');
+      // console.log(existingFilter, stateAbbr, districtCode);
+
       if (existingFilter[0] === 'all') {
         existingFilter = existingFilter[existingFilter.length - 1];
       }
@@ -56,10 +58,11 @@ class App extends Component {
       if (districtCode) filter.push(['==', 'number', districtCode]);
 
       const layerFilter = filter.concat([existingFilter]);
-      map.setFilter('districts_' + i, layerFilter);
-      map.setFilter('districts_' + i + '_boundary', layerFilter);
-      map.setFilter('districts_' + i + '_label', layerFilter);
-    }
+
+      map.setFilter('districts_fill', layerFilter);
+      map.setFilter('districts_boundary', layerFilter);
+      map.setFilter('districts_label', layerFilter);
+    // }
   };
 
   focusMap = (stateAbbr, districtCode) => {
@@ -84,10 +87,7 @@ class App extends Component {
           districts={districts}
           handleSelection={this.handleSelection}
         />
-        <MainContainer
-          bboxes={bboxes}
-          selectedState={this.state.selectedState}
-          selectedDistrict={this.state.selectedDistrict}
+        <CongressMap
           getMapHandle={this.getMapHandle}
           focusMap={this.focusMap}
           zoom={[continental.zoom]}

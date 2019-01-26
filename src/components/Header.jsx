@@ -31,14 +31,18 @@ export class Header extends Component {
     return (
       <header id="App-header">
         <a href="/" className="home-link">
+
           <div className="App-logo">
             <i className="fas fa-globe"></i>
           </div>
+
           <div className="App-title">
             <span className="light">Project </span>
             <span className="normal">Bluezone</span>
           </div>
+
         </a>
+
         <div className="App-menu">
           <div className="control-title normal">Filter by:</div>
           <div className="selector light">
@@ -57,6 +61,7 @@ export class Header extends Component {
               })}
             </select>
           </div>
+
           <div className="selector light">
             <span className="label">District</span>
             <select
@@ -73,6 +78,7 @@ export class Header extends Component {
               })}
             </select>
           </div>
+
         </div>
       </header>
     )
