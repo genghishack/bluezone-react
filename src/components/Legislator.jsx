@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
-import CurrentLegislatorData from '../data/legislators-current.json';
-
 class Legislator extends Component {
 
   getImg = (id) => {
@@ -23,13 +21,9 @@ class Legislator extends Component {
     )
   };
 
-  getData = (id) => {
+  getModel = legislator => {
 
-    let legislator;
-    [legislator] = CurrentLegislatorData.filter(leg => {
-      return leg.id.bioguide === id;
-    });
-    legislator = legislator || {};
+    // console.log('legislator: ', legislator);
 
     legislator.attributes = {
       fullName: '',
@@ -75,8 +69,12 @@ class Legislator extends Component {
   };
 
   render() {
-    const { id } = this.props;
-    const legislator = this.getData(id);
+    const { data } = this.props;
+    if (!data) {
+      return 'No info available';
+    }
+
+    const legislator = this.getModel(data);
 
     const l = legislator.attributes;
 
