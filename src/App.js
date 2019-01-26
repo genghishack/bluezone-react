@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import geoViewport from "@mapbox/geo-viewport/index";
 import './App.less';
 import Header from './components/Header';
-import CongressMap from './components/Map';
+import CongressMap from './components/Map1';
+import CongressMap2 from './components/Map2';
 
 import states from './data/states.json';
 import bboxes from './data/bboxes.json';
@@ -38,6 +39,10 @@ class App extends Component {
       focusMap={this.focusMap}
       getMapHandle={this.getMapHandle}
     />
+  );
+
+  Map2 = () => (
+    <CongressMap2/>
   );
 
   getMapHandle = (map) => {

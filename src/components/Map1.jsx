@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactMapGl from 'react-map-gl';
 import ReactMapboxGl, {
   ZoomControl,
   ScaleControl,
@@ -30,7 +29,7 @@ const mapConf = {
   center: continental.center,
 };
 
-const Map = ReactMapboxGl(mapConf);
+const Map1 = ReactMapboxGl(mapConf);
 
 export class CongressMap extends Component {
 
@@ -246,7 +245,6 @@ export class CongressMap extends Component {
       color: true
     });
 
-
     this.setState({
       district: district,
       expanded: true
@@ -264,7 +262,7 @@ export class CongressMap extends Component {
   render() {
     return (
       <div id="main-container">
-        <Map
+        <Map1
           ref={map => {
             this.map = map;
             this.props.getMapHandle(map);
@@ -296,7 +294,7 @@ export class CongressMap extends Component {
             measurement="mi"
             position={'bottom-left'}
           />
-        </Map>
+        </Map1>
       </div>
     );
   }
