@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactMapGl from 'react-map-gl';
 import ReactMapboxGl, {
   ZoomControl,
   ScaleControl,
@@ -6,14 +7,27 @@ import ReactMapboxGl, {
 } from "react-mapbox-gl";
 import {InfoBox} from './InfoBox/';
 
+import states from '../data/states.json';
+import bboxes from '../data/bboxes.json';
+
 import { indexedLegislators, indexedCandidates } from '../utils/data-index';
+import geoViewport from "@mapbox/geo-viewport/index";
+
+// Use GeoViewport and the window size to determine an appropriate center and zoom for the continental US
+const continentalBbox = [-128.8, 23.6, -65.4, 50.2];
+const continentalView = (w, h) => {
+  return geoViewport.viewport(continentalBbox, [w, h]);
+};
+const continental = continentalView(window.innerWidth / 2, window.innerHeight / 2);
 
 const mapConf = {
   accessToken: "pk.eyJ1IjoiZ2VuZ2hpc2hhY2siLCJhIjoiZ2x6WjZhbyJ9.P8at90QQiy0C8W_mc21w6Q",
   // style: "mapbox://styles/genghishack/cjga1amoc2xx02ro7nzpv1e7s", // 2017 congress map
   style: "mapbox://styles/genghishack/cjnjjdyk64avs2rqgldz3j2ok", // 2018 congress map
   // style: "mapbox://styles/genghishack/cjftwwb9b8kw32sqpariydkrk", // basic
-  layerIds: ['districts_fill']
+  layerIds: ['districts_fill'],
+  zoom: [continental.zoom],
+  center: continental.center,
 };
 
 const Map = ReactMapboxGl(mapConf);
@@ -248,16 +262,13 @@ export class CongressMap extends Component {
   };
 
   render() {
-    const {
-      zoom,
-      center,
-      handleMapClick,
-    } = this.props;
-
     return (
       <div id="main-container">
         <Map
-          ref={e => { this.props.getMapHandle(e); }}
+          ref={map => {
+            this.map = map;
+            this.props.getMapHandle(map);
+          }}
           style={ mapConf.style }
           containerStyle={{
             height: "100%",
@@ -265,8 +276,8 @@ export class CongressMap extends Component {
           }}
           attributionControl={false}
           renderWorldCopies={false}
-          center={center}
-          zoom={zoom}
+          center={ mapConf.center }
+          zoom={ mapConf.zoom }
           onMouseMove={this.mouseMove}
           onClick={this.mapClick}
           onStyleLoad={this.mapLoad}

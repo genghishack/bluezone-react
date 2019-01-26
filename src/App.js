@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import geoViewport from "@mapbox/geo-viewport/index";
 import './App.less';
 import Header from './components/Header';
 import CongressMap from './components/Map';
 
 import states from './data/states.json';
 import bboxes from './data/bboxes.json';
-import geoViewport from "@mapbox/geo-viewport/index";
 
-// Use GeoViewport and the window size to determine and appropriate center and zoom for the continental US
+// Use GeoViewport and the window size to determine an appropriate center and zoom for the continental US
 const continentalBbox = [-128.8, 23.6, -65.4, 50.2];
 const continentalView = (w, h) => {
   return geoViewport.viewport(continentalBbox, [w, h]);
@@ -30,12 +31,17 @@ class App extends Component {
   state = {
     selectedState: '',
     selectedDistrict: '',
-    zoom: [continental.zoom],
-    center: continental.center,
   };
 
-  getMapHandle = e => {
-    this.map = e;
+  Map1 = () => (
+    <CongressMap
+      focusMap={this.focusMap}
+      getMapHandle={this.getMapHandle}
+    />
+  );
+
+  getMapHandle = (map) => {
+    this.map = map;
   };
 
   handleSelection = (state, district = '') => {
@@ -99,12 +105,18 @@ class App extends Component {
           districts={districts}
           handleSelection={this.handleSelection}
         />
-        <CongressMap
-          getMapHandle={this.getMapHandle}
-          focusMap={this.focusMap}
-          zoom={[continental.zoom]}
-          center={continental.center}
-        />
+        <Router>
+          <Switch>
+            <Route
+              path="/uber"
+              component={this.Map2}
+            />
+            <Route
+              path="/"
+              component={this.Map1}
+            />
+          </Switch>
+        </Router>
       </div>
     );
   }
