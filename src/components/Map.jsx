@@ -11,8 +11,8 @@ import { indexedLegislators, indexedCandidates } from '../utils/data-index';
 const mapConf = {
   accessToken: "pk.eyJ1IjoiZ2VuZ2hpc2hhY2siLCJhIjoiZ2x6WjZhbyJ9.P8at90QQiy0C8W_mc21w6Q",
   // style: "mapbox://styles/genghishack/cjga1amoc2xx02ro7nzpv1e7s", // 2017 congress map
-  // style: "mapbox://styles/genghishack/cjnjjdyk64avs2rqgldz3j2ok", // 2018 congress map
-  style: "mapbox://styles/genghishack/cjftwwb9b8kw32sqpariydkrk", // basic
+  style: "mapbox://styles/genghishack/cjnjjdyk64avs2rqgldz3j2ok", // 2018 congress map
+  // style: "mapbox://styles/genghishack/cjftwwb9b8kw32sqpariydkrk", // basic
   layerIds: ['districts_fill']
 };
 
