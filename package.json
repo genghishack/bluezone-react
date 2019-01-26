@@ -40,6 +40,7 @@
     "react": "^16.5.0",
     "react-dev-utils": "^5.0.2",
     "react-dom": "^16.5.0",
+    "react-map-gl": "^4.0.9",
     "react-mapbox-gl": "^3.9.2",
     "resolve": "1.6.0",
     "style-loader": "0.19.0",
@@ -51,7 +52,7 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "PORT=49152 node scripts/start.js",
+    "start": "PORT=49153 node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
   },
