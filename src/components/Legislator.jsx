@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
-import CurrentLegislatorData from '../data/legislators-current.json';
-
 class Legislator extends Component {
 
   getImg = (id) => {
@@ -24,6 +22,8 @@ class Legislator extends Component {
   };
 
   getModel = legislator => {
+
+    // console.log('legislator: ', legislator);
 
     legislator.attributes = {
       fullName: '',
@@ -70,7 +70,10 @@ class Legislator extends Component {
 
   render() {
     const { data } = this.props;
-    // console.log(data);
+    if (!data) {
+      return 'No info available';
+    }
+
     const legislator = this.getModel(data);
 
     const l = legislator.attributes;
