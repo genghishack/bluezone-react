@@ -1,52 +1,62 @@
-import React, { Component } from 'react';
-import ReactMapboxGl, {
-  ZoomControl,
-  ScaleControl,
-  RotationControl,
-} from "react-mapbox-gl";
+import React, {Component} from 'react';
+import ReactMapGl, { NavigationControl } from 'react-map-gl';
+import geoViewport from "@mapbox/geo-viewport/index";
+
 import {InfoBox} from './InfoBox/';
+import CongressionalDistricts from './Layers/CongressionalDistricts';
 
 import { indexedLegislators, indexedCandidates } from '../utils/data-index';
+
+// Use GeoViewport and the window size to determine an
+// appropriate center and zoom for the continental US
+const continentalBbox = [-128.8, 23.6, -65.4, 50.2];
+const continentalView = (w, h) => {
+  return geoViewport.viewport(continentalBbox, [w, h]);
+};
+const continental = continentalView(window.innerWidth / 2, window.innerHeight / 2);
 
 const mapConf = {
   accessToken: "pk.eyJ1IjoiZ2VuZ2hpc2hhY2siLCJhIjoiZ2x6WjZhbyJ9.P8at90QQiy0C8W_mc21w6Q",
   // style: "mapbox://styles/genghishack/cjga1amoc2xx02ro7nzpv1e7s", // 2017 congress map
   style: "mapbox://styles/genghishack/cjnjjdyk64avs2rqgldz3j2ok", // 2018 congress map
   // style: "mapbox://styles/genghishack/cjftwwb9b8kw32sqpariydkrk", // basic
-  layerIds: ['districts_fill']
+  layerIds: ['districts_fill'],
 };
-
-const Map = ReactMapboxGl(mapConf);
 
 export class CongressMap extends Component {
 
   constructor(props) {
     super(props);
-    this.closeClick = this.closeClick.bind(this);
-    this.mapLoad = this.mapLoad.bind(this);
-    this.addGeoJson = this.addGeoJson.bind(this);
-    this.addDistrictLabels = this.addDistrictLabels.bind(this);
-    this.setHoveredDistrict = this.setHoveredDistrict.bind(this);
     this.map = null;
+    this.onMapLoad = this.onMapLoad.bind(this);
+    this.closeClick = this.closeClick.bind(this);
     this.hoveredDistrictId = null;
     this.legislatorIndex = indexedLegislators();
     this.candidateIndex = indexedCandidates();
     this.state = {
+      viewport: {
+        longitude: continental.center[0],
+        latitude: continental.center[1],
+        zoom: continental.zoom,
+        bearing: 0,
+        pitch: 0
+      },
+      mapLoaded: false,
       expanded: false,
-      districtProps: null,
       hoveredDistrictId: null,
       district: {},
-    }
+    };
   }
 
-  componentDidUpdate(prevProps) {
-
-  }
-
-  mapLoad(map) {
-    this.map = map;
+  onMapLoad() {
+    this.map = this.mapRef.getMap();
+    this.setState({ mapLoaded: true });
     this.addGeoJson();
   }
+
+  updateViewport = viewport => {
+    this.setState({ viewport });
+  };
 
   addGeoJson() {
     this.map.addSource('districts2018', {
@@ -60,7 +70,7 @@ export class CongressMap extends Component {
 
     this.addDistrictFillLayer();
 
-  };
+  }
 
   addDistrictBoundaries() {
 
@@ -133,16 +143,6 @@ export class CongressMap extends Component {
 
   }
 
-  addMouseEvents() {
-
-    this.map.on('mousemove', 'fieldPolygonsLayer', (e) => {
-      if (this.hoveredDistrictId) {
-
-      }
-    });
-
-  }
-
   setHoveredDistrict(district) {
 
     // remove the hover setting from whatever district was being hovered before
@@ -170,36 +170,41 @@ export class CongressMap extends Component {
 
   }
 
-  mouseMove = (map, evt) => {
-    const features = map.queryRenderedFeatures(evt.point);
-    let cursorStyle = '';
+  mouseMove = (evt) => {
+    const { mapLoaded } = this.state;
 
-    const {layerIds} = mapConf;
+    if (mapLoaded) {
+      const features = this.map.queryRenderedFeatures(evt.point);
 
-    // Make sure the district we are hovering is being displayed by the filter
-    const hoveredDistrict = features.filter(feature => {
-      return layerIds.indexOf(feature.layer.id) !== -1;
-    });
+      let cursorStyle = '';
 
-    // console.log(hoveredDistrict);
+      const {layerIds} = mapConf;
 
-    if (hoveredDistrict.length) {
+      // Make sure the district we are hovering is being displayed by the filter
+      const hoveredDistrict = features.filter(feature => {
+        return layerIds.indexOf(feature.layer.id) !== -1;
+      });
 
-      // Make sure the cursor is a pointer over any visible district.
-      cursorStyle = 'pointer';
+      // console.log(hoveredDistrict);
 
-      this.setHoveredDistrict(hoveredDistrict);
+      if (hoveredDistrict.length) {
 
+        // Make sure the cursor is a pointer over any visible district.
+        cursorStyle = 'pointer';
+
+        this.setHoveredDistrict(hoveredDistrict);
+
+      }
+
+      this.map.getCanvas().style.cursor = cursorStyle;
     }
-
-    map.getCanvas().style.cursor = cursorStyle;
 
   };
 
-  mapClick = (map, evt) => {
-    const features = map.queryRenderedFeatures(evt.point);
+  mapClick = (evt) => {
+    const features = this.map.queryRenderedFeatures(evt.point);
 
-    console.log('features: ', features);
+    // console.log('features: ', features);
 
     const layerIds = mapConf.layerIds;
 
@@ -224,7 +229,7 @@ export class CongressMap extends Component {
       district.properties.number
     );
 
-    map.setFeatureState({
+    this.map.setFeatureState({
       source: 'districts2018',
       sourceLayer: 'districts',
       id: district.id,
@@ -232,45 +237,51 @@ export class CongressMap extends Component {
       color: true
     });
 
-
     this.setState({
       district: district,
       expanded: true
     }, () => {
-      console.log('district: ', district);
+      // console.log('district: ', district);
       // console.log('source: ', map.getSource('composite'));
       // console.log('layer: ', map.getLayer('districts'));
     });
   };
 
   closeClick() {
+    /*
+     TODO: There's a bug in this which makes whatever district
+     is underneath the X become selected when the X is clicked.
+    */
     this.setState({expanded: false});
   };
 
   render() {
-    const {
-      zoom,
-      center,
-      handleMapClick,
-    } = this.props;
+    const { viewport, mapLoaded } = this.state;
+
+    // const CongressionalLayer = mapLoaded ? (
+    //   <CongressionalDistricts
+    //     map={this.map}
+    //   />
+    // ) : null;
 
     return (
       <div id="main-container">
-        <Map
-          ref={e => { this.props.getMapHandle(e); }}
-          style={ mapConf.style }
-          containerStyle={{
-            height: "100%",
-            width: "100%"
+        <ReactMapGl
+          ref={map => {
+            this.mapRef = map;
+            this.props.getMapHandle(map);
           }}
-          attributionControl={false}
-          renderWorldCopies={false}
-          center={center}
-          zoom={zoom}
+          {...viewport}
+          width="100%"
+          height="100%"
+          mapStyle={ mapConf.style }
+          mapboxApiAccessToken={ mapConf.accessToken }
+          onViewportChange={this.updateViewport}
+          onLoad={this.onMapLoad}
           onMouseMove={this.mouseMove}
           onClick={this.mapClick}
-          onStyleLoad={this.mapLoad}
         >
+          {/*{CongressionalLayer}*/}
           <InfoBox
             district={this.state.district}
             expanded={this.state.expanded}
@@ -278,18 +289,15 @@ export class CongressMap extends Component {
             legislatorIndex={this.legislatorIndex}
             candidateIndex={this.candidateIndex}
           />
-          <ZoomControl
-            position={'top-left'}
-          />
-          <ScaleControl
-            measurement="mi"
-            position={'bottom-left'}
-          />
-        </Map>
+          <div style={{position: 'absolute', left: 10, top: 10}}>
+            <NavigationControl
+              onViewportChange={this.updateViewport}
+            />
+          </div>
+        </ReactMapGl>
       </div>
-    );
+    )
   }
-
 }
 
 export default CongressMap;

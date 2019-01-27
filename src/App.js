@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import geoViewport from "@mapbox/geo-viewport/index";
 import './App.less';
 import Header from './components/Header';
 import CongressMap from './components/Map';
 
 import states from './data/states.json';
 import bboxes from './data/bboxes.json';
-import geoViewport from "@mapbox/geo-viewport/index";
 
-// Use GeoViewport and the window size to determine and appropriate center and zoom for the continental US
+// Use GeoViewport and the window size to determine an appropriate center and zoom for the continental US
 const continentalBbox = [-128.8, 23.6, -65.4, 50.2];
 const continentalView = (w, h) => {
   return geoViewport.viewport(continentalBbox, [w, h]);
@@ -30,12 +31,17 @@ class App extends Component {
   state = {
     selectedState: '',
     selectedDistrict: '',
-    zoom: [continental.zoom],
-    center: continental.center,
   };
 
-  getMapHandle = e => {
-    this.map = e;
+  Map2 = () => (
+    <CongressMap
+      focusMap={this.focusMap}
+      getMapHandle={this.getMapHandle}
+    />
+  );
+
+  getMapHandle = (map) => {
+    this.map = map;
   };
 
   handleSelection = (state, district = '') => {
@@ -44,8 +50,14 @@ class App extends Component {
   };
 
   filterMap = (stateAbbr, districtCode) => {
-    const map = this.map.state.map;
+    const map = this.map.getMap();
 
+    /*
+     TODO: This needs to be conditionalized and/or called as a
+     separate function so that it can be called, or not, depending
+     on whether the original congress map style is used underneath
+     the data layer of congressional boundaries
+    */
     for (var i = 1; i <= 5; i++) {
       let existingFilter = map.getFilter('districts_' + i);
       if (existingFilter[0] === 'all') {
@@ -61,6 +73,10 @@ class App extends Component {
       map.setFilter('districts_' + i + '_label', layerFilter);
     }
 
+    /*
+     TODO: If I'm going to do that, might as well make this one
+     a separate function too.
+    */
     let existingFilter = map.getFilter('districts_fill');
 
     if (existingFilter[0] === 'all') {
@@ -78,7 +94,7 @@ class App extends Component {
   };
 
   focusMap = (stateAbbr, districtCode) => {
-    const map = this.map.state.map;
+    const map = this.map.getMap();
 
     let bbox = continentalBbox;
     if (stateAbbr) {
@@ -99,12 +115,14 @@ class App extends Component {
           districts={districts}
           handleSelection={this.handleSelection}
         />
-        <CongressMap
-          getMapHandle={this.getMapHandle}
-          focusMap={this.focusMap}
-          zoom={[continental.zoom]}
-          center={continental.center}
-        />
+        <Router>
+          <Switch>
+            <Route
+              path="/"
+              component={this.Map2}
+            />
+          </Switch>
+        </Router>
       </div>
     );
   }

@@ -11,16 +11,6 @@
 #info_box_wrapper.info_box_wrapper.expanded {
   right: 0;
 }
-.infoBoxTitleIcon {
-  display: inline-block;
-  width: 20px;
-  vertical-align: middle;
-  margin-right: 8px;
-}
-.infoBoxTitle h2 {
-  display: inline-block;
-  vertical-align: middle;
-}
 .modal_close {
   position: absolute;
   top: 8px;
