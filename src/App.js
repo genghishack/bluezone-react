@@ -42,7 +42,10 @@ class App extends Component {
   );
 
   Map2 = () => (
-    <CongressMap2/>
+    <CongressMap2
+      focusMap={this.focusMap2}
+      getMapHandle={this.getMapHandle}
+    />
   );
 
   getMapHandle = (map) => {
@@ -90,6 +93,20 @@ class App extends Component {
 
   focusMap = (stateAbbr, districtCode) => {
     const map = this.map.state.map;
+
+    let bbox = continentalBbox;
+    if (stateAbbr) {
+      bbox = bboxes[stateAbbr + districtCode];
+    }
+    const view = geoViewport.viewport(
+      bbox,
+      [window.innerWidth / 2.75, window.innerHeight / 2.75]
+    );
+    map.easeTo(view);
+  };
+
+  focusMap2 = (stateAbbr, districtCode) => {
+    const map = this.map.getMap();
 
     let bbox = continentalBbox;
     if (stateAbbr) {

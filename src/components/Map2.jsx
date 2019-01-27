@@ -36,6 +36,9 @@ export class CongressMap2 extends Component {
         pitch: 0
       },
       mapLoaded: false,
+      expanded: false,
+      hoveredDistrictId: null,
+      district: {},
     };
   }
 
@@ -192,6 +195,52 @@ export class CongressMap2 extends Component {
 
   };
 
+  mapClick = (evt) => {
+    const features = this.map.queryRenderedFeatures(evt.point);
+
+    // console.log('features: ', features);
+
+    const layerIds = mapConf.layerIds;
+
+    let district;
+    const rFilteredDistricts = features.filter(feature => {
+      return layerIds.indexOf(feature.layer.id) !== -1;
+    });
+    if (rFilteredDistricts.length) {
+      district = rFilteredDistricts[0];
+    }
+
+    if (!district) {
+      this.setState({
+        district: {},
+        expanded: false
+      });
+      return;
+    }
+
+    this.props.focusMap(
+      district.properties.state,
+      district.properties.number
+    );
+
+    this.map.setFeatureState({
+      source: 'districts2018',
+      sourceLayer: 'districts',
+      id: district.id,
+    }, {
+      color: true
+    });
+
+    this.setState({
+      district: district,
+      expanded: true
+    }, () => {
+      // console.log('district: ', district);
+      // console.log('source: ', map.getSource('composite'));
+      // console.log('layer: ', map.getLayer('districts'));
+    });
+  };
+
   render() {
     const { viewport, mapLoaded } = this.state;
 
@@ -206,6 +255,7 @@ export class CongressMap2 extends Component {
         <ReactMapGl
           ref={map => {
             this.mapRef = map;
+            this.props.getMapHandle(map);
           }}
           {...viewport}
           width="100%"
@@ -215,6 +265,7 @@ export class CongressMap2 extends Component {
           onViewportChange={this.updateViewport}
           onLoad={this.onMapLoad}
           onMouseMove={this.mouseMove}
+          onClick={this.mapClick}
         >
           {/*{CongressionalLayer}*/}
         </ReactMapGl>
