@@ -17,6 +17,7 @@ const mapConf = {
   // style: "mapbox://styles/genghishack/cjga1amoc2xx02ro7nzpv1e7s", // 2017 congress map
   // style: "mapbox://styles/genghishack/cjnjjdyk64avs2rqgldz3j2ok", // 2018 congress map
   style: "mapbox://styles/genghishack/cjftwwb9b8kw32sqpariydkrk", // basic
+  layerIds: ['districts_fill'],
 };
 
 export class CongressMap2 extends Component {
@@ -133,59 +134,63 @@ export class CongressMap2 extends Component {
 
   }
 
-  // setHoveredDistrict(district) {
-  //
-  //   // remove the hover setting from whatever district was being hovered before
-  //   if (this.hoveredDistrictId) {
-  //     this.map.setFeatureState({
-  //       source: 'districts2018',
-  //       sourceLayer: 'districts',
-  //       id: this.hoveredDistrictId
-  //     }, {
-  //       hover: false
-  //     });
-  //   }
-  //
-  //   // Change the hovered district id to the current one
-  //   this.hoveredDistrictId = district[0].id;
-  //
-  //   // Set hover to true on the currently hovered district
-  //   this.map.setFeatureState({
-  //     source: 'districts2018',
-  //     sourceLayer: 'districts',
-  //     id: this.hoveredDistrictId
-  //   }, {
-  //     hover: true
-  //   });
-  //
-  // }
-  //
-  // mouseMove = (evt) => {
-  //   const features = this.map.queryRenderedFeatures(evt.point);
-  //   console.log(features);
-  //   let cursorStyle = '';
-  //
-  //   const {layerIds} = mapConf;
-  //
-  //   // Make sure the district we are hovering is being displayed by the filter
-  //   const hoveredDistrict = features.filter(feature => {
-  //     return layerIds.indexOf(feature.layer.id) !== -1;
-  //   });
-  //
-  //   // console.log(hoveredDistrict);
-  //
-  //   if (hoveredDistrict.length) {
-  //
-  //     // Make sure the cursor is a pointer over any visible district.
-  //     cursorStyle = 'pointer';
-  //
-  //     this.setHoveredDistrict(hoveredDistrict);
-  //
-  //   }
-  //
-  //   this.map.getCanvas().style.cursor = cursorStyle;
-  //
-  // };
+  setHoveredDistrict(district) {
+
+    // remove the hover setting from whatever district was being hovered before
+    if (this.hoveredDistrictId) {
+      this.map.setFeatureState({
+        source: 'districts2018',
+        sourceLayer: 'districts',
+        id: this.hoveredDistrictId
+      }, {
+        hover: false
+      });
+    }
+
+    // Change the hovered district id to the current one
+    this.hoveredDistrictId = district[0].id;
+
+    // Set hover to true on the currently hovered district
+    this.map.setFeatureState({
+      source: 'districts2018',
+      sourceLayer: 'districts',
+      id: this.hoveredDistrictId
+    }, {
+      hover: true
+    });
+
+  }
+
+  mouseMove = (evt) => {
+    const { mapLoaded } = this.state;
+
+    if (mapLoaded) {
+      const features = this.map.queryRenderedFeatures(evt.point);
+
+      let cursorStyle = '';
+
+      const {layerIds} = mapConf;
+
+      // Make sure the district we are hovering is being displayed by the filter
+      const hoveredDistrict = features.filter(feature => {
+        return layerIds.indexOf(feature.layer.id) !== -1;
+      });
+
+      // console.log(hoveredDistrict);
+
+      if (hoveredDistrict.length) {
+
+        // Make sure the cursor is a pointer over any visible district.
+        cursorStyle = 'pointer';
+
+        this.setHoveredDistrict(hoveredDistrict);
+
+      }
+
+      this.map.getCanvas().style.cursor = cursorStyle;
+    }
+
+  };
 
   render() {
     const { viewport, mapLoaded } = this.state;
@@ -209,7 +214,7 @@ export class CongressMap2 extends Component {
           mapboxApiAccessToken={ mapConf.accessToken }
           onViewportChange={this.updateViewport}
           onLoad={this.onMapLoad}
-          // onMouseMove={this.mouseMove}
+          onMouseMove={this.mouseMove}
         >
           {/*{CongressionalLayer}*/}
         </ReactMapGl>
