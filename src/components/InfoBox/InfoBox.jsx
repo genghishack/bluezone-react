@@ -112,7 +112,6 @@ class InfoBox extends Component {
     } else {
       return (
         <div className="no-info">
-          Please click on a congressional district to display information.
         </div>
       )
     }

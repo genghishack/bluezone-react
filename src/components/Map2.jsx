@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 import ReactMapGl from 'react-map-gl';
 import geoViewport from "@mapbox/geo-viewport/index";
 
+import {InfoBox} from './InfoBox/';
 import CongressionalDistricts from './Layers/CongressionalDistricts';
+
+import { indexedLegislators, indexedCandidates } from '../utils/data-index';
 
 // Use GeoViewport and the window size to determine an
 // appropriate center and zoom for the continental US
@@ -26,7 +29,10 @@ export class CongressMap2 extends Component {
     super(props);
     this.map = null;
     this.onMapLoad = this.onMapLoad.bind(this);
-    this.addGeoJson = this.addGeoJson.bind(this);
+    this.closeClick = this.closeClick.bind(this);
+    this.hoveredDistrictId = null;
+    this.legislatorIndex = indexedLegislators();
+    this.candidateIndex = indexedCandidates();
     this.state = {
       viewport: {
         longitude: continental.center[0],
@@ -241,6 +247,10 @@ export class CongressMap2 extends Component {
     });
   };
 
+  closeClick() {
+    this.setState({expanded: false});
+  };
+
   render() {
     const { viewport, mapLoaded } = this.state;
 
@@ -268,6 +278,13 @@ export class CongressMap2 extends Component {
           onClick={this.mapClick}
         >
           {/*{CongressionalLayer}*/}
+          <InfoBox
+            district={this.state.district}
+            expanded={this.state.expanded}
+            closeClick={this.closeClick}
+            legislatorIndex={this.legislatorIndex}
+            candidateIndex={this.candidateIndex}
+          />
         </ReactMapGl>
       </div>
     )
