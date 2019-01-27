@@ -53,12 +53,48 @@ class App extends Component {
   };
 
   handleSelection = (state, district = '') => {
-    this.filterMap(state, district);
-    this.focusMap(state, district);
+    // this.filterMap(state, district);
+    this.filterMap2(state, district);
+    // this.focusMap(state, district);
+    this.focusMap2(state, district);
   };
 
   filterMap = (stateAbbr, districtCode) => {
     const map = this.map.state.map;
+
+    for (var i = 1; i <= 5; i++) {
+      let existingFilter = map.getFilter('districts_' + i);
+      if (existingFilter[0] === 'all') {
+        existingFilter = existingFilter[existingFilter.length - 1];
+      }
+      const filter = ['all'];
+      if (stateAbbr) filter.push(['==', 'state', stateAbbr]);
+      if (districtCode) filter.push(['==', 'number', districtCode]);
+
+      const layerFilter = filter.concat([existingFilter]);
+      map.setFilter('districts_' + i, layerFilter);
+      map.setFilter('districts_' + i + '_boundary', layerFilter);
+      map.setFilter('districts_' + i + '_label', layerFilter);
+    }
+
+    let existingFilter = map.getFilter('districts_fill');
+
+    if (existingFilter[0] === 'all') {
+      existingFilter = existingFilter[existingFilter.length - 1];
+    }
+    const filter = ['all'];
+    if (stateAbbr) filter.push(['==', 'state', stateAbbr]);
+    if (districtCode) filter.push(['==', 'number', districtCode]);
+
+    const layerFilter = filter.concat([existingFilter]);
+
+    map.setFilter('districts_fill', layerFilter);
+    map.setFilter('districts_boundary', layerFilter);
+    map.setFilter('districts_label', layerFilter);
+  };
+
+  filterMap2 = (stateAbbr, districtCode) => {
+    const map = this.map.getMap();
 
     for (var i = 1; i <= 5; i++) {
       let existingFilter = map.getFilter('districts_' + i);
