@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ReactMapGl from 'react-map-gl';
+import ReactMapGl, { NavigationControl } from 'react-map-gl';
 import geoViewport from "@mapbox/geo-viewport/index";
 
 import {InfoBox} from './InfoBox/';
@@ -23,7 +23,7 @@ const mapConf = {
   layerIds: ['districts_fill'],
 };
 
-export class CongressMap2 extends Component {
+export class CongressMap extends Component {
 
   constructor(props) {
     super(props);
@@ -248,6 +248,10 @@ export class CongressMap2 extends Component {
   };
 
   closeClick() {
+    /*
+     TODO: There's a bug in this which makes whatever district
+     is underneath the X become selected when the X is clicked.
+    */
     this.setState({expanded: false});
   };
 
@@ -285,10 +289,15 @@ export class CongressMap2 extends Component {
             legislatorIndex={this.legislatorIndex}
             candidateIndex={this.candidateIndex}
           />
+          <div style={{position: 'absolute', left: 10, top: 10}}>
+            <NavigationControl
+              onViewportChange={this.updateViewport}
+            />
+          </div>
         </ReactMapGl>
       </div>
     )
   }
 }
 
-export default CongressMap2;
+export default CongressMap;

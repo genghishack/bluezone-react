@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import geoViewport from "@mapbox/geo-viewport/index";
 import './App.less';
 import Header from './components/Header';
-import CongressMap from './components/Map1';
-import CongressMap2 from './components/Map2';
+import CongressMap from './components/Map';
 
 import states from './data/states.json';
 import bboxes from './data/bboxes.json';
@@ -34,16 +33,9 @@ class App extends Component {
     selectedDistrict: '',
   };
 
-  Map1 = () => (
+  Map2 = () => (
     <CongressMap
       focusMap={this.focusMap}
-      getMapHandle={this.getMapHandle}
-    />
-  );
-
-  Map2 = () => (
-    <CongressMap2
-      focusMap={this.focusMap2}
       getMapHandle={this.getMapHandle}
     />
   );
@@ -53,49 +45,19 @@ class App extends Component {
   };
 
   handleSelection = (state, district = '') => {
-    // this.filterMap(state, district);
-    this.filterMap2(state, district);
-    // this.focusMap(state, district);
-    this.focusMap2(state, district);
+    this.filterMap(state, district);
+    this.focusMap(state, district);
   };
 
   filterMap = (stateAbbr, districtCode) => {
-    const map = this.map.state.map;
-
-    for (var i = 1; i <= 5; i++) {
-      let existingFilter = map.getFilter('districts_' + i);
-      if (existingFilter[0] === 'all') {
-        existingFilter = existingFilter[existingFilter.length - 1];
-      }
-      const filter = ['all'];
-      if (stateAbbr) filter.push(['==', 'state', stateAbbr]);
-      if (districtCode) filter.push(['==', 'number', districtCode]);
-
-      const layerFilter = filter.concat([existingFilter]);
-      map.setFilter('districts_' + i, layerFilter);
-      map.setFilter('districts_' + i + '_boundary', layerFilter);
-      map.setFilter('districts_' + i + '_label', layerFilter);
-    }
-
-    let existingFilter = map.getFilter('districts_fill');
-
-    if (existingFilter[0] === 'all') {
-      existingFilter = existingFilter[existingFilter.length - 1];
-    }
-    const filter = ['all'];
-    if (stateAbbr) filter.push(['==', 'state', stateAbbr]);
-    if (districtCode) filter.push(['==', 'number', districtCode]);
-
-    const layerFilter = filter.concat([existingFilter]);
-
-    map.setFilter('districts_fill', layerFilter);
-    map.setFilter('districts_boundary', layerFilter);
-    map.setFilter('districts_label', layerFilter);
-  };
-
-  filterMap2 = (stateAbbr, districtCode) => {
     const map = this.map.getMap();
 
+    /*
+     TODO: This needs to be conditionalized and/or called as a
+     separate function so that it can be called, or not, depending
+     on whether the original congress map style is used underneath
+     the data layer of congressional boundaries
+    */
     for (var i = 1; i <= 5; i++) {
       let existingFilter = map.getFilter('districts_' + i);
       if (existingFilter[0] === 'all') {
@@ -111,6 +73,10 @@ class App extends Component {
       map.setFilter('districts_' + i + '_label', layerFilter);
     }
 
+    /*
+     TODO: If I'm going to do that, might as well make this one
+     a separate function too.
+    */
     let existingFilter = map.getFilter('districts_fill');
 
     if (existingFilter[0] === 'all') {
@@ -128,20 +94,6 @@ class App extends Component {
   };
 
   focusMap = (stateAbbr, districtCode) => {
-    const map = this.map.state.map;
-
-    let bbox = continentalBbox;
-    if (stateAbbr) {
-      bbox = bboxes[stateAbbr + districtCode];
-    }
-    const view = geoViewport.viewport(
-      bbox,
-      [window.innerWidth / 2.75, window.innerHeight / 2.75]
-    );
-    map.easeTo(view);
-  };
-
-  focusMap2 = (stateAbbr, districtCode) => {
     const map = this.map.getMap();
 
     let bbox = continentalBbox;
@@ -166,12 +118,8 @@ class App extends Component {
         <Router>
           <Switch>
             <Route
-              path="/uber"
-              component={this.Map2}
-            />
-            <Route
               path="/"
-              component={this.Map1}
+              component={this.Map2}
             />
           </Switch>
         </Router>
