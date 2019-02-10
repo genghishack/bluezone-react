@@ -18,9 +18,9 @@ const continental = continentalView(window.innerWidth / 2, window.innerHeight / 
 const mapConf = {
   accessToken: "pk.eyJ1IjoiZ2VuZ2hpc2hhY2siLCJhIjoiZ2x6WjZhbyJ9.P8at90QQiy0C8W_mc21w6Q",
   // style: "mapbox://styles/genghishack/cjga1amoc2xx02ro7nzpv1e7s", // 2017 congress map
-  style: "mapbox://styles/genghishack/cjnjjdyk64avs2rqgldz3j2ok", // 2018 congress map
-  // style: "mapbox://styles/genghishack/cjftwwb9b8kw32sqpariydkrk", // basic
-  layerIds: ['districts_fill'],
+  // style: "mapbox://styles/genghishack/cjnjjdyk64avs2rqgldz3j2ok", // 2018 congress map
+  style: "mapbox://styles/genghishack/cjftwwb9b8kw32sqpariydkrk", // basic
+  layerIds: ['districts_hover'],
 };
 
 export class CongressMap extends Component {
@@ -68,7 +68,9 @@ export class CongressMap extends Component {
 
     this.addDistrictLabels();
 
-    this.addDistrictFillLayer();
+    this.addDistrictHoverLayer();
+
+    // this.addDistrictFillLayer();
 
   }
 
@@ -115,10 +117,10 @@ export class CongressMap extends Component {
 
   }
 
-  addDistrictFillLayer() {
+  addDistrictHoverLayer() {
 
     this.map.addLayer({
-      'id': 'districts_fill',
+      'id': 'districts_hover',
       'type': 'fill',
       'source': 'districts2018',
       'source-layer': 'districts',
@@ -141,6 +143,42 @@ export class CongressMap extends Component {
       }
     });
 
+  }
+
+  addDistrictFillLayer() {
+
+    this.map.addLayer({
+      'id': 'districts_fill',
+      'type': 'fill',
+      'source': 'districts2018',
+      'source-layer': 'districts',
+      'filter': ['!=', 'fill', ''],
+      'paint': {
+        'fill-color': [
+          'case',
+          ['boolean', ['feature-state', 'party'], false],
+          '#ff0000', // rep
+          '#0000ff' // dem
+        ],
+        'fill-antialias': true
+      }
+    });
+
+    this.setFillByParty();
+  }
+
+  setFillByParty() {
+    // Here, we're going to examine the data and determine which
+    // feature id's need to be set to which color
+
+    // How to iterate through all of the features in a layer?
+    var layers = this.map.getSource('districts2018');
+    console.log(layers);
+
+    var features = this.map.querySourceFeatures('districts2018', {
+      sourceLayer: 'districts'
+    });
+    console.log(features);
   }
 
   setHoveredDistrict(district) {
@@ -171,6 +209,9 @@ export class CongressMap extends Component {
   }
 
   mouseMove = (evt) => {
+    /*
+    TODO: the mouse is no longer being changed with the new map.
+     */
     const { mapLoaded } = this.state;
 
     if (mapLoaded) {
