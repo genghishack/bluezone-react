@@ -3,6 +3,7 @@ import ReactMapGl, { NavigationControl } from 'react-map-gl';
 import geoViewport from "@mapbox/geo-viewport/index";
 
 import {InfoBox} from './InfoBox/';
+import { MenuTree } from './MenuTree/';
 import CongressionalDistricts from './Layers/CongressionalDistricts';
 
 import { indexedLegislators, indexedCandidates } from '../utils/data-index';
@@ -348,6 +349,7 @@ export class CongressMap extends Component {
 
     return (
       <div id="main-container">
+        <MenuTree />
         <ReactMapGl
           ref={map => {
             this.mapRef = map;
