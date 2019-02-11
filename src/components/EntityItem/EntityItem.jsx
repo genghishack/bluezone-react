@@ -6,8 +6,6 @@ import darkChevron from "../../assets/chevron.svg"
 import lightChevron from "../../assets/light_chevron.svg"
 import {setCurrentEntity, menuTreeClick} from '../../redux/actions/entities';
 
-import "./EntityItem.css";
-
 class EntityItem extends Component {
   static propTypes = {
     name: PropTypes.string,
@@ -29,37 +27,10 @@ class EntityItem extends Component {
     this.setState({ open: !this.state.open });
     if (this.props.type === 'states') {
       const USStateDistricts = getCongressionalDistrictJsonData(this.props.value);
-      console.log(USStateDistricts);
+      // console.log(USStateDistricts);
       this.setState({
-        children: USStateDistricts,
+        children: USStateDistricts.data,
         childrenType: 'districts'
-      });
-    }
-    if (this.props.type === "regions") {
-      getJsonData(`v1/geoData/divisions?region=${encodeURIComponent(this.props.name)}`)
-      .then(data => {
-        this.setState({
-          children: data.data,
-          childrenType: "divisions"
-        })
-      });
-    }
-    else if (this.props.type === "divisions") {
-      getJsonData(`v1/geoData/branches?division=${encodeURIComponent(this.props.name)}`)
-      .then(data => {
-        this.setState({
-          children: data.data,
-          childrenType: "branches"
-        })
-      });
-    }
-    else if (this.props.type === "branches") {
-      getJsonData(`v1/geoData/growers?branch=${encodeURIComponent(this.props.name)}`)
-      .then(data => {
-        this.setState({
-          children: data.data,
-          childrenType: "growers"
-        })
       });
     }
   }
@@ -72,24 +43,16 @@ class EntityItem extends Component {
   render() {
     const openClass = this.state.open ? "open" : "closed";
     const children = this.state.children.map((entity, index) => {
-      // return (
-      //   <EntityItemExport
-      //     key={`entity${index}`}
-      //     id={entity.attributes.growerId}
-      //     name={entity.attributes.division || entity.attributes.branch || entity.attributes.growerName}
-      //     type={this.state.childrenType}
-      //   />
-      // );
       return (
         <EntityItemExport
           key={`entity${index}`}
-          id={entity.attributes.growerId}
-          name={entity.attributes.division || entity.attributes.branch || entity.attributes.growerName}
+          id={entity.attributes.value}
+          name={entity.attributes.label}
           type={this.state.childrenType}
         />
       );
     });
-    const hideChevron = this.props.type === "growers" ? "hidden" : "";
+    const hideChevron = this.props.type === "districts" ? "hidden" : "";
     const entityId = this.props.id || this.props.name;
     const activeClass = this.props.currentId === entityId ? "active" : "";
     const chevron = this.props.currentId === entityId ? lightChevron : darkChevron;
@@ -100,7 +63,12 @@ class EntityItem extends Component {
             <span>{this.props.name}</span>
           </div>
           <div className={`chevronContainer ${hideChevron}`}>
-            <img className={`entityChevron ${openClass}`} src={chevron} alt="chevron" onClick={this.handleChevronClick}></img>
+            <img
+              className={`entityChevron ${openClass}`}
+              src={chevron}
+              alt="chevron"
+              onClick={this.handleChevronClick}
+            />
           </div>
         </div>
         <div className={`entityChildren ${openClass}`}>

@@ -24,7 +24,6 @@ export function getJsonData(endpoint) {
   })
     .then(resp => {
       const jsonResponse = resp.json();
-      console.log(jsonResponse);
       return jsonResponse;
     })
     .catch(error => console.log(error));
@@ -32,9 +31,37 @@ export function getJsonData(endpoint) {
 }
 
 export function getUSStateJsonData() {
-  return (states);
+  const USStates = states.map(state => {
+    return {
+      attributes: {
+        value: state.USPS,
+        label: state.Name
+      },
+      type: 'state'
+    }
+  });
+  return ({
+    meta: {
+      total: USStates.length
+    },
+    data: USStates.sort((a,b) => a.attributes.label - b.attributes.label)
+  });
 }
 
 export function getCongressionalDistrictJsonData(USState) {
-  return (districts[USState]);
+  const districtsForUSState = districts[USState].map(district => {
+    return {
+      attributes: {
+        value: district,
+        label: `District ${district}`
+      },
+      type: 'district'
+    }
+  });
+  return ({
+    meta: {
+      total: districtsForUSState.length
+    },
+    data: districtsForUSState.sort((a,b) => a.attributes.value - b.attributes.value)
+  });
 }
