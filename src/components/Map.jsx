@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
+import { connect } from "react-redux";
 import ReactMapGl, { NavigationControl } from 'react-map-gl';
 import geoViewport from "@mapbox/geo-viewport/index";
 
-import {InfoBox} from './InfoBox/';
+import { InfoBox } from './InfoBox/';
 import { MenuTree } from './MenuTree/';
 import CongressionalDistricts from './Layers/CongressionalDistricts';
 
@@ -384,4 +385,11 @@ export class CongressMap extends Component {
   }
 }
 
-export default CongressMap;
+function mapStateToProps(state) {
+  return {
+    currentId: state.entities.currentEntity,
+    currentType: state.entities.currentType
+  };
+}
+
+export default connect(mapStateToProps)(CongressMap);
