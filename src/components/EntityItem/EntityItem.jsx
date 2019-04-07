@@ -10,7 +10,8 @@ class EntityItem extends Component {
   static propTypes = {
     name: PropTypes.string,
     id: PropTypes.string,
-    type: PropTypes.string
+    type: PropTypes.string,
+    filterMap: PropTypes.func.isRequired
   };
   constructor(props) {
     super(props);
@@ -26,7 +27,7 @@ class EntityItem extends Component {
   handleChevronClick() {
     this.setState({ open: !this.state.open });
     if (this.props.type === 'states') {
-      const USStateDistricts = getCongressionalDistrictJsonData(this.props.value);
+      const USStateDistricts = getCongressionalDistrictJsonData(this.props.id);
       // console.log(USStateDistricts);
       this.setState({
         children: USStateDistricts.data,
@@ -36,6 +37,12 @@ class EntityItem extends Component {
   }
 
   entityClick() {
+    // console.log('entity clicked', this.props);
+    if (this.props.type === 'states') {
+      this.props.handleSelection(this.props.id);
+    } else {
+      this.props.handleSelection(this.props.stateAbbr, this.props.id);
+    }
     this.props.dispatch(menuTreeClick(false));
     this.props.dispatch(setCurrentEntity({id: this.props.id || this.props.name, type: this.props.type}));
   }
@@ -49,6 +56,8 @@ class EntityItem extends Component {
           id={entity.attributes.value}
           name={entity.attributes.label}
           type={this.state.childrenType}
+          handleSelection={this.props.handleSelection}
+          stateAbbr={this.props.id}
         />
       );
     });

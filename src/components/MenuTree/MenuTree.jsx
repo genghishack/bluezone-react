@@ -24,17 +24,23 @@ export class MenuTree extends Component {
     });
     this.setState({
       USStateOptions: USStates
+    }, () => {
+      // console.log(this.state.USStateOptions);
     });
   }
 
   render() {
     const showMenuTreeClass = this.props.showMenuTree ? "show" : "";
+    const { filterMap, handleSelection } = this.props;
+
     const USStateList = this.state.USStateOptions.map((USState, index) => {
       return <EntityItem
         key={`USState${index}`}
         name={USState.label}
-        value={USState.value}
+        id={USState.value}
         type="states"
+        filterMap={filterMap}
+        handleSelection={handleSelection}
       />;
     });
     // console.log(USStateList);

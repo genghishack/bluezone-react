@@ -72,9 +72,9 @@ export class CongressMap extends Component {
     const mapIsLoaded = this.map.loaded();
     const styleIsLoaded = this.map.isStyleLoaded();
     const tilesAreLoaded = this.map.areTilesLoaded();
-    console.log('mapIsLoaded: ', mapIsLoaded);
-    console.log('tilesAreLoaded: ', tilesAreLoaded);
-    console.log('styleIsLoaded: ', styleIsLoaded);
+    // console.log('mapIsLoaded: ', mapIsLoaded);
+    // console.log('tilesAreLoaded: ', tilesAreLoaded);
+    // console.log('styleIsLoaded: ', styleIsLoaded);
     if (!mapIsLoaded || !tilesAreLoaded || !styleIsLoaded) {
       setTimeout(this.onMapFullRender, 200);
     } else {
@@ -289,6 +289,7 @@ export class CongressMap extends Component {
 
         <MenuTree
           filterMap={this.filterMap}
+          handleSelection={this.props.handleSelection}
         />
 
         <ReactMapGl

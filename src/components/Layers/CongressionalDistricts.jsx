@@ -15,9 +15,9 @@ export class CongressionalDistricts extends Component {
     const mapIsLoaded = map.loaded();
     const styleIsLoaded = map.isStyleLoaded();
     const tilesAreLoaded = map.areTilesLoaded();
-    console.log('mapIsLoaded: ', mapIsLoaded);
-    console.log('tilesAreLoaded: ', tilesAreLoaded);
-    console.log('styleIsLoaded: ', styleIsLoaded);
+    // console.log('mapIsLoaded: ', mapIsLoaded);
+    // console.log('tilesAreLoaded: ', tilesAreLoaded);
+    // console.log('styleIsLoaded: ', styleIsLoaded);
     if (!mapIsLoaded || !tilesAreLoaded || !styleIsLoaded) {
       setTimeout(this.onMapFullRender, 200);
     } else {

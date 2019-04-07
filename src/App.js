@@ -31,6 +31,7 @@ class App extends Component {
       getMapHandle={this.getMapHandle}
       selectedState={this.state.selectedState}
       selectedDistrict={this.state.selectedDistrict}
+      handleSelection={this.handleSelection}
     />
   );
 
