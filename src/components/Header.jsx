@@ -44,40 +44,40 @@ export class Header extends Component {
         </a>
 
         <div className="App-menu">
-          <div className="control-title normal">Filter by:</div>
-          <div className="selector light">
-            <span className="label">State</span>
-            <select
-              className="state"
-              onChange={this.handleStateSelection}
-            >
-              <option value=""></option>
-              {states.map(state => {
-                return (
-                  <option
-                    key={state.USPS}
-                    value={state.USPS}>{state.Name}</option>
-                );
-              })}
-            </select>
-          </div>
+          {/*<div className="control-title normal">Filter by:</div>*/}
+          {/*<div className="selector light">*/}
+          {/*  <span className="label">State</span>*/}
+          {/*  <select*/}
+          {/*    className="state"*/}
+          {/*    onChange={this.handleStateSelection}*/}
+          {/*  >*/}
+          {/*    <option value=""></option>*/}
+          {/*    {states.map(state => {*/}
+          {/*      return (*/}
+          {/*        <option*/}
+          {/*          key={state.USPS}*/}
+          {/*          value={state.USPS}>{state.Name}</option>*/}
+          {/*      );*/}
+          {/*    })}*/}
+          {/*  </select>*/}
+          {/*</div>*/}
 
-          <div className="selector light">
-            <span className="label">District</span>
-            <select
-              className="district"
-              onChange={this.handleDistrictSelection}
-            >
-              <option value=""></option>
-              {this.state.possibleDistricts.map(districtNum => {
-                return (
-                  <option
-                    key={districtNum}
-                    value={districtNum}>{districtNum}</option>
-                );
-              })}
-            </select>
-          </div>
+          {/*<div className="selector light">*/}
+          {/*  <span className="label">District</span>*/}
+          {/*  <select*/}
+          {/*    className="district"*/}
+          {/*    onChange={this.handleDistrictSelection}*/}
+          {/*  >*/}
+          {/*    <option value=""></option>*/}
+          {/*    {this.state.possibleDistricts.map(districtNum => {*/}
+          {/*      return (*/}
+          {/*        <option*/}
+          {/*          key={districtNum}*/}
+          {/*          value={districtNum}>{districtNum}</option>*/}
+          {/*      );*/}
+          {/*    })}*/}
+          {/*  </select>*/}
+          {/*</div>*/}
 
         </div>
       </header>
