@@ -46,6 +46,10 @@ export class MenuTree extends Component {
     // console.log(USStateList);
     return (
       <div className={`menuTreeWrapper ${showMenuTreeClass}`}>
+        <div
+          className="focus-on-usa"
+          onClick={() => this.props.handleSelection()}
+        >Show Entire US</div>
         <div>{USStateList}</div>
       </div>
     );
