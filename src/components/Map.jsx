@@ -65,8 +65,22 @@ export class CongressMap extends Component {
 
   onMapLoad() {
     this.map = this.mapRef.getMap();
-    this.setState({ mapLoaded: true });
+    this.onMapFullRender();
   }
+
+  onMapFullRender = () => {
+    const mapIsLoaded = this.map.loaded();
+    const styleIsLoaded = this.map.isStyleLoaded();
+    const tilesAreLoaded = this.map.areTilesLoaded();
+    console.log('mapIsLoaded: ', mapIsLoaded);
+    console.log('tilesAreLoaded: ', tilesAreLoaded);
+    console.log('styleIsLoaded: ', styleIsLoaded);
+    if (!mapIsLoaded || !tilesAreLoaded || !styleIsLoaded) {
+      setTimeout(this.onMapFullRender, 200);
+    } else {
+      this.setState({ mapLoaded: true });
+    }
+  };
 
   updateViewport = viewport => {
     this.setState({ viewport });
@@ -262,9 +276,10 @@ export class CongressMap extends Component {
   render() {
     const { viewport, mapLoaded } = this.state;
 
-    const CongressionalLayer = mapLoaded ? (
+    const congressionalDistricts = mapLoaded ? (
       <CongressionalDistricts
         map={this.map}
+        mapLoaded={mapLoaded}
         legislatorIndex={this.legislatorIndex}
       />
     ) : null;
@@ -291,7 +306,8 @@ export class CongressMap extends Component {
           onMouseMove={this.mouseMove}
           onClick={this.mapClick}
         >
-          {CongressionalLayer}
+
+          {congressionalDistricts}
 
           <InfoBox
             district={this.state.district}
