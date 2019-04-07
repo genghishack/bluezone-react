@@ -34,7 +34,6 @@ export class CongressMap extends Component {
     this.map = null;
     this.onMapLoad = this.onMapLoad.bind(this);
     this.closeClick = this.closeClick.bind(this);
-    this.setFillByParty = this.setFillByParty.bind(this);
     this.focusMap = this.focusMap.bind(this);
     this.hoveredDistrictId = null;
     this.legislatorIndex = indexedLegislators();
@@ -67,168 +66,12 @@ export class CongressMap extends Component {
   onMapLoad() {
     this.map = this.mapRef.getMap();
     this.setState({ mapLoaded: true });
-    this.addGeoJson();
-    this.onMapStyleLoad();
   }
-
-  // A brutal hack, because documented methods of finding out when the style was loaded weren't working
-  onMapStyleLoad = () => {
-    const styleIsLoaded = this.map.isStyleLoaded();
-    // console.log('styleIsLoaded: ', styleIsLoaded);
-    if (!styleIsLoaded) {
-      setTimeout(this.onMapStyleLoad, 200);
-    } else {
-      this.setFillByParty();
-    }
-  };
 
   updateViewport = viewport => {
     this.setState({ viewport });
   };
 
-  addGeoJson() {
-    this.map.addSource('districts2018', {
-      type: 'vector',
-      url: 'mapbox://genghishack.cd-116-2018'
-    });
-
-    this.addDistrictBoundaries();
-
-    this.addDistrictLabels();
-
-    this.addDistrictHoverLayer();
-
-    this.addDistrictFillLayer();
-
-  }
-
-  addDistrictBoundaries() {
-
-    this.map.addLayer({
-      'id': 'districts_boundary',
-      'type': 'line',
-      'source': 'districts2018',
-      'source-layer': 'districts',
-      'paint': {
-        'line-color': 'rgba(128, 128, 128, 0.4)',
-        'line-width': 1
-      },
-      'filter': ['all']
-    });
-
-  }
-
-  addDistrictLabels() {
-
-    this.map.addLayer({
-      'id': 'districts_label',
-      'type': 'symbol',
-      'source': 'districts2018',
-      'source-layer': 'districts',
-      'layout': {
-        'text-field': '{title_short}',
-        'text-font': ['Open Sans Bold', 'Arial Unicode MS Regular'],
-        'text-size': {'base': 1, stops: [[1,8], [7,18]]}
-      },
-      'paint': {
-        'text-color': 'hsl(0, 0%, 27%)',
-        'text-halo-color': '#decbe4',
-        'text-halo-width': {
-          'base': 1,
-          'stops': [
-            [1,1],
-            [8,2]
-          ]
-        }
-      }
-    });
-
-  }
-
-  addDistrictHoverLayer() {
-
-    this.map.addLayer({
-      'id': 'districts_hover',
-      'type': 'fill',
-      'source': 'districts2018',
-      'source-layer': 'districts',
-      'filter': ['!=', 'fill', ''],
-      'paint': {
-        'fill-color': [
-          'case',
-          ['boolean', ['feature-state', 'hover'], false],
-          'rgba(123, 104, 238, 0.3)', // medium slate blue
-          'rgba(0, 0, 0, 0)'
-        ],
-        // 'fill-opacity': [
-        //   'case',
-        //   ['boolean', ['feature-state', 'hover'], false],
-        //   1,
-        //   0.2
-        // ],
-        // 'fill-outline-color': 'rgba(128, 128, 128, 0.4)',
-        'fill-antialias': true
-      }
-    });
-
-  }
-
-  addDistrictFillLayer() {
-
-    this.map.addLayer({
-      'id': 'districts_fill',
-      'type': 'fill',
-      'source': 'districts2018',
-      'source-layer': 'districts',
-      'filter': ['!=', 'fill', ''],
-      'paint': {
-        'fill-color': [
-          'case',
-          ['boolean', ['feature-state', 'party'], true],
-          '#9999ff', // dem
-          '#ff9999' // rep
-        ],
-        'fill-antialias': true,
-        'fill-opacity': 0.5
-      }
-    });
-
-  }
-
-  setFillByParty() {
-    // Here, we're going to examine the data and determine which
-    // feature id's need to be set to which color
-
-    // How to iterate through all of the features in a layer?
-    const layers = this.map.getSource('districts2018');
-    // console.log('layers: ', layers);
-
-    // const layer = this.map.getLayer('districts_fill');
-    // console.log('layer: ', layer);
-
-    const features = this.map.querySourceFeatures('districts2018', {
-      sourceLayer: 'districts',
-      // filter: ['has', 'id']
-    });
-    // console.log('features: ', features);
-
-    features.forEach(feature => {
-      const stateAbbr = feature.properties.state;
-      const districtNum = parseInt(feature.properties.number);
-      const districtData = this.legislatorIndex[stateAbbr].rep[districtNum];
-      if (districtData) {
-        const party = districtData.terms.slice(-1)[0].party;
-        const partyBoolean = !!(party == 'Democrat');
-        this.map.setFeatureState({
-          source: 'districts2018',
-          sourceLayer: 'districts',
-          id: feature.id
-        }, {
-          party: partyBoolean
-        });
-      }
-    });
-  }
 
   setHoveredDistrict(district) {
 
@@ -320,13 +163,13 @@ export class CongressMap extends Component {
       district.properties.number
     );
 
-    this.map.setFeatureState({
-      source: 'districts2018',
-      sourceLayer: 'districts',
-      id: district.id,
-    }, {
-      color: true
-    });
+    // this.map.setFeatureState({
+    //   source: 'districts2018',
+    //   sourceLayer: 'districts',
+    //   id: district.id,
+    // }, {
+    //   color: true
+    // });
 
     this.setState({
       district: district,
@@ -337,7 +180,6 @@ export class CongressMap extends Component {
       // console.log('layer: ', this.map.getLayer('districts'));
     });
 
-    // this.setFillByParty();
   };
 
   closeClick() {
@@ -420,15 +262,20 @@ export class CongressMap extends Component {
   render() {
     const { viewport, mapLoaded } = this.state;
 
-    // const CongressionalLayer = mapLoaded ? (
-    //   <CongressionalDistricts
-    //     map={this.map}
-    //   />
-    // ) : null;
+    const CongressionalLayer = mapLoaded ? (
+      <CongressionalDistricts
+        map={this.map}
+        legislatorIndex={this.legislatorIndex}
+      />
+    ) : null;
 
     return (
       <div id="main-container">
-        <MenuTree />
+
+        <MenuTree
+          filterMap={this.filterMap}
+        />
+
         <ReactMapGl
           ref={map => {
             this.mapRef = map;
@@ -444,7 +291,8 @@ export class CongressMap extends Component {
           onMouseMove={this.mouseMove}
           onClick={this.mapClick}
         >
-          {/*{CongressionalLayer}*/}
+          {CongressionalLayer}
+
           <InfoBox
             district={this.state.district}
             expanded={this.state.expanded}
