@@ -27,12 +27,17 @@ export class CongressMap extends Component {
 
   constructor(props) {
     super(props);
+
     this.map = null;
     this.onMapLoad = this.onMapLoad.bind(this);
     this.closeClick = this.closeClick.bind(this);
+    this.setFillByParty = this.setFillByParty.bind(this);
     this.hoveredDistrictId = null;
     this.legislatorIndex = indexedLegislators();
     this.candidateIndex = indexedCandidates();
+
+    // console.log(this.legislatorIndex);
+
     this.state = {
       viewport: {
         longitude: continental.center[0],
@@ -52,7 +57,19 @@ export class CongressMap extends Component {
     this.map = this.mapRef.getMap();
     this.setState({ mapLoaded: true });
     this.addGeoJson();
+    this.onMapStyleLoad();
   }
+
+  // A brutal hack, because documented methods of finding out when the style was loaded weren't working
+  onMapStyleLoad = () => {
+    const styleIsLoaded = this.map.isStyleLoaded();
+    // console.log('styleIsLoaded: ', styleIsLoaded);
+    if (!styleIsLoaded) {
+      setTimeout(this.onMapStyleLoad, 200);
+    } else {
+      this.setFillByParty();
+    }
+  };
 
   updateViewport = viewport => {
     this.setState({ viewport });
@@ -70,7 +87,7 @@ export class CongressMap extends Component {
 
     this.addDistrictHoverLayer();
 
-    // this.addDistrictFillLayer();
+    this.addDistrictFillLayer();
 
   }
 
@@ -156,15 +173,15 @@ export class CongressMap extends Component {
       'paint': {
         'fill-color': [
           'case',
-          ['boolean', ['feature-state', 'party'], false],
-          '#ff0000', // rep
-          '#0000ff' // dem
+          ['boolean', ['feature-state', 'party'], true],
+          '#9999ff', // dem
+          '#ff9999' // rep
         ],
-        'fill-antialias': true
+        'fill-antialias': true,
+        'fill-opacity': 0.5
       }
     });
 
-    this.setFillByParty();
   }
 
   setFillByParty() {
@@ -172,13 +189,34 @@ export class CongressMap extends Component {
     // feature id's need to be set to which color
 
     // How to iterate through all of the features in a layer?
-    var layers = this.map.getSource('districts2018');
-    console.log(layers);
+    const layers = this.map.getSource('districts2018');
+    // console.log('layers: ', layers);
 
-    var features = this.map.querySourceFeatures('districts2018', {
-      sourceLayer: 'districts'
+    // const layer = this.map.getLayer('districts_fill');
+    // console.log('layer: ', layer);
+
+    const features = this.map.querySourceFeatures('districts2018', {
+      sourceLayer: 'districts',
+      // filter: ['has', 'id']
     });
-    console.log(features);
+    // console.log('features: ', features);
+
+    features.forEach(feature => {
+      const stateAbbr = feature.properties.state;
+      const districtNum = parseInt(feature.properties.number);
+      const districtData = this.legislatorIndex[stateAbbr].rep[districtNum];
+      if (districtData) {
+        const party = districtData.terms.slice(-1)[0].party;
+        const partyBoolean = !!(party == 'Democrat');
+        this.map.setFeatureState({
+          source: 'districts2018',
+          sourceLayer: 'districts',
+          id: feature.id
+        }, {
+          party: partyBoolean
+        });
+      }
+    });
   }
 
   setHoveredDistrict(district) {
@@ -206,6 +244,7 @@ export class CongressMap extends Component {
       hover: true
     });
 
+
   }
 
   mouseMove = (evt) => {
@@ -226,7 +265,7 @@ export class CongressMap extends Component {
         return layerIds.indexOf(feature.layer.id) !== -1;
       });
 
-      // console.log(hoveredDistrict);
+      // console.log('hovered district: ', hoveredDistrict);
 
       if (hoveredDistrict.length) {
 
@@ -283,9 +322,11 @@ export class CongressMap extends Component {
       expanded: true
     }, () => {
       // console.log('district: ', district);
-      // console.log('source: ', map.getSource('composite'));
-      // console.log('layer: ', map.getLayer('districts'));
+      // console.log('source: ', this.map.getSource('composite'));
+      // console.log('layer: ', this.map.getLayer('districts'));
     });
+
+    // this.setFillByParty();
   };
 
   closeClick() {

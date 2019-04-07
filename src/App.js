@@ -89,6 +89,7 @@ class App extends Component {
     map.setFilter('districts_hover', layerFilter);
     map.setFilter('districts_boundary', layerFilter);
     map.setFilter('districts_label', layerFilter);
+    map.setFilter('districts_fill', layerFilter);
   };
 
   /*
