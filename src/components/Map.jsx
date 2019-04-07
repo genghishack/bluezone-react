@@ -8,6 +8,7 @@ import { MenuTree } from './MenuTree/';
 import CongressionalDistricts from './Layers/CongressionalDistricts';
 
 import { indexedLegislators, indexedCandidates } from '../utils/data-index';
+import bboxes from "../data/bboxes";
 
 // Use GeoViewport and the window size to determine an
 // appropriate center and zoom for the continental US
@@ -34,6 +35,7 @@ export class CongressMap extends Component {
     this.onMapLoad = this.onMapLoad.bind(this);
     this.closeClick = this.closeClick.bind(this);
     this.setFillByParty = this.setFillByParty.bind(this);
+    this.focusMap = this.focusMap.bind(this);
     this.hoveredDistrictId = null;
     this.legislatorIndex = indexedLegislators();
     this.candidateIndex = indexedCandidates();
@@ -54,6 +56,13 @@ export class CongressMap extends Component {
       district: {},
     };
   }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevProps.selectedState !== this.props.selectedState
+    || prevProps.selectedDistrict !== this.props.selectedDistrict) {
+      this.filterMap();
+    }
+  };
 
   onMapLoad() {
     this.map = this.mapRef.getMap();
@@ -306,7 +315,7 @@ export class CongressMap extends Component {
       return;
     }
 
-    this.props.focusMap(
+    this.focusMap(
       district.properties.state,
       district.properties.number
     );
@@ -337,6 +346,75 @@ export class CongressMap extends Component {
      is underneath the X become selected when the X is clicked.
     */
     this.setState({expanded: false});
+  };
+
+  focusMap = (stateAbbr, districtNum) => {
+    let bbox = continentalBbox;
+    if (stateAbbr) {
+      bbox = bboxes[stateAbbr + districtNum];
+    }
+    const view = geoViewport.viewport(
+      bbox,
+      [window.innerWidth / 2.75, window.innerHeight / 2.75]
+    );
+    this.map.easeTo(view);
+  };
+
+  filterMap = () => {
+
+    const {
+      selectedState,
+      selectedDistrict
+    } = this.props;
+
+    // this.filterUnderlyingStyle();
+    this.filterDataset();
+    this.focusMap(selectedState, selectedDistrict);
+  };
+
+  filterUnderlyingStyle = () => {
+    const {
+      selectedState,
+      selectedDistrict
+    } = this.props;
+
+    for (var i = 1; i <= 5; i++) {
+      let existingFilter = this.map.getFilter('districts_' + i);
+      if (existingFilter[0] === 'all') {
+        existingFilter = existingFilter[existingFilter.length - 1];
+      }
+      const filter = ['all'];
+      if (selectedState) filter.push(['==', 'state', selectedState]);
+      if (selectedDistrict) filter.push(['==', 'number', selectedDistrict]);
+
+      const layerFilter = filter.concat([existingFilter]);
+      this.map.setFilter('districts_' + i, layerFilter);
+      this.map.setFilter('districts_' + i + '_boundary', layerFilter);
+      this.map.setFilter('districts_' + i + '_label', layerFilter);
+    }
+  };
+
+  filterDataset = () => {
+    const {
+      selectedState,
+      selectedDistrict
+    } = this.props;
+
+    let existingFilter = this.map.getFilter('districts_hover');
+
+    if (existingFilter[0] === 'all') {
+      existingFilter = existingFilter[existingFilter.length - 1];
+    }
+    const filter = ['all'];
+    if (selectedState) filter.push(['==', 'state', selectedState]);
+    if (selectedDistrict) filter.push(['==', 'number', selectedDistrict]);
+
+    const layerFilter = filter.concat([existingFilter]);
+
+    this.map.setFilter('districts_hover', layerFilter);
+    this.map.setFilter('districts_boundary', layerFilter);
+    this.map.setFilter('districts_label', layerFilter);
+    this.map.setFilter('districts_fill', layerFilter);
   };
 
   render() {
