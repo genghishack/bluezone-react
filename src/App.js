@@ -33,7 +33,7 @@ class App extends Component {
     selectedDistrict: '',
   };
 
-  Map2 = () => (
+  Map = () => (
     <CongressMap
       focusMap={this.focusMap}
       getMapHandle={this.getMapHandle}
@@ -49,15 +49,11 @@ class App extends Component {
     this.focusMap(state, district);
   };
 
-  filterMap = (stateAbbr, districtCode) => {
-    const map = this.map.getMap();
-
-    /*
-     TODO: This needs to be conditionalized and/or called as a
-     separate function so that it can be called, or not, depending
-     on whether the original congress map style is used underneath
-     the data layer of congressional boundaries
-    */
+  /*
+  TODO: This should go into the Map Component, and this component
+  should pass down props of stateAbbr and districtCode to it.
+   */
+  filterUnderlyingStyle = (map, stateAbbr, districtCode) => {
     for (var i = 1; i <= 5; i++) {
       let existingFilter = map.getFilter('districts_' + i);
       if (existingFilter[0] === 'all') {
@@ -72,12 +68,14 @@ class App extends Component {
       map.setFilter('districts_' + i + '_boundary', layerFilter);
       map.setFilter('districts_' + i + '_label', layerFilter);
     }
+  };
 
-    /*
-     TODO: If I'm going to do that, might as well make this one
-     a separate function too.
-    */
-    let existingFilter = map.getFilter('districts_fill');
+  /*
+  TODO: This should go into the Map Component, and this component
+  should pass down props of stateAbbr and districtCode to it.
+   */
+  filterDataset = (map, stateAbbr, districtCode) => {
+    let existingFilter = map.getFilter('districts_hover');
 
     if (existingFilter[0] === 'all') {
       existingFilter = existingFilter[existingFilter.length - 1];
@@ -88,11 +86,28 @@ class App extends Component {
 
     const layerFilter = filter.concat([existingFilter]);
 
-    map.setFilter('districts_fill', layerFilter);
+    map.setFilter('districts_hover', layerFilter);
     map.setFilter('districts_boundary', layerFilter);
     map.setFilter('districts_label', layerFilter);
+    map.setFilter('districts_fill', layerFilter);
   };
 
+  /*
+  TODO: This should go into the Map Component, and this component
+  should pass down props of stateAbbr and districtCode to it.
+   */
+  filterMap = (stateAbbr, districtCode) => {
+    const map = this.map.getMap();
+
+    // this.filterUnderlyingStyle(map, stateAbbr, districtCode);
+
+    this.filterDataset(map, stateAbbr, districtCode);
+  };
+
+  /*
+  TODO: This should go into the Map Component, and this component
+  should pass down props of stateAbbr and districtCode to it.
+   */
   focusMap = (stateAbbr, districtCode) => {
     const map = this.map.getMap();
 
@@ -119,7 +134,7 @@ class App extends Component {
           <Switch>
             <Route
               path="/"
-              component={this.Map2}
+              component={this.Map}
             />
           </Switch>
         </Router>
