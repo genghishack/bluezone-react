@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import './App.less';
 import Header from './components/Header';
 import CongressMap from './components/Map';
@@ -8,10 +8,10 @@ import states from './data/states.json';
 import bboxes from './data/bboxes.json';
 
 let districts = {};
-states.map(state => {
+states.forEach(state => {
   districts[state.USPS] = [];
 });
-Object.keys(bboxes).map(key => {
+Object.keys(bboxes).forEach(key => {
   if (key.slice(2, key.length) !== '') {
     districts[key.slice(0, 2)].push(key.slice(2, key.length));
   }
@@ -45,25 +45,23 @@ class App extends Component {
     });
   };
 
-  render() {
-    return (
-      <div className="App">
-        <Header
-          states={states}
-          districts={districts}
-          handleSelection={this.handleSelection}
-        />
-        <Router>
-          <Switch>
-            <Route
-              path="/"
-              component={this.Map}
-            />
-          </Switch>
-        </Router>
-      </div>
-    );
-  }
+  render = () => (
+    <div className="App">
+      <Header
+        states={states}
+        districts={districts}
+        handleSelection={this.handleSelection}
+      />
+      <Router>
+        <Switch>
+          <Route
+            path="/"
+            component={this.Map}
+          />
+        </Switch>
+      </Router>
+    </div>
+  );
 
 }
 
