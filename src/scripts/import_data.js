@@ -69,8 +69,8 @@ const importDistricts = async () => {
 const importLegislators = async () => {
   client.connect();
 
-  const legislators = require('../data/legislators-current.json');
-  // const legislators = require('../data/legislators-historical.json');
+  // const legislators = require('../data/legislators-current.json');
+  const legislators = require('../data/legislators-historical.json');
   const rValues = [];
 
   legislators.forEach(legislator => {
@@ -83,11 +83,22 @@ const importLegislators = async () => {
     );
   });
 
-  const sql = [
-    'INSERT INTO us_legislator_json (bioguide, id_json, name_json, bio_json, terms_json) VALUES',
-    rValues.join(','),
-    'RETURNING *'
-  ].join(' ');
+  const sValues = rValues.join(',');
+
+  // TODO: To do this upsert properly you will need to use a CTE and upsert the records individually
+  const sql =
+    `INSERT INTO us_legislator_json (
+      bioguide_id, 
+      id_json, 
+      name_json, 
+      bio_json, 
+      terms_json
+    ) VALUES
+    ${sValues}
+    RETURNING *`;
+    // ON CONFLICT ON CONSTRAINT us_legislator_json_bioguide_id_key DO
+    // UPDATE SET
+    //   bioguide_id = '${legislator.id.bioguide}'
 
 // console.log(sql);
 
