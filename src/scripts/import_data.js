@@ -69,8 +69,8 @@ const importDistricts = async () => {
 const importLegislators = async () => {
   client.connect();
 
-  // const legislators = require('../data/legislators-current.json');
-  const legislators = require('../data/legislators-historical.json');
+  const legislators = require('../data/legislators-current.json');
+  // const legislators = require('../data/legislators-historical.json');
   const rValues = [];
 
   legislators.forEach(legislator => {
