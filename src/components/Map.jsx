@@ -7,7 +7,7 @@ import { InfoBox } from './InfoBox/';
 import { MenuTree } from './MenuTree/';
 import CongressionalDistricts from './Layers/CongressionalDistricts';
 
-import { indexedLegislators, indexedCandidates } from '../utils/data-index';
+import { CandidateIndex_2018 } from '../utils/data-index';
 import bboxes from "../data/bboxes";
 
 // Use GeoViewport and the window size to determine an
@@ -36,8 +36,7 @@ export class CongressMap extends Component {
     this.closeClick = this.closeClick.bind(this);
     this.focusMap = this.focusMap.bind(this);
     this.hoveredDistrictId = null;
-    this.legislatorIndex = indexedLegislators();
-    this.candidateIndex = indexedCandidates();
+    this.candidateIndex = CandidateIndex_2018();
 
     // console.log(this.legislatorIndex);
 
@@ -274,13 +273,14 @@ export class CongressMap extends Component {
   };
 
   render() {
+    const { legislatorIndex, handleDistrictSelection } = this.props;
     const { viewport, mapLoaded } = this.state;
 
     const congressionalDistricts = mapLoaded ? (
       <CongressionalDistricts
         map={this.map}
         mapLoaded={mapLoaded}
-        legislatorIndex={this.legislatorIndex}
+        legislatorIndex={legislatorIndex}
       />
     ) : null;
 
@@ -289,7 +289,7 @@ export class CongressMap extends Component {
 
         <MenuTree
           filterMap={this.filterMap}
-          handleSelection={this.props.handleSelection}
+          handleSelection={handleDistrictSelection}
         />
 
         <ReactMapGl
@@ -314,7 +314,7 @@ export class CongressMap extends Component {
             district={this.state.district}
             expanded={this.state.expanded}
             closeClick={this.closeClick}
-            legislatorIndex={this.legislatorIndex}
+            legislatorIndex={legislatorIndex}
             candidateIndex={this.candidateIndex}
           />
           <div style={{position: 'absolute', left: 10, top: 10}}>

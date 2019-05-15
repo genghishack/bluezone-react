@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import './App.less';
 import Header from './components/Header';
@@ -7,6 +7,8 @@ import CongressMap from './components/Map';
 
 import states from './data/states.json';
 import bboxes from './data/bboxes.json';
+
+import { LegislatorIndex } from './utils/data-index';
 
 let districts = {};
 states.forEach(state => {
@@ -24,15 +26,16 @@ class App extends Component {
   state = {
     selectedState: '',
     selectedDistrict: '',
+    legislatorIndex: LegislatorIndex(),
   };
 
   Map = () => (
     <CongressMap
-      // focusMap={this.focusMap}
-      getMapHandle={this.getMapHandle}
       selectedState={this.state.selectedState}
       selectedDistrict={this.state.selectedDistrict}
-      handleSelection={this.handleSelection}
+      legislatorIndex={this.state.legislatorIndex}
+      getMapHandle={this.getMapHandle}
+      handleDistrictSelection={this.handleDistrictSelection}
     />
   );
 
@@ -40,11 +43,16 @@ class App extends Component {
     this.map = map;
   };
 
-  handleSelection = (stateAbbr, districtNum = '') => {
+  handleDistrictSelection = (stateAbbr, districtNum = '') => {
     this.setState({
       selectedState: stateAbbr,
       selectedDistrict: districtNum
     });
+  };
+
+  handleYearSelection = (year) => {
+    const legislatorIndex = LegislatorIndex(year);
+    this.setState({ legislatorIndex });
   };
 
   render = () => (
@@ -52,7 +60,7 @@ class App extends Component {
       <Header
         states={states}
         districts={districts}
-        handleSelection={this.handleSelection}
+        handleYearSelection={this.handleYearSelection}
       />
       <Router>
         <Switch>
