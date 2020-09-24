@@ -59,7 +59,8 @@
   "scripts": {
     "start": "PORT=49152 node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "deployDev": "REACT_APP_STAGE=dev node scripts/build.js && aws s3 rm s3://bluezone-dev --recursive --profile BluezoneDev && aws s3 sync build/ s3://bluezone-dev --profile BluezoneDev"
   },
   "jest": {
     "collectCoverageFrom": [

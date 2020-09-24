@@ -1,4 +1,4 @@
-import LegislatorData from '../data/legislators-current.json';
+import LegislatorData from '../data/2019/legislators-current.json';
 import LegislatorData_2018 from '../data/2018/legislators-current.json';
 import CandidateData_2018 from '../data/red-to-blue-2018/candidates.json';
 
