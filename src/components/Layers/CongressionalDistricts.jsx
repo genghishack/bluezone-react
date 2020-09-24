@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { indexedLegislators, indexedCandidates } from '../../utils/data-index';
 
 export class CongressionalDistricts extends Component {
   constructor(props) {

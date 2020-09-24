@@ -7,8 +7,10 @@ import { InfoBox } from './InfoBox/';
 import { MenuTree } from './MenuTree/';
 import CongressionalDistricts from './Layers/CongressionalDistricts';
 
-import { indexedLegislators, indexedCandidates } from '../utils/data-index';
+import { CandidateIndex_2018 } from '../utils/data-index';
 import bboxes from "../data/bboxes";
+
+import Config from '../config';
 
 // Use GeoViewport and the window size to determine an
 // appropriate center and zoom for the continental US
@@ -18,13 +20,7 @@ const continentalView = (w, h) => {
 };
 const continental = continentalView(window.innerWidth / 2, window.innerHeight / 2);
 
-const mapConf = {
-  accessToken: "pk.eyJ1IjoiZ2VuZ2hpc2hhY2siLCJhIjoiZ2x6WjZhbyJ9.P8at90QQiy0C8W_mc21w6Q",
-  // style: "mapbox://styles/genghishack/cjga1amoc2xx02ro7nzpv1e7s", // 2017 congress map
-  // style: "mapbox://styles/genghishack/cjnjjdyk64avs2rqgldz3j2ok", // 2018 congress map
-  style: "mapbox://styles/genghishack/cjftwwb9b8kw32sqpariydkrk", // basic
-  layerIds: ['districts_hover'],
-};
+const mapConf = Config.mapbox;
 
 export class CongressMap extends Component {
 
@@ -32,29 +28,26 @@ export class CongressMap extends Component {
     super(props);
 
     this.map = null;
-    this.onMapLoad = this.onMapLoad.bind(this);
-    this.closeClick = this.closeClick.bind(this);
-    this.focusMap = this.focusMap.bind(this);
     this.hoveredDistrictId = null;
-    this.legislatorIndex = indexedLegislators();
-    this.candidateIndex = indexedCandidates();
+    this.candidateIndex = CandidateIndex_2018();
 
-    // console.log(this.legislatorIndex);
+    console.log(this.candidateIndex);
 
-    this.state = {
-      viewport: {
-        longitude: continental.center[0],
-        latitude: continental.center[1],
-        zoom: continental.zoom,
-        bearing: 0,
-        pitch: 0
-      },
-      mapLoaded: false,
-      expanded: false,
-      hoveredDistrictId: null,
-      district: {},
-    };
   }
+
+  state = {
+    viewport: {
+      longitude: continental.center[0],
+      latitude: continental.center[1],
+      zoom: continental.zoom,
+      bearing: 0,
+      pitch: 0
+    },
+    mapLoaded: false,
+    expanded: false,
+    hoveredDistrictId: null,
+    district: {},
+  };
 
   componentDidUpdate = (prevProps, prevState) => {
     if (prevProps.selectedState !== this.props.selectedState
@@ -63,10 +56,10 @@ export class CongressMap extends Component {
     }
   };
 
-  onMapLoad() {
+  onMapLoad = () => {
     this.map = this.mapRef.getMap();
     this.onMapFullRender();
-  }
+  };
 
   onMapFullRender = () => {
     const mapIsLoaded = this.map.loaded();
@@ -88,7 +81,6 @@ export class CongressMap extends Component {
 
 
   setHoveredDistrict(district) {
-
     // remove the hover setting from whatever district was being hovered before
     if (this.hoveredDistrictId) {
       this.map.setFeatureState({
@@ -111,8 +103,6 @@ export class CongressMap extends Component {
     }, {
       hover: true
     });
-
-
   }
 
   mouseMove = (evt) => {
@@ -196,7 +186,7 @@ export class CongressMap extends Component {
 
   };
 
-  closeClick() {
+  closeClick = () => {
     /*
      TODO: There's a bug in this which makes whatever district
      is underneath the X become selected when the X is clicked.
@@ -274,13 +264,14 @@ export class CongressMap extends Component {
   };
 
   render() {
+    const { legislatorIndex, handleDistrictSelection } = this.props;
     const { viewport, mapLoaded } = this.state;
 
     const congressionalDistricts = mapLoaded ? (
       <CongressionalDistricts
         map={this.map}
         mapLoaded={mapLoaded}
-        legislatorIndex={this.legislatorIndex}
+        legislatorIndex={legislatorIndex}
       />
     ) : null;
 
@@ -289,7 +280,7 @@ export class CongressMap extends Component {
 
         <MenuTree
           filterMap={this.filterMap}
-          handleSelection={this.props.handleSelection}
+          handleSelection={handleDistrictSelection}
         />
 
         <ReactMapGl
@@ -314,7 +305,7 @@ export class CongressMap extends Component {
             district={this.state.district}
             expanded={this.state.expanded}
             closeClick={this.closeClick}
-            legislatorIndex={this.legislatorIndex}
+            legislatorIndex={legislatorIndex}
             candidateIndex={this.candidateIndex}
           />
           <div style={{position: 'absolute', left: 10, top: 10}}>

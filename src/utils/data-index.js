@@ -1,10 +1,17 @@
-import CurrentLegislatorData from '../data/legislators-current.json';
-import CurrentCandidateData from '../data/red-to-blue-2018/candidates.json';
+import LegislatorData from '../data/2019/legislators-current.json';
+import LegislatorData_2018 from '../data/2018/legislators-current.json';
+import CandidateData_2018 from '../data/red-to-blue-2018/candidates.json';
 
-export const indexedLegislators = () => {
+const legislators = {
+  _current: LegislatorData,
+  _2018: LegislatorData_2018
+};
+
+export const LegislatorIndex = (year) => {
+  year = year || 'current';
 
   const index = {};
-  CurrentLegislatorData.forEach(legislator => {
+  legislators[`_${year}`].forEach(legislator => {
     const terms = legislator.terms;
     const latestTerm = terms[terms.length - 1];
     const { state, type, state_rank, district } = latestTerm;
@@ -21,10 +28,10 @@ export const indexedLegislators = () => {
   return index;
 };
 
-export const indexedCandidates = () => {
+export const CandidateIndex_2018 = () => {
 
   const index = {};
-  CurrentCandidateData.forEach(candidate => {
+  CandidateData_2018.forEach(candidate => {
     const campaign = candidate.campaign;
     const { state, type, district } = campaign;
     index[state] = index[state] || {};
