@@ -1,16 +1,4 @@
 import states from '../data/states.json';
-import bboxes from '../data/bboxes.json';
-
-let districts = {};
-states.map(state => {
-  districts[state.USPS] = [];
-});
-Object.keys(bboxes).map(key => {
-  if (key.slice(2, key.length) !== '') {
-    districts[key.slice(0, 2)].push(key.slice(2, key.length));
-  }
-});
-// console.log(districts);
 
 export function getJsonData(endpoint) {
   const url = `http://localhost:4000/${endpoint}`;
@@ -48,7 +36,7 @@ export function getUSStateJsonData() {
   });
 }
 
-export function getCongressionalDistrictJsonData(USState) {
+export function getCongressionalDistrictJsonData(districts, USState) {
   const districtsForUSState = districts[USState].map(district => {
     return {
       attributes: {

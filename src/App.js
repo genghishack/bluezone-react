@@ -1,32 +1,48 @@
 import React, {Component} from 'react';
+import { connect } from "react-redux";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import './App.less';
 import Header from './components/Header';
 import CongressMap from './components/Map';
+import Config from './config';
 
 import states from './data/states.json';
-import bboxes from './data/bboxes.json';
 
-import { LegislatorIndex } from './utils/data-index';
+import {LegislatorIndex} from './utils/data-index';
+import {setBBoxes, setDistrictsByState} from "./redux/actions/states";
+import {setError} from "./redux/actions/errors";
 
-let districts = {};
-states.forEach(state => {
-  districts[state.USPS] = [];
-});
-Object.keys(bboxes).forEach(key => {
-  if (key.slice(2, key.length) !== '') {
-    districts[key.slice(0, 2)].push(key.slice(2, key.length));
-  }
-});
-
-// console.log(districts);
+const apiConfig = Config.apiGateway;
 
 class App extends Component {
   state = {
     selectedState: '',
     selectedDistrict: '',
     legislatorIndex: LegislatorIndex(),
+  };
+
+  componentDidMount = () => {
+    fetch(`${apiConfig.URL}/public/state/districts`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.props.dispatch(setDistrictsByState(result.data));
+        },
+        (error) => {
+          this.props.dispatch(setError(error));
+        }
+      );
+    fetch(`${apiConfig.URL}/public/state/bboxes`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.props.dispatch(setBBoxes(result.data));
+        },
+        (error) => {
+          this.props.dispatch(setError(error));
+        }
+      )
   };
 
   Map = () => (
@@ -52,27 +68,37 @@ class App extends Component {
 
   handleYearSelection = (year) => {
     const legislatorIndex = LegislatorIndex(year);
-    this.setState({ legislatorIndex });
+    this.setState({legislatorIndex});
   };
 
-  render = () => (
-    <div className="App">
-      <Header
-        states={states}
-        districts={districts}
-        handleYearSelection={this.handleYearSelection}
-      />
-      <Router>
-        <Switch>
-          <Route
-            path="/"
-            component={this.Map}
-          />
-        </Switch>
-      </Router>
-    </div>
-  );
+  render = () => {
+    const { districts } = this.props;
+    return (
+      <div className="App">
+        <Header
+          states={states}
+          districts={districts}
+          handleYearSelection={this.handleYearSelection}
+        />
+        <Router>
+          <Switch>
+            <Route
+              path="/"
+              component={this.Map}
+            />
+          </Switch>
+        </Router>
+      </div>
+    )
+  };
 
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    errors: state.errors,
+    districts: state.states.districtsByState
+  };
+}
+
+export default connect(mapStateToProps)(App);

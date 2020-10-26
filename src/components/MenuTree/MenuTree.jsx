@@ -15,7 +15,7 @@ export class MenuTree extends Component {
   }
   getUSStateOptions() {
     const USStateData = getUSStateJsonData();
-    // console.log(USStateData);
+    console.log('USStateData: ', USStateData);
     const USStates = USStateData.data.map((USState) => {
       return {
         value: USState.attributes.value,

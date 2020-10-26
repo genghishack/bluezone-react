@@ -8,7 +8,6 @@ import { MenuTree } from './MenuTree/';
 import CongressionalDistricts from './Layers/CongressionalDistricts';
 
 import { CandidateIndex_2018 } from '../utils/data-index';
-import bboxes from "../data/bboxes";
 
 import Config from '../config';
 
@@ -195,6 +194,7 @@ export class CongressMap extends Component {
   };
 
   focusMap = (stateAbbr, districtNum) => {
+    const { bboxes } = this.props;
     let bbox = continentalBbox;
     if (stateAbbr) {
       bbox = bboxes[stateAbbr + districtNum];
@@ -203,6 +203,7 @@ export class CongressMap extends Component {
       bbox,
       [window.innerWidth / 2.75, window.innerHeight / 2.75]
     );
+    console.log('bbox: ', bbox, 'view: ', view);
     this.map.easeTo(view);
   };
 
@@ -321,6 +322,7 @@ export class CongressMap extends Component {
 
 function mapStateToProps(state) {
   return {
+    bboxes: state.states.bboxes,
     currentId: state.entities.currentEntity,
     currentType: state.entities.currentType
   };

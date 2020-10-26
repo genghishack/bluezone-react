@@ -25,10 +25,11 @@ class EntityItem extends Component {
   }
 
   handleChevronClick() {
+    const {districts, id} = this.props;
     this.setState({ open: !this.state.open });
     if (this.props.type === 'states') {
-      const USStateDistricts = getCongressionalDistrictJsonData(this.props.id);
-      // console.log(USStateDistricts);
+      const USStateDistricts = getCongressionalDistrictJsonData(districts, id);
+      console.log('USStateDistrictData: ', USStateDistricts);
       this.setState({
         children: USStateDistricts.data,
         childrenType: 'districts'
@@ -90,7 +91,8 @@ class EntityItem extends Component {
 
 function mapStateToProps(state) {
   return {
-    currentId: state.entities.currentEntity
+    currentId: state.entities.currentEntity,
+    districts: state.states.districtsByState,
   };
 }
 
