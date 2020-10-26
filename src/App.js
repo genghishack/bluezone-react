@@ -7,10 +7,8 @@ import Header from './components/Header';
 import CongressMap from './components/Map';
 import Config from './config';
 
-import states from './data/states.json';
-
 import {LegislatorIndex} from './utils/data-index';
-import {setBBoxes, setDistrictsByState} from "./redux/actions/states";
+import {setBBoxes, setDistrictsByState, setStates} from "./redux/actions/states";
 import {setError} from "./redux/actions/errors";
 
 const apiConfig = Config.apiGateway;
@@ -38,6 +36,16 @@ class App extends Component {
       .then(
         (result) => {
           this.props.dispatch(setBBoxes(result.data));
+        },
+        (error) => {
+          this.props.dispatch(setError(error));
+        }
+      )
+    fetch(`${apiConfig.URL}/public/state`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.props.dispatch(setStates(result.data));
         },
         (error) => {
           this.props.dispatch(setError(error));
@@ -72,12 +80,9 @@ class App extends Component {
   };
 
   render = () => {
-    const { districts } = this.props;
     return (
       <div className="App">
         <Header
-          states={states}
-          districts={districts}
           handleYearSelection={this.handleYearSelection}
         />
         <Router>
@@ -97,7 +102,8 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     errors: state.errors,
-    districts: state.states.districtsByState
+    districts: state.states.districtsByState,
+    states: state.states.states
   };
 }
 

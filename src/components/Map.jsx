@@ -30,8 +30,7 @@ export class CongressMap extends Component {
     this.hoveredDistrictId = null;
     this.candidateIndex = CandidateIndex_2018();
 
-    console.log(this.candidateIndex);
-
+    // console.log(this.candidateIndex);
   }
 
   state = {
@@ -203,7 +202,7 @@ export class CongressMap extends Component {
       bbox,
       [window.innerWidth / 2.75, window.innerHeight / 2.75]
     );
-    console.log('bbox: ', bbox, 'view: ', view);
+    // console.log('bbox: ', bbox, 'view: ', view);
     this.map.easeTo(view);
   };
 

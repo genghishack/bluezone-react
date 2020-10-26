@@ -1,5 +1,3 @@
-import states from '../data/states.json';
-
 export function getJsonData(endpoint) {
   const url = `http://localhost:4000/${endpoint}`;
   return fetch(url, {
@@ -18,7 +16,8 @@ export function getJsonData(endpoint) {
 
 }
 
-export function getUSStateJsonData() {
+export function getUSStateJsonData(states) {
+  // console.log('states: ', states);
   const USStates = states.map(state => {
     return {
       attributes: {

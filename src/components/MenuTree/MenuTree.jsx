@@ -13,9 +13,15 @@ export class MenuTree extends Component {
   componentDidMount() {
     this.getUSStateOptions();
   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.states !== this.props.states) {
+      this.getUSStateOptions();
+    }
+  }
   getUSStateOptions() {
-    const USStateData = getUSStateJsonData();
-    console.log('USStateData: ', USStateData);
+    const { states } = this.props;
+    const USStateData = getUSStateJsonData(states);
+    // console.log('USStateData: ', USStateData);
     const USStates = USStateData.data.map((USState) => {
       return {
         value: USState.attributes.value,
@@ -58,7 +64,8 @@ export class MenuTree extends Component {
 
 function mapStateToProps(state) {
   return {
-    showMenuTree: state.entities.showMenuTree
+    showMenuTree: state.entities.showMenuTree,
+    states: state.states.states
   };
 }
 

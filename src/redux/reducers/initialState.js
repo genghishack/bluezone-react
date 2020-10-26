@@ -8,6 +8,7 @@ export default {
     showMenuTree: false
   },
   states: {
+    states: [],
     bboxes: {},
     districtsByState: {}
   }
