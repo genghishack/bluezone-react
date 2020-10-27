@@ -8,7 +8,9 @@ import CongressMap from './components/Map';
 import Config from './config';
 
 import {LegislatorIndex} from './utils/data-index';
+
 import {setBBoxes, setDistrictsByState, setStates} from "./redux/actions/states";
+import {setLegislators} from './redux/actions/legislators';
 import {setError} from "./redux/actions/errors";
 
 const apiConfig = Config.apiGateway;
@@ -46,6 +48,16 @@ class App extends Component {
       .then(
         (result) => {
           this.props.dispatch(setStates(result.data));
+        },
+        (error) => {
+          this.props.dispatch(setError(error));
+        }
+      )
+    fetch(`${apiConfig.URL}/public/legislator`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.props.dispatch(setLegislators(result.data));
         },
         (error) => {
           this.props.dispatch(setError(error));
@@ -103,7 +115,8 @@ function mapStateToProps(state) {
   return {
     errors: state.errors,
     districts: state.states.districtsByState,
-    states: state.states.states
+    states: state.states.states,
+    legislators: state.legislators,
   };
 }
 

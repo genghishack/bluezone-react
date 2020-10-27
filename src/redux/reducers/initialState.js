@@ -11,5 +11,6 @@ export default {
     states: [],
     bboxes: {},
     districtsByState: {}
-  }
+  },
+  legislators: [],
 };

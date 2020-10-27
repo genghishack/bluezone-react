@@ -1,7 +1,7 @@
 import {SET_BBOXES, SET_DISTRICTS_BY_STATE, SET_STATES} from "./actionTypes";
 
 export const setStates = (payload) => {
-  return {type: SET_STATES, payload}
+  return {type: SET_STATES, payload};
 }
 
 export const setDistrictsByState = (payload) => {
