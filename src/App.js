@@ -7,11 +7,13 @@ import Header from './components/Header';
 import CongressMap from './components/Map';
 import Config from './config';
 
-import {LegislatorIndex} from './utils/data-index';
+import {LegislatorIndex, legislatorsByState} from './utils/data-index';
 
 import {setBBoxes, setDistrictsByState, setStates} from "./redux/actions/states";
-import {setLegislators} from './redux/actions/legislators';
+import {setLegislators, setLegislatorsByState} from './redux/actions/legislators';
 import {setError} from "./redux/actions/errors";
+
+console.log(LegislatorIndex());
 
 const apiConfig = Config.apiGateway;
 
@@ -58,6 +60,7 @@ class App extends Component {
       .then(
         (result) => {
           this.props.dispatch(setLegislators(result.data));
+          this.props.dispatch(setLegislatorsByState(legislatorsByState(this.props.legislators)));
         },
         (error) => {
           this.props.dispatch(setError(error));
@@ -87,11 +90,26 @@ class App extends Component {
   };
 
   handleYearSelection = (year) => {
+    fetch(`${apiConfig.URL}/public/legislator?date=${year}`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.props.dispatch(setLegislators(result.data));
+          this.props.dispatch(setLegislatorsByState(legislatorsByState(this.props.legislators)));
+        },
+        (error) => {
+          this.props.dispatch(setError(error));
+        }
+      )
     const legislatorIndex = LegislatorIndex(year);
     this.setState({legislatorIndex});
   };
 
   render = () => {
+    console.log(
+      this.props.legislators,
+      this.props.legislatorsByState
+    )
     return (
       <div className="App">
         <Header
@@ -116,7 +134,8 @@ function mapStateToProps(state) {
     errors: state.errors,
     districts: state.states.districtsByState,
     states: state.states.states,
-    legislators: state.legislators,
+    legislators: state.legislators.legislators,
+    legislatorsByState: state.legislators.legislatorsByState,
   };
 }
 

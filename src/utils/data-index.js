@@ -7,6 +7,41 @@ const legislators = {
   _2018: LegislatorData_2018
 };
 
+export const legislatorsByState = (legislators) => {
+  const index = {};
+  legislators.forEach(legislator => {
+    const {first, last, middle, official_full} = legislator.bio[0];
+    legislator.name = {first, last, middle, official_full};
+    const {term} = legislator;
+    const { state, type, state_rank, district } = term[0];
+    index[state] = index[state] || {};
+    index[state][type] = index[state][type] || {};
+
+    // console.log(legislator);
+
+    if (type === 'sen') {
+      index[state][type][state_rank] = {
+        bioguide_id: legislator.bioguide_id,
+        name: legislator.name,
+        bio: legislator.bio[0],
+        terms: legislator.term,
+        id: legislator.ids[0]
+      };
+    }
+    if (type === 'rep') {
+      index[state][type][district] = {
+        bioguide_id: legislator.bioguide_id,
+        name: legislator.name,
+        bio: legislator.bio[0],
+        terms: legislator.term,
+        id: legislator.ids[0]
+      };
+    }
+  })
+  console.log(index);
+  return index;
+};
+
 export const LegislatorIndex = (year) => {
   year = year || 'current';
 
