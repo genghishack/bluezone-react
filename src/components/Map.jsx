@@ -58,9 +58,6 @@ export class CongressMap extends Component {
     const mapIsLoaded = this.map.loaded();
     const styleIsLoaded = this.map.isStyleLoaded();
     const tilesAreLoaded = this.map.areTilesLoaded();
-    // console.log('mapIsLoaded: ', mapIsLoaded);
-    // console.log('tilesAreLoaded: ', tilesAreLoaded);
-    // console.log('styleIsLoaded: ', styleIsLoaded);
     if (!mapIsLoaded || !tilesAreLoaded || !styleIsLoaded) {
       setTimeout(this.onMapFullRender, 200);
     } else {
@@ -173,7 +170,6 @@ export class CongressMap extends Component {
       expanded: true
     }, () => {
       // console.log('district: ', district);
-      // console.log('expanded: ', this.state.expanded);
       // console.log('source: ', this.map.getSource('composite'));
       // console.log('layer: ', this.map.getLayer('districts'));
     });

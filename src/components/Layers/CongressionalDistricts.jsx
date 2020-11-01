@@ -7,9 +7,7 @@ export class CongressionalDistricts extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    // console.log('prev Props: ', prevProps, 'this.props: ', this.props)
     if (prevProps.legislatorIndex !== this.props.legislatorIndex) {
-      // this.addDistrictFillLayer();
       this.setDistrictFillByParty();
     }
   }
@@ -19,16 +17,9 @@ export class CongressionalDistricts extends Component {
     const mapIsLoaded = map.loaded();
     const styleIsLoaded = map.isStyleLoaded();
     const tilesAreLoaded = map.areTilesLoaded();
-    // console.log('mapIsLoaded: ', mapIsLoaded);
-    // console.log('tilesAreLoaded: ', tilesAreLoaded);
-    // console.log('styleIsLoaded: ', styleIsLoaded);
     if (!mapIsLoaded || !tilesAreLoaded || !styleIsLoaded & !this.props.legislatorIndex.AK) {
-      // console.log('set timeout');
-      // console.log('legislatorIndex: ', this.props.legislatorIndex);
       setTimeout(this.onMapFullRender, 200);
     } else {
-      // console.log('set fill');
-      // console.log('legislatorIndex: ', this.props.legislatorIndex);
       this.addDistrictFillLayer();
       this.setDistrictFillByParty();
     }
@@ -136,7 +127,6 @@ export class CongressionalDistricts extends Component {
       legislatorIndex,
     } = this.props;
 
-    // console.log('legislatorIndex in fill: ', legislatorIndex);
     const features = map.querySourceFeatures('districts2018', {
       sourceLayer: 'districts',
       // filter: ['has', 'id']

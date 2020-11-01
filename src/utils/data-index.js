@@ -8,8 +8,6 @@ export const legislatorsByState = (legislators) => {
     index[state] = index[state] || {};
     index[state][type] = index[state][type] || {};
 
-    // console.log(legislator);
-
     if (type === 'sen') {
       index[state][type][state_rank] = {
         bioguide_id: legislator.bioguide_id,

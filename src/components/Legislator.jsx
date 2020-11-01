@@ -59,7 +59,6 @@ class Legislator extends Component {
       const wikipediaUrl = 'http://www.wikipedia.org/wiki/' + legislator.id.wikipedia;
       legislator.attributes.links.wikipedia = this.getLink(wikipediaUrl, 'Wikipedia');
     }
-    console.log(legislator);
 
     return legislator;
   };
