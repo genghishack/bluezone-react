@@ -172,5 +172,3 @@ export class CongressionalDistricts extends Component {
     return null;
   }
 }
-
-git commit -am
