@@ -28,6 +28,12 @@ export class Header extends Component {
           <div className="light">
             <span
               className="link"
+              onClick={() => handleYearSelection(1957)}
+            >1957</span>
+          </div>
+          <div className="light">
+            <span
+              className="link"
               onClick={() => handleYearSelection(2018)}
             >2018</span>
           </div>

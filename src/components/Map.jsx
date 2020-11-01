@@ -323,7 +323,7 @@ function mapStateToProps(state) {
   return {
     bboxes: state.states.bboxes,
     currentId: state.entities.currentEntity,
-    currentType: state.entities.currentType
+    currentType: state.entities.currentType,
   };
 }
 

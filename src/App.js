@@ -7,13 +7,16 @@ import Header from './components/Header';
 import CongressMap from './components/Map';
 import Config from './config';
 
-import {LegislatorIndex, legislatorsByState} from './utils/data-index';
+import {
+  // LegislatorIndex,
+  legislatorsByState
+} from './utils/data-index';
 
 import {setBBoxes, setDistrictsByState, setStates} from "./redux/actions/states";
 import {setLegislators, setLegislatorsByState} from './redux/actions/legislators';
 import {setError} from "./redux/actions/errors";
 
-console.log(LegislatorIndex());
+// console.log(LegislatorIndex());
 
 const apiConfig = Config.apiGateway;
 
@@ -21,7 +24,7 @@ class App extends Component {
   state = {
     selectedState: '',
     selectedDistrict: '',
-    legislatorIndex: LegislatorIndex(),
+    // legislatorIndex: LegislatorIndex(),
   };
 
   componentDidMount = () => {
@@ -72,7 +75,7 @@ class App extends Component {
     <CongressMap
       selectedState={this.state.selectedState}
       selectedDistrict={this.state.selectedDistrict}
-      legislatorIndex={this.state.legislatorIndex}
+      legislatorIndex={this.props.legislatorsByState}
       getMapHandle={this.getMapHandle}
       handleDistrictSelection={this.handleDistrictSelection}
     />
@@ -101,15 +104,16 @@ class App extends Component {
           this.props.dispatch(setError(error));
         }
       )
-    const legislatorIndex = LegislatorIndex(year);
-    this.setState({legislatorIndex});
+    // const legislatorIndex = LegislatorIndex(year);
+    // console.log('legislatorIndex: ', legislatorIndex);
+    // this.setState({legislatorIndex});
   };
 
   render = () => {
-    console.log(
-      this.props.legislators,
-      this.props.legislatorsByState
-    )
+    // console.log(
+    //   this.props.legislators,
+    //   this.props.legislatorsByState
+    // )
     return (
       <div className="App">
         <Header
@@ -117,10 +121,7 @@ class App extends Component {
         />
         <Router>
           <Switch>
-            <Route
-              path="/"
-              component={this.Map}
-            />
+            <Route path="/" component={this.Map}/>
           </Switch>
         </Router>
       </div>

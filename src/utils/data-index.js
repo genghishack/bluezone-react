@@ -38,7 +38,7 @@ export const legislatorsByState = (legislators) => {
       };
     }
   })
-  console.log(index);
+  // console.log(index);
   return index;
 };
 
