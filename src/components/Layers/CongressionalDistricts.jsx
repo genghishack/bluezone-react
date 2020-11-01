@@ -173,10 +173,4 @@ export class CongressionalDistricts extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    // legislatorIndex: state.legislators.legislatorsByState,
-  }
-}
-
-export default connect(mapStateToProps)(CongressionalDistricts);
+git commit -am

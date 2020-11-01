@@ -177,9 +177,10 @@ export class CongressMap extends Component {
       district: district,
       expanded: true
     }, () => {
-      // console.log('district: ', district);
-      // console.log('source: ', this.map.getSource('composite'));
-      // console.log('layer: ', this.map.getLayer('districts'));
+      console.log('district: ', district);
+      console.log('expanded: ', this.state.expanded);
+      console.log('source: ', this.map.getSource('composite'));
+      console.log('layer: ', this.map.getLayer('districts'));
     });
 
   };
@@ -264,14 +265,13 @@ export class CongressMap extends Component {
   };
 
   render() {
-    const { legislatorIndex, handleDistrictSelection } = this.props;
+    const { handleDistrictSelection } = this.props;
     const { viewport, mapLoaded } = this.state;
 
     const congressionalDistricts = mapLoaded ? (
       <CongressionalDistricts
         map={this.map}
         mapLoaded={mapLoaded}
-        legislatorIndex={legislatorIndex}
       />
     ) : null;
 
@@ -305,7 +305,6 @@ export class CongressMap extends Component {
             district={this.state.district}
             expanded={this.state.expanded}
             closeClick={this.closeClick}
-            legislatorIndex={legislatorIndex}
             candidateIndex={this.candidateIndex}
           />
           <div style={{position: 'absolute', left: 10, top: 10}}>

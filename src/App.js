@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { connect } from "react-redux";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
-import './App.less';
 import Header from './components/Header';
 import CongressMap from './components/Map';
 import Config from './config';
@@ -12,6 +11,8 @@ import {legislatorsByState} from './utils/data-index';
 import {setBBoxes, setDistrictsByState, setStates} from "./redux/actions/states";
 import {setLegislators, setLegislatorsByState} from './redux/actions/legislators';
 import {setError} from "./redux/actions/errors";
+
+import './App.less';
 
 const apiConfig = Config.apiGateway;
 
@@ -69,7 +70,6 @@ class App extends Component {
     <CongressMap
       selectedState={this.state.selectedState}
       selectedDistrict={this.state.selectedDistrict}
-      legislatorIndex={this.props.legislatorsByState}
       getMapHandle={this.getMapHandle}
       handleDistrictSelection={this.handleDistrictSelection}
     />
