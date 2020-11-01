@@ -7,16 +7,11 @@ import Header from './components/Header';
 import CongressMap from './components/Map';
 import Config from './config';
 
-import {
-  // LegislatorIndex,
-  legislatorsByState
-} from './utils/data-index';
+import {legislatorsByState} from './utils/data-index';
 
 import {setBBoxes, setDistrictsByState, setStates} from "./redux/actions/states";
 import {setLegislators, setLegislatorsByState} from './redux/actions/legislators';
 import {setError} from "./redux/actions/errors";
-
-// console.log(LegislatorIndex());
 
 const apiConfig = Config.apiGateway;
 
@@ -24,7 +19,6 @@ class App extends Component {
   state = {
     selectedState: '',
     selectedDistrict: '',
-    // legislatorIndex: LegislatorIndex(),
   };
 
   componentDidMount = () => {
@@ -104,16 +98,9 @@ class App extends Component {
           this.props.dispatch(setError(error));
         }
       )
-    // const legislatorIndex = LegislatorIndex(year);
-    // console.log('legislatorIndex: ', legislatorIndex);
-    // this.setState({legislatorIndex});
   };
 
   render = () => {
-    // console.log(
-    //   this.props.legislators,
-    //   this.props.legislatorsByState
-    // )
     return (
       <div className="App">
         <Header

@@ -6,10 +6,6 @@ export class CongressionalDistricts extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    // this.onMapFullRender();
-  }
-
   componentDidUpdate(prevProps) {
     console.log('prevProps: ', prevProps, 'this.props: ', this.props)
     if (prevProps.legislatorIndex !== this.props.legislatorIndex) {
@@ -27,12 +23,12 @@ export class CongressionalDistricts extends Component {
     // console.log('tilesAreLoaded: ', tilesAreLoaded);
     // console.log('styleIsLoaded: ', styleIsLoaded);
     if (!mapIsLoaded || !tilesAreLoaded || !styleIsLoaded & !this.props.legislatorIndex.AK) {
-      console.log('set timeout');
-      console.log('legislatorIndex: ', this.props.legislatorIndex);
+      // console.log('set timeout');
+      // console.log('legislatorIndex: ', this.props.legislatorIndex);
       setTimeout(this.onMapFullRender, 200);
     } else {
-      console.log('set fill');
-      console.log('legislatorIndex: ', this.props.legislatorIndex);
+      // console.log('set fill');
+      // console.log('legislatorIndex: ', this.props.legislatorIndex);
       this.addDistrictFillLayer();
       this.setDistrictFillByParty();
     }
@@ -132,31 +128,6 @@ export class CongressionalDistricts extends Component {
         'fill-opacity': 0.5
       }
     });
-    // const features = map.querySourceFeatures('districts2018', {
-    //   sourceLayer: 'districts',
-    //   // filter: ['has', 'id']
-    // });
-    // features.forEach(feature => {
-    //   const stateAbbr = feature.properties.state;
-    //   const districtNum = parseInt(feature.properties.number, 10);
-    //   let districtData = {};
-    //   if(legislatorIndex && legislatorIndex[stateAbbr]) {
-    //     districtData = legislatorIndex[stateAbbr].rep[districtNum] || {};
-    //   }
-    //   console.log('districtData: ', districtData);
-    //   if (districtData['name']) {
-    //     console.log('here');
-    //     const party = districtData.terms.slice(-1)[0].party;
-    //     const partyBoolean = !!(party === 'Democrat');
-    //     map.setFeatureState({
-    //       source: 'districts2018',
-    //       sourceLayer: 'districts',
-    //       id: feature.id
-    //     }, {
-    //       party: partyBoolean
-    //     });
-    //   }
-    // })
   }
 
   setDistrictFillByParty() {
@@ -180,7 +151,6 @@ export class CongressionalDistricts extends Component {
         districtData = legislatorIndex[stateAbbr].rep[districtNum] || {};
       }
       if (districtData.name) {
-        // console.log('here');
         const party = districtData.terms.slice(-1)[0].party;
         const partyBoolean = !!(party === 'Democrat');
         this.props.map.setFeatureState({
@@ -199,8 +169,6 @@ export class CongressionalDistricts extends Component {
     this.addDistrictBoundariesLayer();
     this.addDistrictLabelsLayer();
     this.addDistrictHoverLayer();
-    // this.addDistrictFillLayer();
-    // this.setDistrictFillByParty();
     return null;
   }
 }
