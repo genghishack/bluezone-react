@@ -2,10 +2,6 @@ import {Component} from 'react';
 import { connect } from "react-redux";
 
 export class CongressionalDistricts extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.onMapFullRender();
   }

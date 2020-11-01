@@ -7,8 +7,6 @@ import { InfoBox } from './InfoBox/';
 import { MenuTree } from './MenuTree/';
 import CongressionalDistricts from './Layers/CongressionalDistricts';
 
-import { CandidateIndex_2018 } from '../utils/data-index';
-
 import Config from '../config';
 
 // Use GeoViewport and the window size to determine an
@@ -28,9 +26,6 @@ export class CongressMap extends Component {
 
     this.map = null;
     this.hoveredDistrictId = null;
-    this.candidateIndex = CandidateIndex_2018();
-
-    // console.log(this.candidateIndex);
   }
 
   state = {
@@ -305,7 +300,6 @@ export class CongressMap extends Component {
             district={this.state.district}
             expanded={this.state.expanded}
             closeClick={this.closeClick}
-            candidateIndex={this.candidateIndex}
           />
           <div style={{position: 'absolute', left: 10, top: 10}}>
             <NavigationControl

@@ -3,13 +3,9 @@ import moment from 'moment';
 
 class Legislator extends Component {
 
-  getImg = (id) => {
+  getImg = (id, fullName) => {
     const src = 'https://theunitedstates.io/images/congress/225x275/' + id + '.jpg';
-    return (
-      <img
-        src={src}
-      />
-    );
+    return <img src={src} alt={fullName}/>;
   };
 
   getLink = (url, text) => {
@@ -55,7 +51,7 @@ class Legislator extends Component {
     }
 
     if (legislator.id) {
-      legislator.attributes.imgTag = this.getImg(legislator.bioguide_id);
+      legislator.attributes.imgTag = this.getImg(legislator.bioguide_id, legislator.attributes.fullName);
 
       const bioguideUrl = 'http://bioguide.congress.gov/scripts/biodisplay.pl?index=' + legislator.bioguide_id;
       legislator.attributes.links.bioguide = this.getLink(bioguideUrl, 'Official Bio');
