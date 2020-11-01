@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import { connect } from "react-redux";
 
 export class CongressionalDistricts extends Component {
@@ -6,11 +6,15 @@ export class CongressionalDistricts extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.onMapFullRender();
+  }
+
   componentDidUpdate(prevProps) {
-    console.log('prevProps: ', prevProps, 'this.props: ', this.props)
+    // console.log('prev Props: ', prevProps, 'this.props: ', this.props)
     if (prevProps.legislatorIndex !== this.props.legislatorIndex) {
-      console.log('here');
-      this.onMapFullRender();
+      // this.addDistrictFillLayer();
+      this.setDistrictFillByParty();
     }
   }
 
@@ -136,7 +140,7 @@ export class CongressionalDistricts extends Component {
       legislatorIndex,
     } = this.props;
 
-    console.log('legislatorIndex in fill: ', legislatorIndex);
+    // console.log('legislatorIndex in fill: ', legislatorIndex);
     const features = map.querySourceFeatures('districts2018', {
       sourceLayer: 'districts',
       // filter: ['has', 'id']

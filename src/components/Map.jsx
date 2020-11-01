@@ -177,10 +177,10 @@ export class CongressMap extends Component {
       district: district,
       expanded: true
     }, () => {
-      console.log('district: ', district);
-      console.log('expanded: ', this.state.expanded);
-      console.log('source: ', this.map.getSource('composite'));
-      console.log('layer: ', this.map.getLayer('districts'));
+      // console.log('district: ', district);
+      // console.log('expanded: ', this.state.expanded);
+      // console.log('source: ', this.map.getSource('composite'));
+      // console.log('layer: ', this.map.getLayer('districts'));
     });
 
   };

@@ -33,7 +33,7 @@ class InfoBox extends Component {
 
     if (district.properties) {
       const state = district.properties.state;
-      const district_num = parseInt(district.properties.number);
+      const district_num = parseInt(district.properties.number, 10);
       const rep = legislatorIndex[state].rep[district_num];
 
       const sens = legislatorIndex[state].sen ? Object.values(legislatorIndex[state].sen) : [];

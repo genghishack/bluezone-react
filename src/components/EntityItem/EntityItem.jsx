@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
-import { getJsonData, getCongressionalDistrictJsonData } from '../../utility/DataHelpers';
+import { getCongressionalDistrictJsonData } from '../../utility/DataHelpers';
 import darkChevron from "../../assets/chevron.svg"
 import lightChevron from "../../assets/light_chevron.svg"
 import {setCurrentEntity, menuTreeClick} from '../../redux/actions/entities';

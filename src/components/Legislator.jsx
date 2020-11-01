@@ -55,15 +55,15 @@ class Legislator extends Component {
     }
 
     if (legislator.id) {
-      legislator.attributes.imgTag = this.getImg(legislator.id.bioguide);
+      legislator.attributes.imgTag = this.getImg(legislator.bioguide_id);
 
-      const bioguideUrl = 'http://bioguide.congress.gov/scripts/biodisplay.pl?index=' + legislator.id.bioguide;
+      const bioguideUrl = 'http://bioguide.congress.gov/scripts/biodisplay.pl?index=' + legislator.bioguide_id;
       legislator.attributes.links.bioguide = this.getLink(bioguideUrl, 'Official Bio');
 
       const wikipediaUrl = 'http://www.wikipedia.org/wiki/' + legislator.id.wikipedia;
       legislator.attributes.links.wikipedia = this.getLink(wikipediaUrl, 'Wikipedia');
     }
-    // console.log(legislator);
+    console.log(legislator);
 
     return legislator;
   };
