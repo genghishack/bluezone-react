@@ -172,3 +172,11 @@ export class CongressionalDistricts extends Component {
     return null;
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    legislatorIndex: state.legislators.legislatorsByState,
+  }
+}
+
+export default connect(mapStateToProps)(CongressionalDistricts);
